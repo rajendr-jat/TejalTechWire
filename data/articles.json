@@ -1,5 +1,16 @@
 [
     {
+        "id": 18,
+        "title": "Tech Update - 19 Aug 2026 15:15",
+        "summary": "Autonomous generation in progress. Stay tuned for updates.",
+        "category": "Tech",
+        "image_url": "https://techcrunch.com/wp-content/uploads/2022/03/GettyImages-634332718.jpg?resize=1200,781",
+        "source_name": "TejalTechWire Original",
+        "source_url": "#",
+        "published_at": "2026-08-19T15:15:36.806773",
+        "is_featured": 0
+    },
+    {
         "id": 17,
         "title": "Sweeping Up the Mess: How Calendly and Mova Are Tackling the Hardest Parts of Our Daily Grind",
         "summary": "The ultimate promise of modern technology has always been absolute convenience, yet some of our most tedious chores\u2014both digital and physical\u2014have remained stubbornly manual. Whether it is scrubbing the tight crevices around kitchen stools or organizing action items after a marathon Zoom call, the \"last mile\" of automation has proven incredibly difficult to solve. This week, two distinct product launches from scheduling giant Calendly and smart-home manufacturer Mova highlight how tech companies are deploying AI and clever physical engineering to finally conquer these persistent professional and domestic blind spots.\n\nIn the virtual workspace, Calendly is stepping directly into the highly competitive productivity arena with a new AI-powered meeting note-taker. Under the leadership of CEO Tope Awotona, the brand is introducing an automated assistant designed to streamline the post-meeting grind for heavily scheduled sales and marketing professionals. Rather than just transcribing audio, the tool focuses on the workflows that happen after a call wraps up, such as drafting follow-up emails and utilizing an upcoming digital assistant named Callie to coordinate future bookings. Crucially, the software addresses growing industry privacy concerns by directly notifying participants when a recording starts and offering an easy way to opt out, carving a secure path in a crowded field populated by rivals like Otter and Granola.\n\nMeanwhile, in the physical realm, domestic automation is getting a literal extension. Mova, a subsidiary of vacuum specialist Dreame, has unveiled the V70 Ultra Complete\u2014a $1,300 robotic vacuum and mop designed specifically to reach previously inaccessible spaces. While standard robovacs often fail to clean around complex obstacles like dining chairs, Mova\u2019s solution utilizes an innovative articulating arm that stretches its mop pad out by nearly seven inches, alongside a five-inch extending side brush. Operating with a powerful 42,000Pa of suction, lidar navigation, and a multi-functional dock that washes and dries its own pads, the device successfully automates the deep cleaning of corners and furniture legs that previously required manual labor.\n\nBoth developments point to a broader, highly welcome shift in consumer technology. Success is no longer just about performing a basic task like booking a calendar slot or vacuuming an open hallway; it is about refining the technology to handle the nuanced, irritating details that humans still have to fix. As AI and robotics mature, the goal is clear: eliminating the final friction points of daily life, leaving users with far fewer loose ends to clean up.",
