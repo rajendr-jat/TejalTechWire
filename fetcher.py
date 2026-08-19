@@ -1,4 +1,4 @@
-import os
+Import os
 import json
 import sqlite3
 import feedparser
@@ -83,4 +83,3 @@ if __name__ == "__main__":
     export_to_json(db_conn)
     db_conn.close()
     print("Update Complete!")
-  
