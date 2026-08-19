@@ -8,25 +8,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0A1120;
-    --panel:#111C30;
-    --panel-2:#16233B;
-    --line:#26344E;
-    --text:#E7ECF6;
-    --text-dim:#8C9AB5;
-    --wire-amber:#FFB238;
-    --ai:#9C8CFF;
-    --ev:#33D6A6;
-    --gadgets:#FFB238;
-    --live:#FF4D5E;
+    --ink:#0A0A0C;
+    --panel:#141417;
+    --panel-2:#1B1B1F;
+    --line:#2C2C32;
+    --text:#F3F2EE;
+    --text-dim:#9B9A97;
+    --wire-amber:#D4AF37;
+    --ai:#B3A6FF;
+    --ev:#4FE0B3;
+    --gadgets:#D4AF37;
+    --live:#FF5D6C;
+    --shadow:none;
   }
   [data-theme="light"]{
-    --ink:#F4F1EA;
+    --ink:#FFFFFF;
     --panel:#FFFFFF;
-    --panel-2:#FBF9F4;
-    --line:#E3DDCC;
-    --text:#191510;
-    --text-dim:#6B6252;
+    --panel-2:#FAFAF8;
+    --line:#EAE8E2;
+    --text:#141414;
+    --text-dim:#6B6A66;
+    --wire-amber:#B8862F;
+    --ai:#6C5CE0;
+    --ev:#149E77;
+    --gadgets:#B8862F;
+    --shadow:0 2px 8px rgba(20,20,20,.04), 0 8px 24px rgba(20,20,20,.06);
   }
   *{box-sizing:border-box;}
   body{
@@ -68,14 +74,6 @@
     background:var(--panel-2); border-bottom:1px solid var(--line);
     display:flex; align-items:center; overflow:hidden; height:38px;
   }
-  .live-tag{
-    flex-shrink:0; display:flex; align-items:center; gap:.4rem;
-    font-family:'IBM Plex Mono'; font-size:.7rem; font-weight:600; letter-spacing:.08em;
-    color:var(--live); padding:0 1rem; height:100%;
-    border-right:1px solid var(--line); background:var(--panel);
-  }
-  .live-dot{width:7px; height:7px; border-radius:50%; background:var(--live); animation:pulse 1.4s infinite;}
-  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.25;}}
   .ticker-track{display:flex; white-space:nowrap; animation:scroll 45s linear infinite;}
   .ticker-track:hover{animation-play-state:paused;}
   .ticker-item{
@@ -95,40 +93,54 @@
   /* Featured */
   .featured{
     display:grid; grid-template-columns:1.1fr 1fr; gap:2rem;
-    background:var(--panel); border:1px solid var(--line); border-radius:4px;
-    overflow:hidden; margin-bottom:3rem;
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    overflow:hidden; margin-bottom:3rem; box-shadow:var(--shadow);
   }
   .featured img{width:100%; height:100%; object-fit:cover; min-height:280px;}
   .featured-body{padding:2rem 2rem 2rem 0; display:flex; flex-direction:column; justify-content:center;}
   .featured-body .cat-tag{margin-bottom:1rem;}
   .featured-body h1{font-family:'Space Grotesk'; font-size:1.9rem; line-height:1.15; margin:0 0 1rem;}
-  .featured-body p{color:var(--text-dim); font-size:1rem; line-height:1.6; margin:0 0 1.3rem;}
+  .featured-text{color:var(--text-dim); font-size:.98rem; line-height:1.65; margin:0 0 1.3rem;
+    max-height:260px; overflow-y:auto; padding-right:.5rem;}
+  .featured-text p{margin:0 0 .9rem;}
+  .featured-text p:last-child{margin-bottom:0;}
 
-  /* Grid */
-  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:1.4rem;}
+  /* List of horizontal dispatch rows */
+  .grid{display:flex; flex-direction:column; gap:1rem;}
   .card{
-    background:var(--panel); border:1px solid var(--line); border-radius:4px;
-    display:flex; flex-direction:column; overflow:hidden; transition:transform .18s, border-color .18s;
-    border-left:3px solid var(--line);
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    display:flex; flex-direction:row; overflow:hidden; transition:transform .18s, border-color .18s, box-shadow .18s;
+    border-left:3px solid var(--line); box-shadow:var(--shadow);
   }
-  .card:hover{ transform:translateY(-3px); border-left-color:var(--wire-amber); }
-  .card img{width:100%; height:170px; object-fit:cover; border-bottom:1px solid var(--line);}
-  .card-body{padding:1.1rem 1.2rem 1.3rem; display:flex; flex-direction:column; flex:1;}
-  .meta-row{display:flex; align-items:center; gap:.6rem; margin-bottom:.7rem;}
+  .card:hover{ transform:translateX(3px); border-left-color:var(--wire-amber); }
+  .card img{
+    width:150px; min-width:150px; height:100%; object-fit:cover; border-right:1px solid var(--line);
+    align-self:stretch;
+  }
+  .card-body{padding:1rem 1.2rem; display:flex; flex-direction:column; flex:1; min-width:0;}
+  .meta-row{display:flex; align-items:center; gap:.6rem; margin-bottom:.5rem;}
   .cat-tag{
-    font-family:'IBM Plex Mono'; font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
-    padding:.2rem .55rem; border-radius:3px; display:inline-block;
+    font-family:'IBM Plex Mono'; font-size:.66rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
+    padding:.18rem .5rem; border-radius:3px; display:inline-block;
   }
   .cat-tag.ai{color:var(--ai); background:rgba(156,140,255,.12); border:1px solid rgba(156,140,255,.35);}
   .cat-tag.ev{color:var(--ev); background:rgba(51,214,166,.12); border:1px solid rgba(51,214,166,.35);}
   .cat-tag.gadgets{color:var(--gadgets); background:rgba(255,178,56,.12); border:1px solid rgba(255,178,56,.35);}
-  .timestamp{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--text-dim);}
-  .card h3{font-family:'Space Grotesk'; font-size:1.08rem; line-height:1.3; margin:0 0 .6rem;}
-  .card p{color:var(--text-dim); font-size:.88rem; line-height:1.55; margin:0 0 1rem; flex:1;}
-  .card-footer{display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:.8rem;}
-  .source-name{font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--text-dim);}
-  .read-link{font-family:'IBM Plex Mono'; font-size:.78rem; color:var(--wire-amber); text-decoration:none; font-weight:600;}
+  .timestamp{font-family:'IBM Plex Mono'; font-size:.68rem; color:var(--text-dim);}
+  .card h3{font-family:'Space Grotesk'; font-size:1rem; line-height:1.3; margin:0 0 .4rem;}
+  .card p{color:var(--text-dim); font-size:.85rem; line-height:1.5; margin:0 0 .7rem;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .card-footer{display:flex; justify-content:space-between; align-items:center; margin-top:auto;}
+  .source-name{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--text-dim);}
+  .read-link{font-family:'IBM Plex Mono'; font-size:.76rem; color:var(--wire-amber); text-decoration:none; font-weight:600; white-space:nowrap;}
   .read-link:hover{text-decoration:underline;}
+
+  @media(max-width:600px){
+    .card{flex-direction:row;}
+    .card img{width:100px; min-width:100px;}
+    .card h3{font-size:.92rem;}
+    .card p{display:none;}
+  }
 
   .empty-state{
     text-align:center; padding:4rem 1rem; color:var(--text-dim); font-family:'IBM Plex Mono'; font-size:.9rem;
@@ -167,7 +179,6 @@
 </header>
 
 <div class="ticker-wrap">
-  <div class="live-tag"><span class="live-dot"></span> LIVE WIRE</div>
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
@@ -238,6 +249,11 @@
     return d.innerHTML;
   }
 
+  // Full article text ko proper paragraphs mein todta hai (featured story ke liye)
+  function toParagraphs(str){
+    return (str || '').split(/\n\s*\n/).map(p => `<p>${escapeHtml(p.trim())}</p>`).join('');
+  }
+
   function renderNews(articles){
     const featuredSlot = document.getElementById('featured-slot');
     const container = document.getElementById('news-container');
@@ -257,7 +273,7 @@
         <div class="featured-body">
           <span class="cat-tag ${topCatClass}">${escapeHtml(top.category)}</span>
           <h1>${escapeHtml(top.title)}</h1>
-          <p>${escapeHtml(top.summary)}</p>
+          <div class="featured-text">${toParagraphs(top.summary)}</div>
           <div class="card-footer" style="border:none; padding-top:0;">
             <span class="source-name mono">${escapeHtml(top.source_name)} · ${timeAgo(top.published_at)}</span>
             ${top.source_url && top.source_url !== '#' ? `<a class="read-link" href="${top.source_url}" target="_blank">Read Full Dispatch →</a>` : ''}
