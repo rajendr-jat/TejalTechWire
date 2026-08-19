@@ -81,37 +81,4 @@ def fetch_and_process(conn):
         print(f"Generating original mix article for {category}...")
         summary, title = generate_original_article(titles_combined, category)
         
-        source_url = "#" # Ab doosri site par jaane ki zaroorat nahi, ye hamari khud ki news hai!
-        source_name = "TejalTechWire Original"
-        
-        # Check duplicate by title
-        cursor.execute("SELECT id FROM articles WHERE title = ?", (title,))
-        if cursor.fetchone():
-            continue
-            
-        cursor.execute("""
-            INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (title, summary, category, "", source_name, source_url, datetime.now().isoformat()))
-        print(f"Published Original: {title}")
-            
-    conn.commit()
-
-def export_to_json(conn):
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM articles ORDER BY published_at DESC LIMIT 30")
-    articles = [dict(row) for row in cursor.fetchall()]
-    
-    with open(JSON_FILE, 'w', encoding='utf-8') as f:
-        json.dump(articles, f, indent=4)
-    print("Exported to JSON successfully!")
-
-if __name__ == "__main__":
-    print("Starting TejalTechWire Autonomous Content Engine...")
-    db_conn = setup_db()
-    fetch_and_process(db_conn)
-    export_to_json(db_conn)
-    db_conn.close()
-    print("Generation Complete!")
-
+        source_url = "#" # Ab doosri site par jaane ki zaroorat nahi, ye hamari k
