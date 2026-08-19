@@ -1,40 +1,38 @@
 name: Auto Fetch News 24/7
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 */4 * * *' # Har 4 ghante me chalega
-  workflow_dispatch: # Button dabakar manual bhi chala sakte hain
-
-permissions:
-  contents: write
+    - cron: '0 */4 * * *' # Har 4 ghante mein chalega
 
 jobs:
   update-news:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Fetcher Script
+      - name: Run news fetcher
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python fetcher.py
 
-      - name: Commit and Push Changes
+      - name: Commit and push updated articles.json
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
-          git add data/articles.json tejaltechwire.db
-          git commit -m "Auto-update: Latest news added via Actions" || echo "No changes to commit"
+          git add data/articles.json
+          git commit -m "Auto-update latest news json [skip ci]" || exit 0
           git push
           
