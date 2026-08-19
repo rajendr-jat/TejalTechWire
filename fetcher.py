@@ -5,11 +5,10 @@ import feedparser
 from datetime import datetime
 from google import genai
 
-# Setup Gemini API (GitHub Secrets se uthayega)
+# Setup Gemini API
 api_key = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=api_key) if api_key else None
 
-# RSS Feeds (AI, EV aur Gadgets ki news)
 FEEDS = {
     "AI & ML": "https://techcrunch.com/category/artificial-intelligence/feed/",
     "EV": "https://electrek.co/feed/",
@@ -26,18 +25,41 @@ def setup_db():
             conn.executescript(f.read())
     return conn
 
-def summarize_with_gemini(text):
+def generate_original_article(titles_text, category):
     if not client:
-        return "Summary generation skipped (No API Key)."
+        return "Gemini API key missing, content generation skipped.", "TejalTechWire Special"
     try:
-        prompt = f"Summarize this tech news in 2-3 short, engaging lines. Keep it objective and factual. News: {text}"
+        # Gemini ko bol rahe hain ki in titles ko mix karke ek nayi original news likho
+        prompt = f"""
+        You are an expert tech journalist for 'TejalTechWire'. 
+        Take these recent headlines/topics from the '{category}' sector:
+        {titles_text}
+        
+        Write a brand new, engaging, original short tech article (around 4-5 sentences) combining these ideas into a fresh perspective. 
+        Also, give it a catchy new original Headline.
+        
+        Format your response strictly as:
+        TITLE: [Your new catchy title here]
+        CONTENT: [Your generated original article here]
+        """
+        
         response = client.models.generate_content(
             model='gemini-1.5-flash',
             contents=prompt
         )
-        return response.text.strip()
+        
+        text = response.text.strip()
+        # Parse Title and Content
+        if "TITLE:" in text and "CONTENT:" in text:
+            parts = text.split("CONTENT:")
+            new_title = parts[0].replace("TITLE:", "").strip()
+            new_content = parts[1].strip()
+            return new_content, new_title
+        else:
+            return text, "Latest Tech Breakthrough"
+            
     except Exception as e:
-        return f"Summary available on source site."
+        return f"Autonomous generation in progress. Stay tuned for updates.", "Tech Industry Update"
 
 def fetch_and_process(conn):
     cursor = conn.cursor()
@@ -45,25 +67,31 @@ def fetch_and_process(conn):
     
     for category, url in FEEDS.items():
         feed = feedparser.parse(url)
-        # Sirf latest 3 news uthayenge har feed se
-        for entry in feed.entries[:3]:
-            source_url = entry.link
+        # Top 4 news nikal kar unke titles ikatthe karenge
+        recent_titles = [entry.title for entry in feed.entries[:4]]
+        
+        if not recent_titles:
+            continue
             
-            # Check duplicate in DB
-            cursor.execute("SELECT id FROM articles WHERE source_url = ?", (source_url,))
-            if cursor.fetchone():
-                continue
-                
-            title = entry.title
-            source_name = url.split('/')[2]
-            summary = summarize_with_gemini(title)
-            image_url = "https://via.placeholder.com/400x200?text=TejalTechWire"
+        titles_combined = "\n- " + "\n- ".join(recent_titles)
+        
+        # Gemini se mix karke ek original article banwayenge
+        print(f"Generating original mix article for {category}...")
+        summary, title = generate_original_article(titles_combined, category)
+        
+        source_url = "#" # Ab doosri site par jaane ki zaroorat nahi, ye hamari khud ki news hai!
+        source_name = "TejalTechWire Original"
+        
+        # Check duplicate by title
+        cursor.execute("SELECT id FROM articles WHERE title = ?", (title,))
+        if cursor.fetchone():
+            continue
             
-            cursor.execute("""
-                INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (title, summary, category, image_url, source_name, source_url, datetime.now().isoformat()))
-            print(f"Saved: {title}")
+        cursor.execute("""
+            INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (title, summary, category, "", source_name, source_url, datetime.now().isoformat()))
+        print(f"Published Original: {title}")
             
     conn.commit()
 
@@ -78,10 +106,10 @@ def export_to_json(conn):
     print("Exported to JSON successfully!")
 
 if __name__ == "__main__":
-    print("Starting TejalTechWire Fetcher...")
+    print("Starting TejalTechWire Autonomous Content Engine...")
     db_conn = setup_db()
     fetch_and_process(db_conn)
     export_to_json(db_conn)
     db_conn.close()
-    print("Update Complete!")
+    print("Generation Complete!")
     
