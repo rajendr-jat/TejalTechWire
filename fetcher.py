@@ -1,104 +1,87 @@
 import os
+import json
+import sqlite3
 import feedparser
 from datetime import datetime
-import google.generativeai as genai
+from google import genai
 
-# API key configure karna (GitHub Secrets se uthayega)
+# Setup Gemini API (GitHub Secrets se uthayega)
 api_key = os.environ.get("GEMINI_API_KEY")
-if not api_key:
-    print("Error: GEMINI_API_KEY nahi mili!")
-    exit(1)
+client = genai.Client(api_key=api_key) if api_key else None
 
-genai.configure(api_key=api_key)
-
-# Stable aur working model select kiya hai
-model = genai.GenerativeModel('gemini-1.5-flash')
-
-# RSS Feeds (AI, EV aur Gadgets ki news ke liye)
+# RSS Feeds (AI, EV aur Gadgets ki news)
 FEEDS = {
     "AI & ML": "https://techcrunch.com/category/artificial-intelligence/feed/",
     "EV": "https://electrek.co/feed/",
     "Gadgets": "https://www.theverge.com/rss/index.xml"
 }
 
-print("Starting TejalTechWire News Fetcher...")
+DB_FILE = "tejaltechwire.db"
+JSON_FILE = "data/articles.json"
 
-all_articles = []
+def setup_db():
+    conn = sqlite3.connect(DB_FILE)
+    if os.path.exists('schema.sql'):
+        with open('schema.sql', 'r') as f:
+            conn.executescript(f.read())
+    return conn
 
-# Har feed se latest 3-3 news nikalna
-for category, url in FEEDS.items():
+def summarize_with_gemini(text):
+    if not client:
+        return "Summary generation skipped (No API Key)."
     try:
-        feed = feedparser.parse(url)
-        for entry in feed.entries[:3]:
-            title = entry.title
-            link = entry.link
-            
-            # Gemini se choti aur acchi summary banwana
-            prompt = f"Summarize this tech news in 2 short, engaging lines. Keep it objective. Title: {title}"
-            try:
-                response = model.generate_content(prompt)
-                summary = response.text.strip()
-            except Exception:
-                summary = "Click to read full news on source website."
-            
-            all_articles.append({
-                "title": title,
-                "summary": summary,
-                "category": category,
-                "link": link
-            })
-            print(f"Fetched: {title}")
+        prompt = f"Summarize this tech news in 2-3 short, engaging lines. Keep it objective and factual. News: {text}"
+        response = client.models.generate_content(
+            model='gemini-1.5-flash',
+            contents=prompt
+        )
+        return response.text.strip()
     except Exception as e:
-        print(f"Error fetching {category}: {e}")
+        return f"Summary available on source site."
 
-# HTML Cards banana
-cards_html = ""
-for item in all_articles:
-    cards_html += f"""
-    <div style="background: #1e293b; color: #f8fafc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid #334155;">
-        <span style="background: #3b82f6; color: white; padding: 4px 10px; font-size: 12px; border-radius: 20px; font-weight: bold;">{item['category']}</span>
-        <h3 style="margin: 15px 0 10px 0; font-size: 18px; line-height: 1.4;"><a href="{item['link']}" target="_blank" style="color: #60a5fa; text-decoration: none;">{item['title']}</a></h3>
-        <p style="color: #94a3b8; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">{item['summary']}</p>
-        <a href="{item['link']}" target="_blank" style="color: #38bdf8; font-size: 14px; text-decoration: none; font-weight: bold;">Read More →</a>
-    </div>
-    """
-
-# Poori khubsurat index.html file ka design
-html_content = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TejalTechWire - Live Tech News</title>
-    <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #f1f5f9; margin: 0; padding: 20px; }}
-        header {{ text-align: center; padding: 40px 0; border-bottom: 1px solid #1e293b; margin-bottom: 40px; }}
-        h1 {{ font-size: 32px; color: #38bdf8; margin: 0; }}
-        p.subtitle {{ color: #94a3b8; margin-top: 10px; font-size: 16px; }}
-        .container {{ max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }}
-        footer {{ text-align: center; margin-top: 50px; color: #64748b; font-size: 14px; }}
-    </style>
-</head>
-<body>
-    <header>
-        <h1>TejalTechWire</h1>
-        <p class="subtitle">Your 24/7 Automated Source for AI, EV & Gadget News</p>
-        <p style="font-size: 12px; color: #64748b; margin-top: 5px;">Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
-    </header>
+def fetch_and_process(conn):
+    cursor = conn.cursor()
+    os.makedirs("data", exist_ok=True)
     
-    <div class="container">
-        {cards_html}
-    </div>
+    for category, url in FEEDS.items():
+        feed = feedparser.parse(url)
+        # Sirf latest 3 news uthayenge har feed se
+        for entry in feed.entries[:3]:
+            source_url = entry.link
+            
+            # Check duplicate in DB
+            cursor.execute("SELECT id FROM articles WHERE source_url = ?", (source_url,))
+            if cursor.fetchone():
+                continue
+                
+            title = entry.title
+            source_name = url.split('/')[2]
+            summary = summarize_with_gemini(title)
+            image_url = "https://via.placeholder.com/400x200?text=TejalTechWire"
+            
+            cursor.execute("""
+                INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (title, summary, category, image_url, source_name, source_url, datetime.now().isoformat()))
+            print(f"Saved: {title}")
+            
+    conn.commit()
 
-    <footer>
-        <p>© 2026 TejalTechWire. Powered by Gemini & GitHub Actions.</p>
-    </footer>
-</body>
-</html>
-"""
+def export_to_json(conn):
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM articles ORDER BY published_at DESC LIMIT 30")
+    articles = [dict(row) for row in cursor.fetchall()]
+    
+    with open(JSON_FILE, 'w', encoding='utf-8') as f:
+        json.dump(articles, f, indent=4)
+    print("Exported to JSON successfully!")
 
-# Seedha index.html mein save karna
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("Success! index.html updated successfully with fresh news.")
+if __name__ == "__main__":
+    print("Starting TejalTechWire Fetcher...")
+    db_conn = setup_db()
+    fetch_and_process(db_conn)
+    export_to_json(db_conn)
+    db_conn.close()
+    print("Update Complete!")
+    
