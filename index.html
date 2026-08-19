@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TejalTechWire | AI, EV & Gadget News</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --primary: #007bff;
+        }
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0; padding: 0; transition: 0.3s;
+        }
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%; background: var(--card-bg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .nav-links a { margin: 0 10px; color: var(--text-color); text-decoration: none; font-weight: 500; }
+        .theme-toggle { cursor: pointer; padding: 5px 10px; background: var(--primary); color: white; border: none; border-radius: 5px; }
+        
+        .container { padding: 2rem 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--card-bg); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 1rem; }
+        .badge { background: var(--primary); color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; }
+        .card h3 { margin: 10px 0; font-size: 1.2rem; }
+        .card p { font-size: 0.9rem; opacity: 0.8; }
+        .source-link { color: var(--primary); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        
+        footer { text-align: center; padding: 2rem; background: var(--card-bg); margin-top: 2rem; }
+        footer a { color: var(--text-color); margin: 0 10px; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">TejalTechWire</div>
+        <nav class="nav-links">
+            <a href="#" onclick="filterNews('All')">All</a>
+            <a href="#" onclick="filterNews('AI & ML')">AI & ML</a>
+            <a href="#" onclick="filterNews('EV')">EV</a>
+            <a href="#" onclick="filterNews('Gadgets')">Gadgets</a>
+        </nav>
+        <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
+    </header>
+
+    <div class="container">
+        <h2>Latest Breaking News</h2>
+        <div class="grid" id="news-container">
+            <!-- News Cards will load here via JavaScript -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TejalTechWire. All rights reserved.</p>
+        <p>Contact: rajulamror74@gmail.com</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Disclaimer</a> | <a href="#">About Us</a>
+    </footer>
+
+    <script>
+        // Dark Mode Logic
+        const themeBtn = document.querySelector('.theme-toggle');
+        let currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeBtn.innerText = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeBtn.innerText = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+        }
+
+        // Fetch and Display News Logic
+        let allArticles = [];
+
+        async function loadNews() {
+            try {
+                // Yeh file GitHub Actions banayega backend me
+                const response = await fetch('data/articles.json');
+                allArticles = await response.json();
+                renderNews(allArticles);
+            } catch (error) {
+                document.getElementById('news-container').innerHTML = "<p>Loading news... Please wait for the background updater to run.</p>";
+            }
+        }
+
+        function renderNews(articles) {
+            const container = document.getElementById('news-container');
+            container.innerHTML = '';
+            articles.forEach(article => {
+                const card = `
+                    <div class="card">
+                        <img src="${article.image_url}" alt="News Image">
+                        <div class="card-content">
+                            <span class="badge">${article.category}</span>
+                            <h3>${article.title}</h3>
+                            <p>${article.summary}</p>
+                            <p><small>Source: ${article.source_name}</small></p>
+                            <a href="${article.source_url}" target="_blank" class="source-link">Read Full Report →</a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        function filterNews(category) {
+            if(category === 'All') {
+                renderNews(allArticles);
+            } else {
+                const filtered = allArticles.filter(a => a.category === category);
+                renderNews(filtered);
+            }
+        }
+
+        // Run on load
+        loadNews();
+    </script>
+</body>
+</html>
