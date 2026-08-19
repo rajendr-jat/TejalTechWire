@@ -44,7 +44,7 @@ def generate_original_article(titles_text, category):
         """
         
         response = client.models.generate_content(
-            model='gemini-1.5-flash',
+            model='gemini-3.5-flash',
             contents=prompt
         )
         
@@ -59,7 +59,9 @@ def generate_original_article(titles_text, category):
             return text, "Latest Tech Breakthrough"
             
     except Exception as e:
-        return f"Autonomous generation in progress. Stay tuned for updates.", "Tech Industry Update"
+        # Print the real error so it shows up in GitHub Actions logs instead of failing silently
+        print(f"Gemini generation failed: {e}")
+        return f"Autonomous generation in progress. Stay tuned for updates.", f"{category} Update - {datetime.now().strftime('%d %b %Y %H:%M')}"
 
 def fetch_and_process(conn):
     cursor = conn.cursor()
@@ -112,4 +114,4 @@ if __name__ == "__main__":
     export_to_json(db_conn)
     db_conn.close()
     print("Generation Complete!")
-    
+
