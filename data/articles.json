@@ -1,5 +1,16 @@
 [
     {
+        "id": 14,
+        "title": "Breaking Tech News",
+        "summary": "<p>Detailed reporting in progress.</p>",
+        "category": "AI & ML",
+        "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800",
+        "source_name": "TejalTechWire Bureau",
+        "source_url": "#",
+        "published_at": "2026-08-19T11:46:25.736036",
+        "is_featured": 0
+    },
+    {
         "id": 13,
         "title": "Industry Insights",
         "summary": "Detailed reporting on upcoming tech milestones.",
