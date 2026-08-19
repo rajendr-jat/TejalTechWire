@@ -3,6 +3,7 @@ import json
 import sqlite3
 import feedparser
 import trafilatura
+import random
 from datetime import datetime
 from google import genai
 
@@ -24,12 +25,6 @@ SOURCES = {
         "https://www.engadget.com/rss.xml",
         "https://gizmodo.com/rss",
     ],
-}
-
-FALLBACK_IMAGES = {
-    "AI": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80",
-    "Tech": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
-    "Gadgets": "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=900&q=80",
 }
 
 DB_FILE = "tejaltechwire.db"
@@ -84,8 +79,9 @@ def get_latest_entry_with_text(feed_url):
 
 def generate_merged_article(article_a, article_b, category):
     if not client:
-        return "Gemini API key missing, content generation skipped.", "TejalTechWire Special", FALLBACK_IMAGES.get(category, "")
+        return "Gemini API key missing, content generation skipped.", "TejalTechWire Special"
     try:
+        # EXACT CLAUDE ORIGINAL PROMPT - Koi ched-chad nahi
         prompt = f"""
         You are a senior tech journalist writing an original news report for 'TejalTechWire',
         a publication covering AI, Technology, and Gadgets.
@@ -97,8 +93,6 @@ def generate_merged_article(article_a, article_b, category):
         context on why it matters, concrete details, and a natural closing thought. Length: 300-400 words,
         3-5 paragraphs, no bullet points.
 
-        Also, provide a single English search keyword or short phrase (like 'electric car', 'smartphone', 'artificial intelligence robot') that best matches the visual theme of this news for a stock photo search.
-
         --- SOURCE A: "{article_a['title']}" ---
         {article_a['text']}
 
@@ -107,33 +101,26 @@ def generate_merged_article(article_a, article_b, category):
 
         Format your response strictly as:
         TITLE: [Your new original catchy headline]
-        KEYWORD: [1-3 words visual search keyword]
         CONTENT: [Your full original article]
         """
 
         response = client.models.generate_content(
-            model='gemini-2.5-flash', # Aapke original code ke mutabik model name
+            model='gemini-3.5-flash',
             contents=prompt
         )
 
         text = response.text.strip()
-        if "TITLE:" in text and "KEYWORD:" in text and "CONTENT:" in text:
-            parts = text.split("KEYWORD:")
+        if "TITLE:" in text and "CONTENT:" in text:
+            parts = text.split("CONTENT:")
             new_title = parts[0].replace("TITLE:", "").strip()
-            
-            rest = parts[1].split("CONTENT:")
-            keyword = rest[0].strip().replace(" ", ",")
-            new_content = rest[1].strip()
-            
-            # Unsplash Dynamic Image based on Gemini's keyword
-            image_url = f"https://images.unsplash.com/featured/?{keyword}&w=900&q=80"
-            return new_content, new_title, image_url
+            new_content = parts[1].strip()
+            return new_content, new_title
         else:
-            return text, f"{category} Roundup", FALLBACK_IMAGES.get(category, "")
+            return text, f"{category} Roundup"
 
     except Exception as e:
         print(f"Gemini generation failed: {e}")
-        return "Autonomous generation in progress. Stay tuned for updates.", f"{category} Update - {datetime.now().strftime('%d %b %Y %H:%M')}", FALLBACK_IMAGES.get(category, "")
+        return "Autonomous generation in progress. Stay tuned for updates.", f"{category} Update - {datetime.now().strftime('%d %b %Y %H:%M')}"
 
 
 def fetch_and_process(conn):
@@ -154,10 +141,18 @@ def fetch_and_process(conn):
             continue
 
         print(f"Merging {category} articles with Gemini...")
-        summary, title, ai_image_url = generate_merged_article(article_a, article_b, category)
+        summary, title = generate_merged_article(article_a, article_b, category)
 
-        # Priority: 1. Original Article A Image -> 2. Original Article B Image -> 3. Gemini Dynamic Unsplash Keyword Image -> 4. Fallback
-        image_url = article_a.get("image") or article_b.get("image") or ai_image_url or FALLBACK_IMAGES.get(category, "")
+        # --- YAHAN UNSPLASH SYSTEM ADD KIYA HAI SAFELY ---
+        # Category ke hisaab se Unsplash ka search keyword banega
+        search_keyword = "artificial,intelligence" if category == "AI" else category.lower()
+        # Random number taaki ek category me har baar ek nayi fresh image aaye
+        random_sig = random.randint(1, 100000)
+        unsplash_dynamic_url = f"https://images.unsplash.com/featured/?{search_keyword},technology&sig={random_sig}&w=900&q=80"
+        
+        # Priority: 1. Article A Image -> 2. Article B Image -> 3. Nayi Unsplash Image
+        image_url = article_a.get("image") or article_b.get("image") or unsplash_dynamic_url
+        # --------------------------------------------------
 
         cursor.execute("SELECT id FROM articles WHERE title = ?", (title,))
         if cursor.fetchone():
@@ -191,4 +186,4 @@ if __name__ == "__main__":
     export_to_json(db_conn)
     db_conn.close()
     print("Generation Complete!")
-    
+        
