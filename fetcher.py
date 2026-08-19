@@ -3,7 +3,7 @@ import json
 import sqlite3
 import feedparser
 import trafilatura
-import random
+import random  # <-- Sirf ye add kiya hai random image system ke liye
 from datetime import datetime
 from google import genai
 
@@ -25,6 +25,12 @@ SOURCES = {
         "https://www.engadget.com/rss.xml",
         "https://gizmodo.com/rss",
     ],
+}
+
+FALLBACK_IMAGES = {
+    "AI": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80",
+    "Tech": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    "Gadgets": "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=900&q=80",
 }
 
 DB_FILE = "tejaltechwire.db"
@@ -81,7 +87,6 @@ def generate_merged_article(article_a, article_b, category):
     if not client:
         return "Gemini API key missing, content generation skipped.", "TejalTechWire Special"
     try:
-        # EXACT CLAUDE ORIGINAL PROMPT - Koi ched-chad nahi
         prompt = f"""
         You are a senior tech journalist writing an original news report for 'TejalTechWire',
         a publication covering AI, Technology, and Gadgets.
@@ -143,16 +148,13 @@ def fetch_and_process(conn):
         print(f"Merging {category} articles with Gemini...")
         summary, title = generate_merged_article(article_a, article_b, category)
 
-        # --- YAHAN UNSPLASH SYSTEM ADD KIYA HAI SAFELY ---
-        # Category ke hisaab se Unsplash ka search keyword banega
+        # --- KEVAL YAHAN UNSPLASH SYSTEM ADD KIYA HAI ---
         search_keyword = "artificial,intelligence" if category == "AI" else category.lower()
-        # Random number taaki ek category me har baar ek nayi fresh image aaye
         random_sig = random.randint(1, 100000)
         unsplash_dynamic_url = f"https://images.unsplash.com/featured/?{search_keyword},technology&sig={random_sig}&w=900&q=80"
         
-        # Priority: 1. Article A Image -> 2. Article B Image -> 3. Nayi Unsplash Image
         image_url = article_a.get("image") or article_b.get("image") or unsplash_dynamic_url
-        # --------------------------------------------------
+        # ------------------------------------------------
 
         cursor.execute("SELECT id FROM articles WHERE title = ?", (title,))
         if cursor.fetchone():
