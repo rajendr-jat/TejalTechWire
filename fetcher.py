@@ -48,13 +48,11 @@ FALLBACK_IMAGES = {
 def get_unsplash_image_by_title(title, category):
     """Article ke title ya keywords ke adhar par Unsplash se match karti hui image nikalta hai."""
     try:
-        # Title ke kuch mukhya shabd nikalte hain (jaise tech, apple, robot, chip, ai)
         words = [w.lower() for w in title.split() if len(w) > 3]
         query_words = ",".join(words[:3]) if words else category.lower()
         
         encoded_query = urllib.parse.quote(f"{query_words},technology")
         random_sig = random.randint(1, 100000)
-        # Unsplash ki dynamic source URL jo query ke mutabik photo degi
         return f"https://images.unsplash.com/featured/?{encoded_query}&sig={random_sig}&w=900&q=80"
     except Exception:
         return FALLBACK_IMAGES.get(category, "")
@@ -115,12 +113,12 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
   let currentTheme = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', currentTheme);
   themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
-  function toggleTheme(){
+  function toggleTheme(){{
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
     localStorage.setItem('theme', currentTheme);
     themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
-  }
+  }}
 </script>
 </body>
 </html>
@@ -389,4 +387,4 @@ if __name__ == "__main__":
     generate_robots_txt()
     db_conn.close()
     print("Generation Complete!")
-    
+            
