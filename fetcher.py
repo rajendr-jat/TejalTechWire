@@ -47,7 +47,11 @@ FALLBACK_IMAGES = {
     "Gadgets": "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=900&q=80",
 }
 
-# --- NAYA IMAGE SYSTEM: COPYRIGHT-FREE STOCK PHOTOS (Pexels API) ---
+# --- NAYA IMAGE SYSTEM: Unsplash (official API) primary, Pexels backup, fixed image final fallback ---
+# Ab keyword sirf category-level nahi, balki Gemini article ka poora text padhkar deta hai
+# (generate_merged_article ke IMAGE_KEYWORDS wale hisse se), isliye photo topic se zyada match karti hai.
+# Random page + random result se variety milती hai, taaki same photo baar baar repeat na ho.
+UNSPLASH_ACCESS_KEY = os.environ.get("UNSPLASH_ACCESS_KEY")
 PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")
 
 CATEGORY_IMAGE_KEYWORDS = {
@@ -56,27 +60,90 @@ CATEGORY_IMAGE_KEYWORDS = {
     "Gadgets": ["smartphone gadget", "wearable technology", "laptop desk", "smart home device"],
 }
 
+# Isی run ke andar jo images use ho chuki, unhe dobara na chunne ke liye
+_used_images_this_run = set()
+
+
+def _search_unsplash(query):
+    if not UNSPLASH_ACCESS_KEY:
+        return None
+    try:
+        page = random.randint(1, 3)
+        resp = requests.get(
+            "https://api.unsplash.com/search/photos",
+            params={
+                "query": query,
+                "per_page": 12,
+                "page": page,
+                "orientation": "landscape",
+                "client_id": UNSPLASH_ACCESS_KEY,
+            },
+            timeout=10,
+        )
+        data = resp.json()
+        results = data.get("results", [])
+        if not results:
+            return None
+        random.shuffle(results)
+        for photo in results:
+            url = photo.get("urls", {}).get("regular")
+            if url and url not in _used_images_this_run:
+                return url
+        # Sab pehle use ho chuki thi, majboori mein pehli hi de do
+        return results[0].get("urls", {}).get("regular")
+    except Exception as e:
+        print(f"Unsplash fetch failed for '{query}': {e}")
+        return None
+
+
+def _search_pexels(query):
+    if not PEXELS_API_KEY:
+        return None
+    try:
+        resp = requests.get(
+            "https://api.pexels.com/v1/search",
+            headers={"Authorization": PEXELS_API_KEY},
+            params={"query": query, "per_page": 10, "orientation": "landscape"},
+            timeout=10,
+        )
+        data = resp.json()
+        photos = data.get("photos", [])
+        if not photos:
+            return None
+        random.shuffle(photos)
+        for photo in photos:
+            url = photo.get("src", {}).get("large")
+            if url and url not in _used_images_this_run:
+                return url
+        return photos[0].get("src", {}).get("large")
+    except Exception as e:
+        print(f"Pexels fetch failed for '{query}': {e}")
+        return None
+
 
 def get_stock_image(keyword, category):
-    tried = [keyword] + random.sample(CATEGORY_IMAGE_KEYWORDS.get(category, ["technology"]), k=2)
-    if PEXELS_API_KEY:
-        for kw in tried:
-            try:
-                resp = requests.get(
-                    "https://api.pexels.com/v1/search",
-                    headers={"Authorization": PEXELS_API_KEY},
-                    params={"query": kw, "per_page": 6, "orientation": "landscape"},
-                    timeout=10,
-                )
-                data = resp.json()
-                photos = data.get("photos", [])
-                if photos:
-                    pick = random.choice(photos)
-                    print(f"Pexels image found for '{kw}'")
-                    return pick["src"]["large"]
-                print(f"Pexels: no results for '{kw}', trying next...")
-            except Exception as e:
-                print(f"Pexels fetch failed for '{kw}': {e}")
+    """Article ke TOPIC se match karta keyword lekar image dhoondhta hai:
+    1) Unsplash se article-specific keyword  2) Unsplash se category keyword
+    3) Pexels se article-specific keyword    4) Pexels se category keyword
+    5) Fixed safe fallback image
+    Sabse pehle jo bhi mile, wahi use hoti hai — copyright-free stock hi rehती hai."""
+    candidates = [keyword] + random.sample(CATEGORY_IMAGE_KEYWORDS.get(category, ["technology"]), k=2)
+
+    for kw in candidates:
+        url = _search_unsplash(kw)
+        if url:
+            print(f"Unsplash image found for '{kw}'")
+            _used_images_this_run.add(url)
+            return url
+
+    for kw in candidates:
+        url = _search_pexels(kw)
+        if url:
+            print(f"Pexels image found for '{kw}'")
+            _used_images_this_run.add(url)
+            return url
+
+    print("No API image found, using fixed fallback")
     return FALLBACK_IMAGES.get(category, "")
 
 
@@ -309,10 +376,12 @@ def generate_merged_article(article_a, article_b, category):
         --- SOURCE B: "{article_b['title']}" ---
         {article_b['text']}
 
-        Also suggest a short, generic stock-photo search phrase (2-4 words, describing the general
-        SUBJECT/THEME of this story visually — e.g. "self-driving car", "computer chip", "smartphone camera",
-        "cloud data center" — NOT people's names, NOT company/product brand names, since this is for a
-        royalty-free stock photo search and must return real matching photos).
+        Also suggest a short stock-photo search phrase (2-4 words) that visually captures the SPECIFIC
+        subject of THIS article — for example if it's about self-driving cars, say "self-driving car";
+        if it's about a new AI chip, say "computer processor chip"; if it's about wearables, say
+        "smartwatch wrist". Base it on the actual content above, not just the general category.
+        Do NOT use people's names or company/product brand names, since this is for a royalty-free
+        stock photo search and must return real matching generic photos.
 
         Format your response strictly as:
         TITLE: [Your new original catchy headline]
