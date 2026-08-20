@@ -58,9 +58,6 @@ CATEGORY_IMAGE_KEYWORDS = {
 
 
 def get_stock_image(keyword, category):
-    """Article ke TOPIC se match karta keyword lekar Pexels se ek licensed, copyright-free
-    stock photo laata hai. Agar keyword se result na mile, category ke generic keyword try
-    karta hai, aur final fallback ek fixed safe image hai."""
     tried = [keyword] + random.sample(CATEGORY_IMAGE_KEYWORDS.get(category, ["technology"]), k=2)
     if PEXELS_API_KEY:
         for kw in tried:
@@ -81,15 +78,11 @@ def get_stock_image(keyword, category):
             except Exception as e:
                 print(f"Pexels fetch failed for '{kw}': {e}")
     return FALLBACK_IMAGES.get(category, "")
-# ---------------------------------------------------------------------
+
 
 DB_FILE = "tejaltechwire.db"
 JSON_FILE = "data/articles.json"
-
-# --- NAYA ADD KIYA: Google Search Console / sitemap ke liye apna asli site URL yahan daalo ---
 SITE_URL = "https://tejaltechwire.pages.dev"
-# ---------------------------------------------------------------------------------------------
-
 
 CAT_CLASS_MAP = {"AI": "ai", "Tech": "tech", "Gadgets": "gadgets"}
 
@@ -108,7 +101,6 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SMW0JFM2W0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -116,7 +108,6 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
   gtag('js', new Date());
   gtag('config', 'G-SMW0JFM2W0');
 </script>
-
 </head>
 <body>
 
@@ -196,7 +187,6 @@ def _time_ago(published_at):
         return ""
 
 
-# --- NAYA ADD KIYA: har article ke liye ek alag static HTML page banata hai (SEO ke liye) ---
 def generate_article_pages(conn):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -236,7 +226,6 @@ def generate_article_pages(conn):
 
     print(f"Generated {len(rows)} article pages in /articles/")
     return rows
-# ------------------------------------------------------------------------------------------
 
 
 def setup_db():
@@ -260,7 +249,9 @@ def fetch_full_article(url):
         return None
 
 
-def get_latest_entry_with_text(feed_url):
+# --- FIX: ab "seen_urls" leta hai — jo links pehle publish ho chuke hain unhe SKIP karke
+# feed ke AGE ke entries check karta rehta hai, poori category chhodta nahi ---
+def get_latest_entry_with_text(feed_url, seen_urls):
     try:
         feed = feedparser.parse(feed_url)
     except Exception as e:
@@ -269,30 +260,29 @@ def get_latest_entry_with_text(feed_url):
     if not feed.entries:
         print(f"No entries found in feed: {feed_url}")
         return None
-    for entry in feed.entries[:8]:
+    for entry in feed.entries[:10]:
         link = entry.get("link")
         if not link:
             continue
+        if link in seen_urls:
+            print(f"  (already published before, trying next entry): {link}")
+            continue
         text = fetch_full_article(link)
         if text and len(text) > 200:
-            return {
-                "title": entry.get("title", ""),
-                "text": text[:4000],
-                "link": link,
-            }
+            return {"title": entry.get("title", ""), "text": text[:4000], "link": link}
     return None
 
 
-def get_two_articles(feed_urls):
+def get_two_articles(feed_urls, seen_urls):
     collected = []
     for feed_url in feed_urls:
         print(f"Trying source: {feed_url}")
-        entry = get_latest_entry_with_text(feed_url)
+        entry = get_latest_entry_with_text(feed_url, seen_urls)
         if entry:
             collected.append(entry)
             print(f"  -> Got: {entry['title'][:60]}")
         else:
-            print(f"  -> Failed/empty: {feed_url}")
+            print(f"  -> Failed/empty/all-repeated: {feed_url}")
         if len(collected) >= 2:
             break
     return collected
@@ -330,11 +320,7 @@ def generate_merged_article(article_a, article_b, category):
         IMAGE_KEYWORDS: [2-4 word generic visual search phrase]
         """
 
-        response = client.models.generate_content(
-            model='gemini-3.5-flash',
-            contents=prompt
-        )
-
+        response = client.models.generate_content(model='gemini-3.5-flash', contents=prompt)
         text = response.text.strip()
         image_keywords = category.lower()
 
@@ -359,25 +345,23 @@ def fetch_and_process(conn):
     cursor = conn.cursor()
     os.makedirs("data", exist_ok=True)
 
+    # --- FIX: pehle hi DB se saare "already used" source links uthake ek set bana lete hain.
+    # Ab har feed-entry ke liye check hota hai (feed ke andar aage badhte hue), poori category
+    # ek jhatke mein skip nahi hoti — sirf wahi links skip hote hain jo pehle chhap chuke hain. ---
+    cursor.execute("SELECT source_url FROM articles WHERE source_url IS NOT NULL")
+    seen_urls = {row[0] for row in cursor.fetchall() if row[0] and row[0] != "#"}
+    print(f"Already-published source links in DB: {len(seen_urls)}")
+
     for category, feed_urls in SOURCES.items():
         print(f"\n=== Processing category: {category} ===")
-        articles = get_two_articles(feed_urls)
+        articles = get_two_articles(feed_urls, seen_urls)
 
         if len(articles) < 2:
-            print(f"Skipping {category}: only got {len(articles)}/2 valid sources after trying all candidates")
+            print(f"Skipping {category}: only got {len(articles)}/2 fresh valid sources after trying all candidates")
             continue
 
         article_a, article_b = articles[0], articles[1]
-        
-        # --- NAYA REPEAT FILTER YAHAN LAGA HAI (Aur kuch nahi badla) ---
-        # Gemini se news likhwane se pehle hi check kar lo ki kya yeh asli source URL 
-        # pehle se database mein hai? Agar hai, toh matlab yeh khabar chhap chuki hai.
         source_link = article_a.get("link", "")
-        cursor.execute("SELECT id FROM articles WHERE source_url = ?", (source_link,))
-        if cursor.fetchone():
-            print(f"Skipping: Yeh news pehle hi chhap chuki hai ({source_link})")
-            continue
-        # ---------------------------------------------------------------
 
         print(f"Merging {category} articles with Gemini...")
         summary, title, image_keywords = generate_merged_article(article_a, article_b, category)
@@ -395,6 +379,9 @@ def fetch_and_process(conn):
         """, (title, summary, category, image_url, "TejalTechWire Original", source_link, datetime.now().isoformat()))
         print(f"Published Original: {title}")
 
+        # Isی run ke andar bhi dobara wahi link use na ho, isliye turant seen_urls mein daal do
+        seen_urls.add(source_link)
+
     conn.commit()
 
 
@@ -403,7 +390,6 @@ def export_to_json(conn):
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM articles ORDER BY published_at DESC LIMIT 30")
     articles = [dict(row) for row in cursor.fetchall()]
-
     with open(JSON_FILE, 'w', encoding='utf-8') as f:
         json.dump(articles, f, indent=4)
     print("Exported to JSON successfully!")
