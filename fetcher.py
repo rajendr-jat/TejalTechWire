@@ -5,6 +5,7 @@ import feedparser
 import trafilatura
 import requests
 import random
+import urllib.parse
 from datetime import datetime
 from google import genai
 
@@ -37,13 +38,27 @@ SOURCES = {
     ],
 }
 
-# --- UNSPLASH IMAGE SYSTEM ADDED ---
-def get_unsplash_image(category):
-    """Category ke hisaab se Unsplash se ek dynamic aur fresh HD image nikalta hai."""
-    search_keyword = "artificial,intelligence" if category == "AI" else category.lower()
-    random_sig = random.randint(1, 100000)
-    return f"https://images.unsplash.com/featured/?{search_keyword},technology&sig={random_sig}&w=900&q=80"
-# ------------------------------------
+FALLBACK_IMAGES = {
+    "AI": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80",
+    "Tech": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    "Gadgets": "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=900&q=80",
+}
+
+# --- TITLE-BASED SMART UNSPLASH IMAGE SYSTEM ---
+def get_unsplash_image_by_title(title, category):
+    """Article ke title ya keywords ke adhar par Unsplash se match karti hui image nikalta hai."""
+    try:
+        # Title ke kuch mukhya shabd nikalte hain (jaise tech, apple, robot, chip, ai)
+        words = [w.lower() for w in title.split() if len(w) > 3]
+        query_words = ",".join(words[:3]) if words else category.lower()
+        
+        encoded_query = urllib.parse.quote(f"{query_words},technology")
+        random_sig = random.randint(1, 100000)
+        # Unsplash ki dynamic source URL jo query ke mutabik photo degi
+        return f"https://images.unsplash.com/featured/?{encoded_query}&sig={random_sig}&w=900&q=80"
+    except Exception:
+        return FALLBACK_IMAGES.get(category, "")
+# -----------------------------------------------
 
 DB_FILE = "tejaltechwire.db"
 JSON_FILE = "data/articles.json"
@@ -154,7 +169,7 @@ def generate_article_pages(conn):
     os.makedirs("articles", exist_ok=True)
 
     for a in rows:
-        image = a.get("image_url") or get_unsplash_image(a.get("category"))
+        image = a.get("image_url") or get_unsplash_image_by_title(a.get("title", ""), a.get("category", ""))
         description = _escape_html((a.get("summary") or "")[:160])
         cat_class = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
         source_name = a.get("source_name") or "TejalTechWire Original"
@@ -296,22 +311,20 @@ def fetch_and_process(conn):
 
         summary, title = generate_merged_article(article_a, article_b, category)
 
-        # --- DUPLICATE CHECKER (REPETITION STOPPER) ---
-        # Yeh check karega ki kya is title se milti-julti khabar pichle 24 ghante mein chhap chuki hai?
+        # Duplicate Checker Filter
         cursor.execute("SELECT id FROM articles WHERE title = ? OR summary LIKE ?", (title, f"%{title[:20]}%"))
         if cursor.fetchone():
             print(f"Duplicate/Similar article skipped to prevent repetition: {title}")
             continue
-        # ---------------------------------------------
 
-        # Unsplash Dynamic Safe Image
-        image_url = get_unsplash_image(category)
+        # Title-based Unsplash Image Generation
+        image_url = get_unsplash_image_by_title(title, category)
 
         cursor.execute("""
             INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (title, summary, category, image_url, "TejalTechWire Original", "#", datetime.now().isoformat()))
-        print(f"Published Unique Original: {title}")
+        print(f"Published Unique Original with Title-Matched Image: {title}")
 
     conn.commit()
 
@@ -376,4 +389,4 @@ if __name__ == "__main__":
     generate_robots_txt()
     db_conn.close()
     print("Generation Complete!")
-        
+    
