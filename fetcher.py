@@ -41,6 +41,150 @@ SITE_URL = "https://tejaltechwire.pages.dev"
 # ---------------------------------------------------------------------------------------------
 
 
+CAT_CLASS_MAP = {"AI": "ai", "Tech": "tech", "Gadgets": "gadgets"}
+
+ARTICLE_TEMPLATE = """<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title} — TejalTechWire</title>
+<meta name="description" content="{description}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{description}">
+<meta property="og:image" content="{image}">
+<meta property="og:type" content="article">
+<link rel="canonical" href="{url}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <div class="logo-mark">TW</div>
+    <div class="logo-text">Tejal<span>Tech</span>Wire</div>
+  </a>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">☾</button>
+</header>
+
+<div class="container">
+  <a class="back-link" href="/">← Back to TejalTechWire</a>
+  <span class="cat-badge {cat_class}">{category}</span>
+  <h1 class="article-title">{title}</h1>
+  <div class="article-byline">
+    <div class="avatar">{avatar}</div>
+    <div class="byline-text">{source_name} · {time_str}</div>
+  </div>
+  <img class="article-hero-img" src="{image}" alt="{title}">
+  <div class="article-text">{body_html}</div>
+  <div class="article-source">{source_line}</div>
+</div>
+
+<footer>
+  <p><span class="foot-brand">TejalTechWire</span> — Independent AI, Tech &amp; Gadget news desk. &copy; 2026.</p>
+  <p><a href="/">Home</a></p>
+</footer>
+
+<script>
+  const themeBtn = document.getElementById('themeBtn');
+  let currentTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
+  function toggleTheme(){{
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+    themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
+  }}
+</script>
+</body>
+</html>
+"""
+
+
+def _escape_html(text):
+    return (text or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _paragraphs_html(text):
+    parts = [p.strip() for p in (text or "").split("\n\n") if p.strip()]
+    if len(parts) <= 1:
+        parts = [p.strip() for p in (text or "").split("\n") if p.strip()]
+    return "".join(f"<p>{_escape_html(p)}</p>" for p in parts)
+
+
+def _initials(name):
+    if not name:
+        return "TW"
+    clean = name.replace("TejalTechWire", "TW")
+    words = clean.split(" ")
+    return "".join(w[0] for w in words[:2] if w).upper()[:2] or "TW"
+
+
+def _time_ago(published_at):
+    try:
+        dt = datetime.fromisoformat(published_at)
+        diff = datetime.now() - dt
+        hrs = int(diff.total_seconds() // 3600)
+        if hrs < 1:
+            return f"{int(diff.total_seconds() // 60)}m ago"
+        if hrs < 24:
+            return f"{hrs}h ago"
+        return f"{hrs // 24}d ago"
+    except Exception:
+        return ""
+
+
+# --- NAYA ADD KIYA: har article ke liye ek alag static HTML page banata hai (SEO ke liye) ---
+def generate_article_pages(conn):
+    """
+    Har article ke liye /articles/<id>.html par ek standalone page banata hai,
+    apne khud ke URL, title-tag, meta description aur og:image ke saath —
+    isse Google har news ko alag se index kar sakta hai.
+    """
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM articles ORDER BY published_at DESC")
+    rows = [dict(r) for r in cursor.fetchall()]
+
+    os.makedirs("articles", exist_ok=True)
+
+    for a in rows:
+        image = a.get("image_url") or FALLBACK_IMAGES.get(a.get("category"), "")
+        description = _escape_html((a.get("summary") or "")[:160])
+        cat_class = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
+        source_name = a.get("source_name") or "TejalTechWire Original"
+        source_url = a.get("source_url")
+
+        if source_url and source_url != "#":
+            source_line = f'Source references: <a href="{source_url}" target="_blank">Visit original →</a>'
+        else:
+            source_line = "Original reporting by TejalTechWire, based on multiple industry sources."
+
+        html = ARTICLE_TEMPLATE.format(
+            title=_escape_html(a.get("title", "")),
+            description=description,
+            image=image,
+            url=f"{SITE_URL}/articles/{a['id']}.html",
+            cat_class=cat_class,
+            category=_escape_html(a.get("category", "")),
+            avatar=_initials(source_name),
+            source_name=_escape_html(source_name),
+            time_str=_time_ago(a.get("published_at", "")),
+            body_html=_paragraphs_html(a.get("summary", "")),
+            source_line=source_line,
+        )
+
+        with open(f"articles/{a['id']}.html", "w", encoding="utf-8") as f:
+            f.write(html)
+
+    print(f"Generated {len(rows)} article pages in /articles/")
+    return rows
+# ------------------------------------------------------------------------------------------
+
+
 def setup_db():
     conn = sqlite3.connect(DB_FILE)
     if os.path.exists('schema.sql'):
@@ -185,28 +329,38 @@ def export_to_json(conn):
     print("Exported to JSON successfully!")
 
 
-# --- NAYA ADD KIYA: Google Search Console ke liye sitemap.xml banata hai ---
-def generate_sitemap():
+# --- UPDATE KIYA: Google Search Console ke liye sitemap.xml banata hai (ab har article ka URL bhi ismein hai) ---
+def generate_sitemap(article_rows=None):
     """
-    sitemap.xml root folder mein banata hai. Har run mein lastmod time update hota hai,
-    isse Google bot ko pata chalta hai ki homepage par naya content aaya hai.
-    Note: ye ek single-page website hai (articles ke alag URLs nahi hain, sab modal/popup
-    mein khulte hain), isliye sitemap mein sirf homepage hi list ho sakta hai.
+    sitemap.xml root folder mein banata hai. Homepage ke saath saath ab har
+    individual article ka apna URL bhi list hota hai, taaki Google har news
+    ko alag se crawl/index kar sake.
     """
     now = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
+    url_entries = [f"""  <url>
     <loc>{SITE_URL}/</loc>
     <lastmod>{now}</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
-  </url>
+  </url>"""]
+
+    for a in (article_rows or []):
+        lastmod = (a.get("published_at") or "")[:10] or now[:10]
+        url_entries.append(f"""  <url>
+    <loc>{SITE_URL}/articles/{a['id']}.html</loc>
+    <lastmod>{lastmod}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{chr(10).join(url_entries)}
 </urlset>
 """
     with open("sitemap.xml", "w", encoding="utf-8") as f:
         f.write(xml)
-    print("sitemap.xml generated!")
+    print(f"sitemap.xml generated with {len(url_entries)} URLs!")
 
 
 # --- NAYA ADD KIYA: robots.txt banata hai jisme sitemap ka path likha hota hai ---
@@ -231,8 +385,9 @@ if __name__ == "__main__":
     db_conn = setup_db()
     fetch_and_process(db_conn)
     export_to_json(db_conn)
-    generate_sitemap()       # <-- NAYA ADD KIYA
-    generate_robots_txt()    # <-- NAYA ADD KIYA
+    all_rows = generate_article_pages(db_conn)   # <-- NAYA ADD KIYA: har article ka apna page
+    generate_sitemap(all_rows)                   # <-- UPDATE KIYA: ab sabhi article URLs isme hain
+    generate_robots_txt()
     db_conn.close()
     print("Generation Complete!")
     
