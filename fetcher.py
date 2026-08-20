@@ -36,6 +36,10 @@ FALLBACK_IMAGES = {
 DB_FILE = "tejaltechwire.db"
 JSON_FILE = "data/articles.json"
 
+# --- NAYA ADD KIYA: Google Search Console / sitemap ke liye apna asli site URL yahan daalo ---
+SITE_URL = "https://tejaltechwire.pages.dev"
+# ---------------------------------------------------------------------------------------------
+
 
 def setup_db():
     conn = sqlite3.connect(DB_FILE)
@@ -181,11 +185,54 @@ def export_to_json(conn):
     print("Exported to JSON successfully!")
 
 
+# --- NAYA ADD KIYA: Google Search Console ke liye sitemap.xml banata hai ---
+def generate_sitemap():
+    """
+    sitemap.xml root folder mein banata hai. Har run mein lastmod time update hota hai,
+    isse Google bot ko pata chalta hai ki homepage par naya content aaya hai.
+    Note: ye ek single-page website hai (articles ke alag URLs nahi hain, sab modal/popup
+    mein khulte hain), isliye sitemap mein sirf homepage hi list ho sakta hai.
+    """
+    now = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{SITE_URL}/</loc>
+    <lastmod>{now}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+"""
+    with open("sitemap.xml", "w", encoding="utf-8") as f:
+        f.write(xml)
+    print("sitemap.xml generated!")
+
+
+# --- NAYA ADD KIYA: robots.txt banata hai jisme sitemap ka path likha hota hai ---
+def generate_robots_txt():
+    """
+    robots.txt banata hai taaki Google/Bing ka crawler bot ko pata chale sitemap kahan hai.
+    Search Console mein bhi ye hi sitemap URL submit karna hoga: SITE_URL/sitemap.xml
+    """
+    content = f"""User-agent: *
+Allow: /
+
+Sitemap: {SITE_URL}/sitemap.xml
+"""
+    with open("robots.txt", "w", encoding="utf-8") as f:
+        f.write(content)
+    print("robots.txt generated!")
+# ---------------------------------------------------------------------------------
+
+
 if __name__ == "__main__":
     print("Starting TejalTechWire Autonomous Content Engine...")
     db_conn = setup_db()
     fetch_and_process(db_conn)
     export_to_json(db_conn)
+    generate_sitemap()       # <-- NAYA ADD KIYA
+    generate_robots_txt()    # <-- NAYA ADD KIYA
     db_conn.close()
     print("Generation Complete!")
-        
+    
