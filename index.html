@@ -1,183 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta name="google-site-verification" content="12_OIhHqMXgx_TyWICr3XAc003aji9IOn5KlCt7F4HA" />
+  <meta name="google-site-verification" content="12_OIhHqMXgx_TyWICr3XAc003aji9IOn5KlCt7F4HA" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TejalTechWire — AI, Tech & Gadget News</title>
+<meta name="description" content="Original AI, Tech and Gadget news, written fresh every few hours.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0A0A0C;
-    --panel:#141417;
-    --panel-2:#1B1B1F;
-    --line:#2C2C32;
-    --text:#F3F2EE;
-    --text-dim:#9B9A97;
-    --accent:#D4AF37;
-    --ai:#B3A6FF;
-    --tech:#5FB4E8;
-    --gadgets:#D4AF37;
-    --shadow:none;
-  }
-  [data-theme="light"]{
-    --ink:#FFFFFF;
-    --panel:#FFFFFF;
-    --panel-2:#FAFAF8;
-    --line:#EAE8E2;
-    --text:#141414;
-    --text-dim:#6B6A66;
-    --accent:#B8862F;
-    --ai:#6C5CE0;
-    --tech:#1279B8;
-    --gadgets:#B8862F;
-    --shadow:0 2px 8px rgba(20,20,20,.04), 0 8px 24px rgba(20,20,20,.06);
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--ink); color:var(--text);
-    font-family:'Source Serif 4', Georgia, serif;
-    transition:background .3s, color .3s;
-  }
-  .mono{font-family:'IBM Plex Mono', monospace;}
-  .display{font-family:'Space Grotesk', sans-serif;}
-
-  /* ---------- HEADER ---------- */
-  header{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:1.1rem 5%; border-bottom:1px solid var(--line);
-    position:sticky; top:0; background:var(--ink); z-index:50;
-  }
-  .logo{display:flex; align-items:center; gap:.6rem;}
-  .logo-mark{
-    width:34px; height:34px; border:2px solid var(--accent); border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'IBM Plex Mono'; font-weight:600; color:var(--accent); font-size:.75rem;
-  }
-  .logo-text{font-family:'Space Grotesk'; font-weight:700; font-size:1.35rem; letter-spacing:-.02em;}
-  .logo-text span{color:var(--accent);}
-  nav{display:flex; gap:.4rem; align-items:center;}
-  .pill{
-    font-family:'IBM Plex Mono'; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase;
-    color:var(--text-dim); background:transparent; border:1px solid var(--line);
-    padding:.45rem .9rem; border-radius:999px; cursor:pointer; transition:.2s;
-  }
-  .pill:hover, .pill.active{ color:var(--ink); background:var(--accent); border-color:var(--accent);}
-  .theme-toggle{
-    margin-left:.6rem; width:36px; height:36px; border-radius:50%; border:1px solid var(--line);
-    background:transparent; color:var(--text); cursor:pointer; font-size:.9rem;
-  }
-  @media(max-width:800px){ nav{display:none;} }
-
-  /* ---------- LAYOUT ---------- */
-  .container{padding:1.6rem 5% 4rem; max-width:640px; margin:0 auto;}
-
-  /* Hero / trending card */
-  .hero{
-    border-radius:10px; overflow:hidden; margin-bottom:1.8rem; cursor:pointer;
-    background:var(--panel); border:1px solid var(--line); box-shadow:var(--shadow);
-  }
-  .hero img{width:100%; height:230px; object-fit:cover; display:block;}
-  .hero-body{padding:1.2rem 1.3rem 1.4rem;}
-  .cat-badge{
-    font-family:'IBM Plex Mono'; font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em;
-    padding:.28rem .65rem; border-radius:4px; display:inline-block; margin-bottom:.8rem;
-  }
-  .cat-badge.ai{color:#0A0A0C; background:var(--ai);}
-  .cat-badge.tech{color:#0A0A0C; background:var(--tech);}
-  .cat-badge.gadgets{color:#0A0A0C; background:var(--gadgets);}
-  .hero h1{font-family:'Space Grotesk'; font-size:1.5rem; line-height:1.25; margin:0 0 1rem; font-weight:700;}
-  .byline{display:flex; align-items:center; gap:.6rem;}
-  .avatar{
-    width:28px; height:28px; border-radius:50%; background:var(--accent); color:#0A0A0C;
-    display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:.75rem;
-    flex-shrink:0;
-  }
-  .byline-text{font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--text-dim); flex:1;}
-  .icon-btn{
-    width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:transparent;
-    display:flex; align-items:center; justify-content:center; color:var(--text-dim); cursor:pointer;
-  }
-  .icon-row{display:flex; gap:.4rem;}
-
-  /* Section label */
-  .section-head{margin:2rem 0 1rem;}
-  .section-head h2{
-    font-family:'Space Grotesk'; font-size:.85rem; text-transform:uppercase; letter-spacing:.1em;
-    margin:0; color:var(--text-dim); font-weight:600;
-  }
-
-  /* List rows — thumbnail on the right */
-  .list{display:flex; flex-direction:column;}
-  .row{
-    display:flex; align-items:flex-start; gap:1rem; padding:1.1rem 0;
-    border-bottom:1px solid var(--line); cursor:pointer;
-  }
-  .row:last-child{border-bottom:none;}
-  .row-body{flex:1; min-width:0;}
-  .row-cat{
-    font-family:'IBM Plex Mono'; font-size:.64rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em;
-    margin-bottom:.35rem; display:block;
-  }
-  .row-cat.ai{color:var(--ai);}
-  .row-cat.tech{color:var(--tech);}
-  .row-cat.gadgets{color:var(--gadgets);}
-  .row h3{
-    font-family:'Space Grotesk'; font-size:1rem; line-height:1.35; margin:0 0 .5rem; font-weight:600;
-  }
-  .row-time{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--text-dim);}
-  .row img{
-    width:78px; height:78px; object-fit:cover; border-radius:8px; flex-shrink:0; background:var(--panel-2);
-  }
-
-  .empty-state{
-    text-align:center; padding:4rem 1rem; color:var(--text-dim); font-family:'IBM Plex Mono'; font-size:.9rem;
-  }
-
-  footer{
-    border-top:1px solid var(--line); padding:2.5rem 5%; text-align:center;
-    font-family:'IBM Plex Mono'; font-size:.78rem; color:var(--text-dim);
-  }
-  footer .foot-brand{color:var(--accent); font-weight:600;}
-  footer a{color:var(--text-dim); margin:0 .6rem; text-decoration:none;}
-  footer a:hover{color:var(--text);}
-
-  /* ---------- ARTICLE DETAIL MODAL ---------- */
-  #modal-overlay{
-    position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:100;
-    display:none; align-items:flex-start; justify-content:center; overflow-y:auto;
-    padding:0;
-  }
-  #modal-overlay.open{display:flex;}
-  .modal-sheet{
-    background:var(--ink); width:100%; max-width:640px; min-height:100vh;
-    animation:slideUp .25s ease;
-  }
-  @keyframes slideUp{ from{transform:translateY(24px); opacity:0;} to{transform:translateY(0); opacity:1;} }
-  .modal-top{
-    display:flex; align-items:center; justify-content:space-between; padding:1rem 5%;
-    position:sticky; top:0; background:var(--ink); border-bottom:1px solid var(--line); z-index:2;
-  }
-  .modal-byline{display:flex; align-items:center; gap:.6rem;}
-  .modal-body{padding:1.4rem 5% 4rem; max-width:640px; margin:0 auto;}
-  .modal-body h1{font-family:'Space Grotesk'; font-size:1.65rem; line-height:1.3; margin:0 0 1.2rem; font-weight:700;}
-  .modal-body img{width:100%; border-radius:10px; margin-bottom:1.4rem; display:block;}
-  .modal-text p{font-size:1.02rem; line-height:1.75; color:var(--text); margin:0 0 1.1rem;}
-  .modal-source{
-    margin-top:2rem; padding-top:1.2rem; border-top:1px solid var(--line);
-    font-family:'IBM Plex Mono'; font-size:.78rem; color:var(--text-dim);
-  }
-  .modal-source a{color:var(--accent); text-decoration:none; font-weight:600;}
-</style>
+<link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
 
 <header>
-  <div class="logo">
+  <a class="logo" href="/">
     <div class="logo-mark">TW</div>
     <div class="logo-text">Tejal<span>Tech</span>Wire</div>
-  </div>
+  </a>
   <nav id="nav-filters">
     <button class="pill active" onclick="filterNews('All', this)">All</button>
     <button class="pill" onclick="filterNews('AI', this)">AI</button>
@@ -199,29 +38,6 @@
   <p><a href="#">Privacy Policy</a>|<a href="#">Disclaimer</a>|<a href="#">About Us</a></p>
 </footer>
 
-<!-- Article detail overlay -->
-<div id="modal-overlay" onclick="if(event.target===this) closeArticle()">
-  <div class="modal-sheet">
-    <div class="modal-top">
-      <div class="modal-byline">
-        <div class="avatar" id="modal-avatar">TW</div>
-        <div>
-          <div class="byline-text" id="modal-src-line" style="margin-bottom:.15rem;"></div>
-          <div class="byline-text" id="modal-time"></div>
-        </div>
-      </div>
-      <button class="icon-btn" onclick="closeArticle()">✕</button>
-    </div>
-    <div class="modal-body">
-      <span class="cat-badge" id="modal-cat"></span>
-      <h1 id="modal-title"></h1>
-      <img id="modal-img" src="" alt="">
-      <div class="modal-text" id="modal-text"></div>
-      <div class="modal-source" id="modal-source"></div>
-    </div>
-  </div>
-</div>
-
 <script>
   const themeBtn = document.getElementById('themeBtn');
   let currentTheme = localStorage.getItem('theme') || 'dark';
@@ -240,7 +56,7 @@
 
   async function loadNews(){
     try{
-      const res = await fetch('data/articles.json');
+      const res = await fetch('/data/articles.json');
       allArticles = await res.json();
       if(!allArticles.length) throw new Error('empty');
       renderNews(allArticles);
@@ -265,10 +81,6 @@
     return d.innerHTML;
   }
 
-  function toParagraphs(str){
-    return (str || '').split(/\n\s*\n/).map(p => `<p>${escapeHtml(p.trim())}</p>`).join('');
-  }
-
   function initials(name){
     if(!name) return 'TW';
     const parts = name.replace('TejalTechWire','TW').split(' ');
@@ -288,7 +100,7 @@
     const [top, ...rest] = articles;
     const topCls = CAT_CLASS[top.category] || 'gadgets';
     heroSlot.innerHTML = `
-      <div class="hero" onclick="openArticle(${top.id})">
+      <a class="hero" href="/articles/${top.id}.html">
         <img src="${top.image_url || 'https://via.placeholder.com/700x400?text=TejalTechWire'}" alt="">
         <div class="hero-body">
           <span class="cat-badge ${topCls}">${escapeHtml(top.category)}</span>
@@ -296,54 +108,22 @@
           <div class="byline">
             <div class="avatar">${initials(top.source_name)}</div>
             <div class="byline-text">${escapeHtml(top.source_name)} · ${timeAgo(top.published_at)}</div>
-            <div class="icon-row">
-              <div class="icon-btn">⇪</div>
-              <div class="icon-btn">☆</div>
-            </div>
           </div>
         </div>
-      </div>`;
+      </a>`;
 
     list.innerHTML = rest.map(a => {
       const cls = CAT_CLASS[a.category] || 'gadgets';
       return `
-        <div class="row" onclick="openArticle(${a.id})">
+        <a class="row" href="/articles/${a.id}.html">
           <div class="row-body">
             <span class="row-cat ${cls}">${escapeHtml(a.category)}</span>
             <h3>${escapeHtml(a.title)}</h3>
             <span class="row-time">${timeAgo(a.published_at)}</span>
           </div>
           <img src="${a.image_url || 'https://via.placeholder.com/160x160?text=TW'}" alt="">
-        </div>`;
+        </a>`;
     }).join('');
-  }
-
-  function openArticle(id){
-    const a = allArticles.find(x => x.id === id);
-    if(!a) return;
-    const cls = CAT_CLASS[a.category] || 'gadgets';
-    document.getElementById('modal-img').src = a.image_url || 'https://via.placeholder.com/700x400?text=TejalTechWire';
-    document.getElementById('modal-cat').className = 'cat-badge ' + cls;
-    document.getElementById('modal-cat').innerText = a.category;
-    document.getElementById('modal-time').innerText = timeAgo(a.published_at);
-    document.getElementById('modal-title').innerText = a.title;
-    document.getElementById('modal-text').innerHTML = toParagraphs(a.summary);
-    document.getElementById('modal-avatar').innerText = initials(a.source_name);
-    document.getElementById('modal-src-line').innerText = a.source_name;
-    const sourceLine = document.getElementById('modal-source');
-    if(a.source_url && a.source_url !== '#'){
-      sourceLine.innerHTML = `Source references: <a href="${a.source_url}" target="_blank">Visit original →</a>`;
-    }else{
-      sourceLine.innerHTML = `Original reporting by TejalTechWire, based on multiple industry sources.`;
-    }
-    document.getElementById('modal-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    window.scrollTo(0,0);
-  }
-
-  function closeArticle(){
-    document.getElementById('modal-overlay').classList.remove('open');
-    document.body.style.overflow = '';
   }
 
   function filterNews(category, btn){
