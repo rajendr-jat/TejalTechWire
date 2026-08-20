@@ -4,8 +4,7 @@ import sqlite3
 import feedparser
 import trafilatura
 import requests
-import random
-import urllib.parse
+import random  # <-- Sirf ye add kiya hai random image system ke liye
 from datetime import datetime
 from google import genai
 
@@ -13,11 +12,15 @@ from google import genai
 api_key = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=api_key) if api_key else None
 
+# Bahut si news sites bina "real browser" jaisा User-Agent bheje request block kar deti hain.
+# Isse fetch fail hota tha aur AI/Gadgets category skip ho jaati thi.
 REQUEST_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 }
 
+# Har category ke liye MULTIPLE candidate feeds — agar ek source fail ho (block/down/empty)
+# to code automatically agla try karta hai, isliye poori category skip nahi hoti.
 SOURCES = {
     "AI": [
         "https://techcrunch.com/category/artificial-intelligence/feed/",
@@ -44,23 +47,49 @@ FALLBACK_IMAGES = {
     "Gadgets": "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=900&q=80",
 }
 
-# --- TITLE-BASED SMART UNSPLASH IMAGE SYSTEM ---
-def get_unsplash_image_by_title(title, category):
-    """Article ke title ya keywords ke adhar par Unsplash se match karti hui image nikalta hai."""
-    try:
-        words = [w.lower() for w in title.split() if len(w) > 3]
-        query_words = ",".join(words[:3]) if words else category.lower()
-        
-        encoded_query = urllib.parse.quote(f"{query_words},technology")
-        random_sig = random.randint(1, 100000)
-        return f"https://images.unsplash.com/featured/?{encoded_query}&sig={random_sig}&w=900&q=80"
-    except Exception:
-        return FALLBACK_IMAGES.get(category, "")
-# -----------------------------------------------
+# --- NAYA IMAGE SYSTEM: COPYRIGHT-FREE STOCK PHOTOS (Pexels API) ---
+PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")
+
+CATEGORY_IMAGE_KEYWORDS = {
+    "AI": ["artificial intelligence", "machine learning technology", "robot automation", "data center servers"],
+    "Tech": ["technology computer", "software startup", "computer chip", "modern office technology"],
+    "Gadgets": ["smartphone gadget", "wearable technology", "laptop desk", "smart home device"],
+}
+
+
+def get_stock_image(keyword, category):
+    """Article ke TOPIC se match karta keyword lekar Pexels se ek licensed, copyright-free
+    stock photo laata hai. Agar keyword se result na mile, category ke generic keyword try
+    karta hai, aur final fallback ek fixed safe image hai."""
+    tried = [keyword] + random.sample(CATEGORY_IMAGE_KEYWORDS.get(category, ["technology"]), k=2)
+    if PEXELS_API_KEY:
+        for kw in tried:
+            try:
+                resp = requests.get(
+                    "https://api.pexels.com/v1/search",
+                    headers={"Authorization": PEXELS_API_KEY},
+                    params={"query": kw, "per_page": 6, "orientation": "landscape"},
+                    timeout=10,
+                )
+                data = resp.json()
+                photos = data.get("photos", [])
+                if photos:
+                    pick = random.choice(photos)
+                    print(f"Pexels image found for '{kw}'")
+                    return pick["src"]["large"]
+                print(f"Pexels: no results for '{kw}', trying next...")
+            except Exception as e:
+                print(f"Pexels fetch failed for '{kw}': {e}")
+    return FALLBACK_IMAGES.get(category, "")
+# ---------------------------------------------------------------------
 
 DB_FILE = "tejaltechwire.db"
 JSON_FILE = "data/articles.json"
+
+# --- NAYA ADD KIYA: Google Search Console / sitemap ke liye apna asli site URL yahan daalo ---
 SITE_URL = "https://tejaltechwire.pages.dev"
+# ---------------------------------------------------------------------------------------------
+
 
 CAT_CLASS_MAP = {"AI": "ai", "Tech": "tech", "Gadgets": "gadgets"}
 
@@ -158,6 +187,7 @@ def _time_ago(published_at):
         return ""
 
 
+# --- NAYA ADD KIYA: har article ke liye ek alag static HTML page banata hai (SEO ke liye) ---
 def generate_article_pages(conn):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -167,7 +197,7 @@ def generate_article_pages(conn):
     os.makedirs("articles", exist_ok=True)
 
     for a in rows:
-        image = a.get("image_url") or get_unsplash_image_by_title(a.get("title", ""), a.get("category", ""))
+        image = a.get("image_url") or FALLBACK_IMAGES.get(a.get("category"), "")
         description = _escape_html((a.get("summary") or "")[:160])
         cat_class = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
         source_name = a.get("source_name") or "TejalTechWire Original"
@@ -195,7 +225,9 @@ def generate_article_pages(conn):
         with open(f"articles/{a['id']}.html", "w", encoding="utf-8") as f:
             f.write(html)
 
+    print(f"Generated {len(rows)} article pages in /articles/")
     return rows
+# ------------------------------------------------------------------------------------------
 
 
 def setup_db():
@@ -210,8 +242,10 @@ def fetch_full_article(url):
     try:
         resp = requests.get(url, headers=REQUEST_HEADERS, timeout=15)
         if resp.status_code != 200 or not resp.text:
+            print(f"Fetch failed ({resp.status_code}) for {url}")
             return None
-        return trafilatura.extract(resp.text)
+        text = trafilatura.extract(resp.text)
+        return text
     except Exception as e:
         print(f"Full article fetch failed for {url}: {e}")
         return None
@@ -221,8 +255,10 @@ def get_latest_entry_with_text(feed_url):
     try:
         feed = feedparser.parse(feed_url)
     except Exception as e:
+        print(f"Feed parse failed for {feed_url}: {e}")
         return None
     if not feed.entries:
+        print(f"No entries found in feed: {feed_url}")
         return None
     for entry in feed.entries[:8]:
         link = entry.get("link")
@@ -241,9 +277,13 @@ def get_latest_entry_with_text(feed_url):
 def get_two_articles(feed_urls):
     collected = []
     for feed_url in feed_urls:
+        print(f"Trying source: {feed_url}")
         entry = get_latest_entry_with_text(feed_url)
         if entry:
             collected.append(entry)
+            print(f"  -> Got: {entry['title'][:60]}")
+        else:
+            print(f"  -> Failed/empty: {feed_url}")
         if len(collected) >= 2:
             break
     return collected
@@ -251,7 +291,7 @@ def get_two_articles(feed_urls):
 
 def generate_merged_article(article_a, article_b, category):
     if not client:
-        return "Gemini API key missing.", "TejalTechWire Special"
+        return "Gemini API key missing, content generation skipped.", "TejalTechWire Special", category.lower()
     try:
         prompt = f"""
         You are a senior tech journalist writing an original news report for 'TejalTechWire',
@@ -270,9 +310,15 @@ def generate_merged_article(article_a, article_b, category):
         --- SOURCE B: "{article_b['title']}" ---
         {article_b['text']}
 
+        Also suggest a short, generic stock-photo search phrase (2-4 words, describing the general
+        SUBJECT/THEME of this story visually — e.g. "self-driving car", "computer chip", "smartphone camera",
+        "cloud data center" — NOT people's names, NOT company/product brand names, since this is for a
+        royalty-free stock photo search and must return real matching photos).
+
         Format your response strictly as:
         TITLE: [Your new original catchy headline]
         CONTENT: [Your full original article]
+        IMAGE_KEYWORDS: [2-4 word generic visual search phrase]
         """
 
         response = client.models.generate_content(
@@ -281,17 +327,23 @@ def generate_merged_article(article_a, article_b, category):
         )
 
         text = response.text.strip()
+        image_keywords = category.lower()
+
+        if "IMAGE_KEYWORDS:" in text:
+            text, keyword_part = text.split("IMAGE_KEYWORDS:", 1)
+            image_keywords = keyword_part.strip().strip('"').strip() or image_keywords
+
         if "TITLE:" in text and "CONTENT:" in text:
             parts = text.split("CONTENT:")
             new_title = parts[0].replace("TITLE:", "").strip()
             new_content = parts[1].strip()
-            return new_content, new_title
+            return new_content, new_title, image_keywords
         else:
-            return text, f"{category} Roundup"
+            return text, f"{category} Roundup", image_keywords
 
     except Exception as e:
         print(f"Gemini generation failed: {e}")
-        return "Autonomous generation in progress.", f"{category} Update"
+        return "Autonomous generation in progress. Stay tuned for updates.", f"{category} Update - {datetime.now().strftime('%d %b %Y %H:%M')}", category.lower()
 
 
 def fetch_and_process(conn):
@@ -303,26 +355,36 @@ def fetch_and_process(conn):
         articles = get_two_articles(feed_urls)
 
         if len(articles) < 2:
+            print(f"Skipping {category}: only got {len(articles)}/2 valid sources after trying all candidates")
             continue
 
         article_a, article_b = articles[0], articles[1]
-
-        summary, title = generate_merged_article(article_a, article_b, category)
-
-        # Duplicate Checker Filter
-        cursor.execute("SELECT id FROM articles WHERE title = ? OR summary LIKE ?", (title, f"%{title[:20]}%"))
+        
+        # --- NAYA REPEAT FILTER YAHAN LAGA HAI (Aur kuch nahi badla) ---
+        # Gemini se news likhwane se pehle hi check kar lo ki kya yeh asli source URL 
+        # pehle se database mein hai? Agar hai, toh matlab yeh khabar chhap chuki hai.
+        source_link = article_a.get("link", "")
+        cursor.execute("SELECT id FROM articles WHERE source_url = ?", (source_link,))
         if cursor.fetchone():
-            print(f"Duplicate/Similar article skipped to prevent repetition: {title}")
+            print(f"Skipping: Yeh news pehle hi chhap chuki hai ({source_link})")
             continue
+        # ---------------------------------------------------------------
 
-        # Title-based Unsplash Image Generation
-        image_url = get_unsplash_image_by_title(title, category)
+        print(f"Merging {category} articles with Gemini...")
+        summary, title, image_keywords = generate_merged_article(article_a, article_b, category)
+
+        image_url = get_stock_image(image_keywords, category)
+
+        cursor.execute("SELECT id FROM articles WHERE title = ?", (title,))
+        if cursor.fetchone():
+            print(f"Duplicate title skipped: {title}")
+            continue
 
         cursor.execute("""
             INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (title, summary, category, image_url, "TejalTechWire Original", "#", datetime.now().isoformat()))
-        print(f"Published Unique Original with Title-Matched Image: {title}")
+        """, (title, summary, category, image_url, "TejalTechWire Original", source_link, datetime.now().isoformat()))
+        print(f"Published Original: {title}")
 
     conn.commit()
 
@@ -363,7 +425,7 @@ def generate_sitemap(article_rows=None):
 """
     with open("sitemap.xml", "w", encoding="utf-8") as f:
         f.write(xml)
-    print("sitemap.xml generated!")
+    print(f"sitemap.xml generated with {len(url_entries)} URLs!")
 
 
 def generate_robots_txt():
@@ -378,7 +440,7 @@ Sitemap: {SITE_URL}/sitemap.xml
 
 
 if __name__ == "__main__":
-    print("Starting TejalTechWire Clean Content Engine...")
+    print("Starting TejalTechWire Autonomous Content Engine...")
     db_conn = setup_db()
     fetch_and_process(db_conn)
     export_to_json(db_conn)
@@ -387,4 +449,4 @@ if __name__ == "__main__":
     generate_robots_txt()
     db_conn.close()
     print("Generation Complete!")
-            
+        
