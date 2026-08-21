@@ -151,3 +151,18 @@ footer a:hover{color:var(--text);}
   font-family:'IBM Plex Mono'; font-size:.78rem; color:var(--text-dim);
 }
 .article-source a{color:var(--accent); text-decoration:none; font-weight:600;}
+
+/* Related Articles section on article pages */
+.related-section{margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--line);}
+.related-section h2{
+  font-family:'Space Grotesk'; font-size:.85rem; text-transform:uppercase; letter-spacing:.1em;
+  margin:0 0 1rem; color:var(--text-dim); font-weight:600;
+}
+.related-list{display:flex; flex-direction:column;}
+.related-item{
+  display:flex; align-items:center; gap:1rem; padding:.9rem 0;
+  border-bottom:1px solid var(--line); text-decoration:none; color:inherit;
+}
+.related-item:last-child{border-bottom:none;}
+.related-item img{width:60px; height:60px; object-fit:cover; border-radius:6px; flex-shrink:0; background:var(--panel-2);}
+.related-item h4{font-family:'Space Grotesk'; font-size:.92rem; line-height:1.3; margin:0; font-weight:600;}
