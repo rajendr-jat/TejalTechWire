@@ -151,6 +151,37 @@ DB_FILE = "tejaltechwire.db"
 JSON_FILE = "data/articles.json"
 SITE_URL = "https://tejaltechwire.pages.dev"
 
+# --- NAYA: IndexNow protocol — Bing/Yandex ko turant "naya article aaya hai" batata hai,
+# turant crawl ho jaata hai (Google ke liye ye kaam nahi karta, sirf sitemap se hi discover hota hai) ---
+INDEXNOW_KEY = "tejaltechwire4f8a2c19"  # koi bhi unique random text ho sakta hai, ye fixed rehna chahiye
+
+
+def generate_indexnow_key_file():
+    """IndexNow ko verify karne ke liye ek file honi chahiye jiska naam hi key ho, jismein wahi key likhi ho."""
+    with open(f"{INDEXNOW_KEY}.txt", "w", encoding="utf-8") as f:
+        f.write(INDEXNOW_KEY)
+
+
+def submit_indexnow(urls):
+    """Bing/Yandex ko naye/updated URLs ke baare mein turant bata deta hai."""
+    if not urls:
+        return
+    try:
+        resp = requests.post(
+            "https://api.indexnow.org/indexnow",
+            json={
+                "host": SITE_URL.replace("https://", "").replace("http://", ""),
+                "key": INDEXNOW_KEY,
+                "keyLocation": f"{SITE_URL}/{INDEXNOW_KEY}.txt",
+                "urlList": urls,
+            },
+            headers={"Content-Type": "application/json"},
+            timeout=15,
+        )
+        print(f"IndexNow submitted {len(urls)} URLs — status {resp.status_code}")
+    except Exception as e:
+        print(f"IndexNow submission failed: {e}")
+
 CAT_CLASS_MAP = {"AI": "ai", "Tech": "tech", "Gadgets": "gadgets"}
 
 ARTICLE_TEMPLATE = """<!DOCTYPE html>
@@ -160,14 +191,57 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title} — TejalTechWire</title>
 <meta name="description" content="{description}">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+<!-- Open Graph (Facebook/WhatsApp share preview) -->
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
 <meta property="og:image" content="{image}">
 <meta property="og:type" content="article">
+<meta property="og:url" content="{url}">
+<meta property="og:site_name" content="TejalTechWire">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{description}">
+<meta name="twitter:image" content="{image}">
+
 <link rel="canonical" href="{url}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data: Google ko batata hai ye ek News Article hai (rich snippet ke liye) -->
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": {title_json},
+  "image": [{image_json}],
+  "datePublished": "{date_iso}",
+  "dateModified": "{date_iso}",
+  "author": [{{
+    "@type": "Organization",
+    "name": "TejalTechWire",
+    "url": "{site_url}"
+  }}],
+  "publisher": {{
+    "@type": "Organization",
+    "name": "TejalTechWire",
+    "logo": {{
+      "@type": "ImageObject",
+      "url": "{site_url}/assets/favicon.svg"
+    }}
+  }},
+  "description": {description_json},
+  "mainEntityOfPage": {{
+    "@type": "WebPage",
+    "@id": "{url}"
+  }}
+}}
+</script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SMW0JFM2W0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -196,12 +270,17 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
   </div>
   <img class="article-hero-img" src="{image}" alt="{title}">
   <div class="article-text">{body_html}</div>
-  <div class="article-source">{source_line}</div>
+  <div class="article-source">Original reporting by TejalTechWire, based on multiple industry sources.</div>
+
+  <div class="related-section">
+    <h2>More in {category}</h2>
+    <div class="related-list">{related_html}</div>
+  </div>
 </div>
 
 <footer>
   <p><span class="foot-brand">TejalTechWire</span> — Independent AI, Tech &amp; Gadget news desk. &copy; 2026.</p>
-  <p><a href="/">Home</a></p>
+  <p><a href="/">Home</a> | <a href="/about.html">About</a> | <a href="/contact.html">Contact</a> | <a href="/privacy.html">Privacy Policy</a></p>
 </footer>
 
 <script>
@@ -254,6 +333,221 @@ def _time_ago(published_at):
         return ""
 
 
+# --- NAYA: Homepage ab fetcher.py hi generate karta hai, articles ka HTML pehle se
+# built-in hota hai (JS ke bharose nahi rehta). Isse Google/Bing turant homepage khulte
+# hi saara content dekh lete hain, bina JavaScript render kiye — crawlability guaranteed. ---
+HOME_TEMPLATE = """<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TejalTechWire — AI, Tech & Gadget News</title>
+<meta name="description" content="Original AI, Tech and Gadget news, written fresh every few hours.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="canonical" href="{site_url}/">
+
+<meta property="og:title" content="TejalTechWire — AI, Tech & Gadget News">
+<meta property="og:description" content="Original AI, Tech and Gadget news, written fresh every few hours.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{site_url}/">
+<meta property="og:site_name" content="TejalTechWire">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TejalTechWire — AI, Tech & Gadget News">
+<meta name="twitter:description" content="Original AI, Tech and Gadget news, written fresh every few hours.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "NewsMediaOrganization",
+  "name": "TejalTechWire",
+  "url": "{site_url}/",
+  "logo": "{site_url}/assets/favicon.svg",
+  "description": "Original AI, Tech and Gadget news, written fresh every few hours."
+}}
+</script>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <div class="logo-mark">TW</div>
+    <div class="logo-text">Tejal<span>Tech</span>Wire</div>
+  </a>
+  <nav id="nav-filters">
+    <button class="pill active" onclick="filterNews('All', this)">All</button>
+    <button class="pill" onclick="filterNews('AI', this)">AI</button>
+    <button class="pill" onclick="filterNews('Tech', this)">Tech</button>
+    <button class="pill" onclick="filterNews('Gadgets', this)">Gadgets</button>
+  </nav>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">☾</button>
+</header>
+
+<div class="container">
+  <div id="hero-slot">{hero_html}</div>
+  <div class="section-head"><h2>Latest Dispatches</h2></div>
+  <div class="list" id="news-list">{list_html}</div>
+</div>
+
+<footer>
+  <p><span class="foot-brand">TejalTechWire</span> — Independent AI, Tech &amp; Gadget news desk. &copy; 2026.</p>
+  <p><a href="/about.html">About</a>|<a href="/contact.html">Contact</a>|<a href="/privacy.html">Privacy Policy</a></p>
+</footer>
+
+<script type="application/json" id="articles-data">{articles_json}</script>
+<script>
+  const themeBtn = document.getElementById('themeBtn');
+  let currentTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
+
+  function toggleTheme(){{
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+    themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
+  }}
+
+  const CAT_CLASS = {{'AI':'ai', 'Tech':'tech', 'Gadgets':'gadgets'}};
+  // Page load hote hi content pehle se HTML mein maujood hai (SEO ke liye).
+  // Ye embedded data sirf CATEGORY FILTER buttons ke liye use hota hai — koi extra network call nahi.
+  const allArticles = JSON.parse(document.getElementById('articles-data').textContent);
+
+  function timeAgo(iso){{
+    const diffMs = Date.now() - new Date(iso).getTime();
+    const mins = Math.floor(diffMs/60000);
+    if(mins < 60) return mins + 'm ago';
+    const hrs = Math.floor(mins/60);
+    if(hrs < 24) return hrs + 'h ago';
+    return Math.floor(hrs/24) + 'd ago';
+  }}
+
+  function escapeHtml(str){{
+    const d = document.createElement('div');
+    d.innerText = str || '';
+    return d.innerHTML;
+  }}
+
+  function initials(name){{
+    if(!name) return 'TW';
+    const parts = name.replace('TejalTechWire','TW').split(' ');
+    return parts.slice(0,2).map(p => p[0]).join('').toUpperCase().slice(0,2);
+  }}
+
+  function renderNews(articles){{
+    const heroSlot = document.getElementById('hero-slot');
+    const list = document.getElementById('news-list');
+
+    if(!articles.length){{
+      heroSlot.innerHTML = '';
+      list.innerHTML = '<div class="empty-state">// No dispatches in this category yet.</div>';
+      return;
+    }}
+
+    const [top, ...rest] = articles;
+    const topCls = CAT_CLASS[top.category] || 'gadgets';
+    heroSlot.innerHTML = `
+      <a class="hero" href="/articles/${{top.id}}.html">
+        <img src="${{top.image_url || 'https://via.placeholder.com/700x400?text=TejalTechWire'}}" alt="">
+        <div class="hero-body">
+          <span class="cat-badge ${{topCls}}">${{escapeHtml(top.category)}}</span>
+          <h1>${{escapeHtml(top.title)}}</h1>
+          <div class="byline">
+            <div class="avatar">${{initials(top.source_name)}}</div>
+            <div class="byline-text">${{escapeHtml(top.source_name)}} · ${{timeAgo(top.published_at)}}</div>
+          </div>
+        </div>
+      </a>`;
+
+    list.innerHTML = rest.map(a => {{
+      const cls = CAT_CLASS[a.category] || 'gadgets';
+      return `
+        <a class="row" href="/articles/${{a.id}}.html">
+          <div class="row-body">
+            <span class="row-cat ${{cls}}">${{escapeHtml(a.category)}}</span>
+            <h3>${{escapeHtml(a.title)}}</h3>
+            <span class="row-time">${{timeAgo(a.published_at)}}</span>
+          </div>
+          <img src="${{a.image_url || 'https://via.placeholder.com/160x160?text=TW'}}" alt="">
+        </a>`;
+    }}).join('');
+  }}
+
+  function filterNews(category, btn){{
+    document.querySelectorAll('#nav-filters .pill').forEach(p => p.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+    if(category === 'All'){{
+      renderNews(allArticles);
+    }}else{{
+      renderNews(allArticles.filter(a => a.category === category));
+    }}
+  }}
+</script>
+</body>
+</html>
+"""
+
+
+def _render_hero_html(a):
+    cls = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
+    image = a.get("image_url") or "https://via.placeholder.com/700x400?text=TejalTechWire"
+    source_name = a.get("source_name") or "TejalTechWire Original"
+    return f"""<a class="hero" href="/articles/{a['id']}.html">
+        <img src="{image}" alt="{_escape_html(a.get('title',''))}">
+        <div class="hero-body">
+          <span class="cat-badge {cls}">{_escape_html(a.get('category',''))}</span>
+          <h1>{_escape_html(a.get('title',''))}</h1>
+          <div class="byline">
+            <div class="avatar">{_initials(source_name)}</div>
+            <div class="byline-text">{_escape_html(source_name)} · {_time_ago(a.get('published_at',''))}</div>
+          </div>
+        </div>
+      </a>"""
+
+
+def _render_row_html(a):
+    cls = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
+    image = a.get("image_url") or "https://via.placeholder.com/160x160?text=TW"
+    return f"""<a class="row" href="/articles/{a['id']}.html">
+          <div class="row-body">
+            <span class="row-cat {cls}">{_escape_html(a.get('category',''))}</span>
+            <h3>{_escape_html(a.get('title',''))}</h3>
+            <span class="row-time">{_time_ago(a.get('published_at',''))}</span>
+          </div>
+          <img src="{image}" alt="{_escape_html(a.get('title',''))}">
+        </a>"""
+
+
+def generate_homepage(conn):
+    """Homepage ko fetcher.py hi generate karta hai — content pehle se HTML mein hota hai,
+    JS sirf category-filter buttons ke liye use hota hai. Crawlers ko turant content milta hai."""
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM articles ORDER BY published_at DESC LIMIT 30")
+    rows = [dict(r) for r in cursor.fetchall()]
+
+    if not rows:
+        hero_html = ""
+        list_html = '<div class="empty-state">// No dispatches yet — waiting for the next automated update cycle...</div>'
+    else:
+        top, rest = rows[0], rows[1:]
+        hero_html = _render_hero_html(top)
+        list_html = "".join(_render_row_html(a) for a in rest)
+
+    html = HOME_TEMPLATE.format(
+        site_url=SITE_URL,
+        hero_html=hero_html,
+        list_html=list_html,
+        articles_json=json.dumps(rows),
+    )
+    with open("index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print("Homepage (index.html) regenerated with pre-rendered content")
+
+
 def generate_article_pages(conn):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -267,12 +561,27 @@ def generate_article_pages(conn):
         description = _escape_html((a.get("summary") or "")[:160])
         cat_class = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
         source_name = a.get("source_name") or "TejalTechWire Original"
-        source_url = a.get("source_url")
 
-        if source_url and source_url != "#":
-            source_line = f'Source references: <a href="{source_url}" target="_blank">Visit original →</a>'
+        # --- NAYA: isی category ke 3 aur articles dhoondh ke "Related" links banate hain ---
+        related = [r for r in rows if r.get("category") == a.get("category") and r["id"] != a["id"]][:3]
+        if related:
+            related_html = "".join(
+                f'<a class="related-item" href="/articles/{r["id"]}.html">'
+                f'<img src="{r.get("image_url") or FALLBACK_IMAGES.get(r.get("category"), "")}" alt="">'
+                f'<h4>{_escape_html(r.get("title", ""))}</h4></a>'
+                for r in related
+            )
         else:
-            source_line = "Original reporting by TejalTechWire, based on multiple industry sources."
+            related_html = '<p style="color:var(--text-dim); font-size:.9rem;">More stories coming soon.</p>'
+
+        # Structured data (JSON-LD) ke andar safely daalne ke liye JSON-escaped strings
+        title_json = json.dumps(a.get("title", ""))
+        description_json = json.dumps((a.get("summary") or "")[:200])
+        image_json = json.dumps(image)
+        try:
+            date_iso = datetime.fromisoformat(a.get("published_at", "")).strftime('%Y-%m-%dT%H:%M:%S+00:00')
+        except Exception:
+            date_iso = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S+00:00')
 
         html = ARTICLE_TEMPLATE.format(
             title=_escape_html(a.get("title", "")),
@@ -285,7 +594,12 @@ def generate_article_pages(conn):
             source_name=_escape_html(source_name),
             time_str=_time_ago(a.get("published_at", "")),
             body_html=_paragraphs_html(a.get("summary", "")),
-            source_line=source_line,
+            related_html=related_html,
+            title_json=title_json,
+            description_json=description_json,
+            image_json=image_json,
+            date_iso=date_iso,
+            site_url=SITE_URL,
         )
 
         with open(f"articles/{a['id']}.html", "w", encoding="utf-8") as f:
@@ -355,20 +669,36 @@ def get_two_articles(feed_urls, seen_urls):
     return collected
 
 
-def generate_merged_article(article_a, article_b, category):
-    if not client:
-        return "Gemini API key missing, content generation skipped.", "TejalTechWire Special", category.lower()
-    try:
-        prompt = f"""
-        You are a senior tech journalist writing an original news report for 'TejalTechWire',
-        a publication covering AI, Technology, and Gadgets.
+def _call_gemini_once(article_a, article_b, category):
+    """Gemini ko ek baar call karta hai. Fail hone par exception raise karta hai (caller retry karega)."""
+    prompt = f"""
+        You are a friendly tech writer for 'TejalTechWire', explaining recent developments in
+        AI, Technology, and Gadgets to EVERYDAY READERS in the US and UK who are not tech experts.
 
         Below are two full source articles on related recent developments in the '{category}' space.
         Read both carefully, then write a brand-new, completely original article in your own words —
         combining the key facts, context, and angles from both. Do NOT copy any sentence or phrasing
-        from the sources. Write like an experienced human journalist: a strong opening line, clear
-        context on why it matters, concrete details, and a natural closing thought. Length: 300-400 words,
-        3-5 paragraphs, no bullet points.
+        from the sources.
+
+        AUDIENCE: Write for a general American and British audience. Use US/UK spelling and phrasing
+        (e.g. "color" or "colour" both fine, avoid region-specific slang from other countries). Prices
+        should stay in the currency mentioned in the source (usually USD "$"); if converting, prefer USD.
+        Do not add India-specific or any other region-specific framing or comparisons unless the source
+        material itself is about that region.
+
+        WRITING STYLE — this is critical:
+        - Use SIMPLE, PLAIN language. Write like you're explaining it to a smart friend who doesn't
+          follow tech news closely — not like a formal press release or analyst report.
+        - Short sentences. One idea per sentence where possible.
+        - Explain any technical term or jargon in plain words the moment you use it (e.g. instead of
+          just saying "modular nuclear reactor", briefly explain what that means in everyday terms).
+        - ALWAYS write numbers and years as normal digits (e.g. "2028", "7.5 billion", "$500") —
+          NEVER spell them out as words (never write "twenty-twenty-eight" or "seven point five billion").
+        - Avoid heavy, dense, literary sentences. Avoid words like "amid", "underscores", "harbinger".
+        - Start with a simple, clear opening line that says what happened, in one sentence.
+        - Include a short "why this matters to you" idea in plain terms.
+        - End with a simple, natural closing thought — not a grand dramatic statement.
+        Length: 300-400 words, 3-5 short paragraphs, no bullet points.
 
         --- SOURCE A: "{article_a['title']}" ---
         {article_a['text']}
@@ -384,35 +714,55 @@ def generate_merged_article(article_a, article_b, category):
         stock photo search and must return real matching generic photos.
 
         Format your response strictly as:
-        TITLE: [Your new original catchy headline]
-        CONTENT: [Your full original article]
+        TITLE: [Your new original catchy headline, in simple plain language]
+        CONTENT: [Your full original article, in simple plain language]
         IMAGE_KEYWORDS: [2-4 word generic visual search phrase]
         """
 
-        response = client.models.generate_content(model='gemini-3.5-flash', contents=prompt)
-        text = response.text.strip()
-        image_keywords = category.lower()
+    response = client.models.generate_content(model='gemini-3.5-flash', contents=prompt)
+    text = response.text.strip()
+    image_keywords = category.lower()
 
-        if "IMAGE_KEYWORDS:" in text:
-            text, keyword_part = text.split("IMAGE_KEYWORDS:", 1)
-            image_keywords = keyword_part.strip().strip('"').strip() or image_keywords
+    if "IMAGE_KEYWORDS:" in text:
+        text, keyword_part = text.split("IMAGE_KEYWORDS:", 1)
+        image_keywords = keyword_part.strip().strip('"').strip() or image_keywords
 
-        if "TITLE:" in text and "CONTENT:" in text:
-            parts = text.split("CONTENT:")
-            new_title = parts[0].replace("TITLE:", "").strip()
-            new_content = parts[1].strip()
-            return new_content, new_title, image_keywords
-        else:
-            return text, f"{category} Roundup", image_keywords
+    if "TITLE:" not in text or "CONTENT:" not in text:
+        raise ValueError("Gemini response missing TITLE:/CONTENT: markers")
 
-    except Exception as e:
-        print(f"Gemini generation failed: {e}")
-        return "Autonomous generation in progress. Stay tuned for updates.", f"{category} Update - {datetime.now().strftime('%d %b %Y %H:%M')}", category.lower()
+    parts = text.split("CONTENT:")
+    new_title = parts[0].replace("TITLE:", "").strip()
+    new_content = parts[1].strip()
+
+    if not new_title or not new_content or len(new_content) < 100:
+        raise ValueError("Gemini response too short/empty")
+
+    return new_content, new_title, image_keywords
+
+
+def generate_merged_article(article_a, article_b, category):
+    """Gemini se article generate karta hai. Fail hone par 1 baar retry karta hai.
+    Dono attempts fail hon to (None, None, None) return karta hai — is case mein
+    fetch_and_process is category ko SKIP kar deta hai, koi placeholder/khali article
+    publish nahi hota (low-quality content site par jaane se bachata hai)."""
+    if not client:
+        print("Gemini client not configured (missing GEMINI_API_KEY) — skipping this category")
+        return None, None, None
+
+    for attempt in (1, 2):
+        try:
+            return _call_gemini_once(article_a, article_b, category)
+        except Exception as e:
+            print(f"Gemini generation attempt {attempt} failed: {e}")
+            if attempt == 2:
+                print("Both attempts failed — skipping this category this run (no placeholder published)")
+                return None, None, None
 
 
 def fetch_and_process(conn):
     cursor = conn.cursor()
     os.makedirs("data", exist_ok=True)
+    newly_published_ids = []   # <-- NAYA: is run mein jo naye articles bane unke IDs track karta hai
 
     # --- FIX: pehle hi DB se saare "already used" source links uthake ek set bana lete hain.
     # Ab har feed-entry ke liye check hota hai (feed ke andar aage badhte hue), poori category
@@ -435,6 +785,12 @@ def fetch_and_process(conn):
         print(f"Merging {category} articles with Gemini...")
         summary, title, image_keywords = generate_merged_article(article_a, article_b, category)
 
+        # --- FIX: Gemini fail ho gaya (dono retries) — is category ko is run mein publish
+        # hi mat karo. Placeholder/khali article site par nahi jaana chahiye. ---
+        if not summary or not title:
+            print(f"Skipping {category}: article generation failed, nothing published this run")
+            continue
+
         image_url = get_stock_image(image_keywords, category)
 
         cursor.execute("SELECT id FROM articles WHERE title = ?", (title,))
@@ -447,11 +803,13 @@ def fetch_and_process(conn):
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (title, summary, category, image_url, "TejalTechWire Original", source_link, datetime.now().isoformat()))
         print(f"Published Original: {title}")
+        newly_published_ids.append(cursor.lastrowid)   # <-- NAYA
 
         # Isی run ke andar bhi dobara wahi link use na ho, isliye turant seen_urls mein daal do
         seen_urls.add(source_link)
 
     conn.commit()
+    return newly_published_ids   # <-- NAYA
 
 
 def export_to_json(conn):
@@ -506,11 +864,20 @@ Sitemap: {SITE_URL}/sitemap.xml
 if __name__ == "__main__":
     print("Starting TejalTechWire Autonomous Content Engine...")
     db_conn = setup_db()
-    fetch_and_process(db_conn)
+    new_ids = fetch_and_process(db_conn)
     export_to_json(db_conn)
     all_rows = generate_article_pages(db_conn)
+    generate_homepage(db_conn)   # <-- NAYA: homepage ab pre-rendered HTML ke saath banti hai
     generate_sitemap(all_rows)
     generate_robots_txt()
+    generate_indexnow_key_file()
+
+    # --- naye publish hue articles ke baare mein Bing/Yandex ko turant bata dete hain ---
+    new_urls = [f"{SITE_URL}/articles/{i}.html" for i in new_ids]
+    if new_urls:
+        submit_indexnow([f"{SITE_URL}/"] + new_urls)
+    else:
+        print("No new articles this run — skipping IndexNow submission")
+
     db_conn.close()
-    print("Generation Complete!")
-        
+    print("Generation Complete!") 
