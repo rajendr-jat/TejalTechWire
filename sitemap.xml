@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tejaltechwire.pages.dev/</loc>
-    <lastmod>2026-08-21T09:56:06Z</lastmod>
+    <lastmod>2026-08-21T14:06:39Z</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://tejaltechwire.pages.dev/articles/75.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tejaltechwire.pages.dev/articles/74.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tejaltechwire.pages.dev/articles/73.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tejaltechwire.pages.dev/articles/72.html</loc>
