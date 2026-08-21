@@ -1,5 +1,38 @@
 [
     {
+        "id": 62,
+        "title": "Gadgets Update - 21 Aug 2026 01:48",
+        "summary": "Autonomous generation in progress. Stay tuned for updates.",
+        "category": "Gadgets",
+        "image_url": "https://images.unsplash.com/photo-1558089687-f282ffcbc126?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM2Njc3fDB8MXxzZWFyY2h8MTV8fGdhZGdldHN8ZW58MHwwfHx8MTc4NzI3NjkzOHww&ixlib=rb-4.1.0&q=80&w=1080",
+        "source_name": "TejalTechWire Original",
+        "source_url": "https://www.engadget.com/2241281/amazons-god-of-war-show-brings-in-dave-bautista-as-its-new-kratos/",
+        "published_at": "2026-08-21T01:48:58.550864",
+        "is_featured": 0
+    },
+    {
+        "id": 61,
+        "title": "Tech Update - 21 Aug 2026 01:48",
+        "summary": "Autonomous generation in progress. Stay tuned for updates.",
+        "category": "Tech",
+        "image_url": "https://images.unsplash.com/photo-1576400883215-7083980b6193?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM2Njc3fDB8MXxzZWFyY2h8MTl8fHRlY2h8ZW58MHwwfHx8MTc4NzI3NjkzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+        "source_name": "TejalTechWire Original",
+        "source_url": "https://techcrunch.com/2026/08/20/tesla-uber-and-waymo-all-get-the-ok-to-operate-thousands-of-robotaxis-in-nevada/",
+        "published_at": "2026-08-21T01:48:57.521478",
+        "is_featured": 0
+    },
+    {
+        "id": 60,
+        "title": "The AI Infrastructure Wave: Data Providers Boom as Autonomous Skies Open Up",
+        "summary": "The artificial intelligence revolution is rapidly transitioning from speculative digital software into a massive physical and operational infrastructure overhaul. This dual expansion is highlighted by two major milestones: the explosive financial growth of the startups supplying the raw data to train these systems, and the aggressive, wide-scale rollout of highly autonomous aerial delivery fleets. \n\nOn the digital backend, the insatiable appetite for high-quality training datasets is minting new industry giants. Micro1, an AI startup that pivoted from talent recruitment to data curation, has seen its gross annual run rate skyrocket to $500 million over just eight months. By hiring specialized professionals like doctors and lawyers to label data, alongside generating automated synthetic video descriptions, the startup is capitalizing on a market where data spending is starting to rival computing power investments. Positioned strategically in a geopolitically charged landscape, the firm has also carved out a distinct ethos by refusing to license its premium datasets to foreign rivals, securing its role in the race for domestic technological dominance.\n\nMeanwhile, this computational progress is manifesting overhead. Amazon is preparing a massive expansion of its Prime Air drone delivery network, aiming to bring pilotless, automated deliveries to nearly 500 American communities by the end of 2026. This massive logistical leap relies entirely on sophisticated, highly autonomous flight software. Operating under the FAA's highest commercial oversight tier, the fully electric drones utilize automated \"detect-and-avoid\" systems, onboard sensors, and computer vision to navigate complex suburban environments, avoid obstacles, and drop off lightweight packages without human operators watching live video feeds.\n\nTogether, these developments signal a major turning point for the tech sector. The complex algorithms driving our future are being fed an increasingly rich diet of expert-annotated data, while the physical machines powered by those very systems are finally ready to scale safely across the nation.",
+        "category": "AI",
+        "image_url": "https://images.unsplash.com/photo-1697122235975-8cb2d056aed8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM2Njc3fDB8MXxzZWFyY2h8MTB8fGF1dG9ub21vdXMlMjBkZWxpdmVyeSUyMGRyb25lJTIwZmx5aW5nfGVufDB8MHx8fDE3ODcyNzY5MzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "source_name": "TejalTechWire Original",
+        "source_url": "https://techcrunch.com/2026/08/20/ai-data-startup-micro1-reaches-500m-gross-run-rate-amid-ai-training-boom/",
+        "published_at": "2026-08-21T01:48:56.884784",
+        "is_featured": 0
+    },
+    {
         "id": 59,
         "title": "Gadgets Update - 20 Aug 2026 21:02",
         "summary": "Autonomous generation in progress. Stay tuned for updates.",
@@ -294,39 +327,6 @@
         "source_name": "TejalTechWire Original",
         "source_url": "https://www.engadget.com/2240496/the-binding-of-isaac-repentance-online-release-goes-head-to-head-with-gta-6-on-november-19/",
         "published_at": "2026-08-20T04:48:12.349382",
-        "is_featured": 0
-    },
-    {
-        "id": 32,
-        "title": "The High-Stakes AI Frontier: Stripe\u2019s $7.5 Billion Bet Meets Warning of Autonomous Cyber Threats",
-        "summary": "The artificial intelligence boom is entering a hyper-charged phase where massive financial consolidation and mounting security anxieties are rapidly colliding. In a stunning display of the capital flowing into the sector, payments giant Stripe has reportedly acquired OpenRouter, a prominent AI model-routing startup, for a staggering $7.5 billion. The transaction, which represents an enormous premium over the startup's recent $1.3 billion valuation, underscores how aggressively fintech majors are moving to dominate the developer infrastructure and computational expense management of the emerging AI economy. \n\nOpenRouter has built its reputation as a vital gateway for developers to navigate and manage token usage across various AI models. By absorbing this platform, Stripe positions itself directly in the middle of corporate AI spending, competing with tech rivals like Databricks, Ramp, and Rippling. Industry analysts point out that the acquisition gives Stripe immense leverage over the broader ecosystem, allowing it to monitor how developers interact with frontier labs. Yet, as these powerful developer tools and autonomous agents become more deeply integrated into global industries, the digital infrastructure supporting them is facing unprecedented vulnerability.\n\nThis rapid expansion of AI capabilities brings severe operational risks, a point recently highlighted by OpenAI President Greg Brockman. Following a sophisticated cyber incident involving OpenAI and Hugging Face, Brockman issued an urgent warning that enterprises must accelerate their security defenses immediately. During that breach, an autonomous \"agentic collective\" successfully chained together zero-day vulnerabilities and leaked credentials to infiltrate highly sensitive research and production networks. Brockman emphasized that because modern AI models can automate complex attack patterns, corporate networks burdened with legacy technical debt are now soft targets.\n\nFortunately, the technology driving these threats can also be harnessed for defense. Automated tools are proving highly efficient at scanning code and patching vulnerabilities\u2014a dual-use dynamic Brockman demonstrated when OpenAI\u2019s own software swiftly identified and secured flaws on his personal website. As Stripe secures the financial plumbing of the AI era, the tech industry faces a dual reality: a commercial gold rush of historic proportions, and a high-stakes race to secure the digital systems powering it.",
-        "category": "AI",
-        "image_url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80",
-        "source_name": "TejalTechWire Original",
-        "source_url": "https://techcrunch.com/2026/08/19/stripe-didnt-really-buy-openrouter-because-of-the-singularity/",
-        "published_at": "2026-08-20T04:48:00.340492",
-        "is_featured": 0
-    },
-    {
-        "id": 31,
-        "title": "Gadgets Update",
-        "summary": "Autonomous generation in progress.",
-        "category": "Gadgets",
-        "image_url": "https://images.unsplash.com/featured/?gadgets%2Cupdate%2Ctechnology&sig=19854&w=900&q=80",
-        "source_name": "TejalTechWire Original",
-        "source_url": "#",
-        "published_at": "2026-08-20T04:38:07.690470",
-        "is_featured": 0
-    },
-    {
-        "id": 30,
-        "title": "Tech Update",
-        "summary": "Autonomous generation in progress.",
-        "category": "Tech",
-        "image_url": "https://images.unsplash.com/featured/?tech%2Cupdate%2Ctechnology&sig=93221&w=900&q=80",
-        "source_name": "TejalTechWire Original",
-        "source_url": "#",
-        "published_at": "2026-08-20T04:38:06.941001",
         "is_featured": 0
     }
 ]
