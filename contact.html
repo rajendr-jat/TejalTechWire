@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — TejalTechWire</title>
+<meta name="description" content="Get in touch with the TejalTechWire team.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="canonical" href="https://tejaltechwire.pages.dev/contact.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  .contact-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:2rem; margin-top:1.5rem; box-shadow:var(--shadow);
+  }
+  .contact-btn{
+    display:inline-flex; align-items:center; gap:.5rem; margin-top:1rem;
+    background:var(--accent); color:#0A0A0C; font-family:'Space Grotesk'; font-weight:700;
+    padding:.8rem 1.6rem; border-radius:8px; text-decoration:none; border:none; cursor:pointer; font-size:.95rem;
+  }
+  .contact-btn:hover{ opacity:.9; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <div class="logo-mark">TW</div>
+    <div class="logo-text">Tejal<span>Tech</span>Wire</div>
+  </a>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">☾</button>
+</header>
+
+<div class="container">
+  <a class="back-link" href="/">← Back to TejalTechWire</a>
+  <h1 class="article-title">Contact Us</h1>
+
+  <div class="article-text">
+    <p>Have a correction, tip, feedback, or a business inquiry? We'd like to hear from you.</p>
+  </div>
+
+  <div class="contact-card">
+    <h3 style="font-family:'Space Grotesk'; margin:0 0 .6rem;">Email the editorial team</h3>
+    <p style="color:var(--text-dim); font-size:.92rem; margin:0;">Click below to open your email app — we typically respond within a few business days.</p>
+    <button class="contact-btn" id="emailBtn" onclick="openEmail()">✉ Send us an email</button>
+  </div>
+</div>
+
+<footer>
+  <p><span class="foot-brand">TejalTechWire</span> — Independent AI, Tech &amp; Gadget news desk. &copy; 2026.</p>
+  <p><a href="/about.html">About</a>|<a href="/contact.html">Contact</a>|<a href="/privacy.html">Privacy Policy</a></p>
+</footer>
+
+<script>
+  const themeBtn = document.getElementById('themeBtn');
+  let currentTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
+  function toggleTheme(){
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+    themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
+  }
+
+  // Email address JS se banaya jaata hai (page source mein plain text ke roop mein nahi dikhta,
+  // ye basic spam-bot scraping se bachata hai)
+  function openEmail(){
+    const user = "rajulamror74";
+    const domain = "gmail.com";
+    window.location.href = "mailto:" + user + "@" + domain + "?subject=TejalTechWire%20Inquiry";
+  }
+</script>
+</body>
+</html>
