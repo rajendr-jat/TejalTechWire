@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — TejalTechWire</title>
+<meta name="description" content="TejalTechWire's privacy policy — how we handle data, cookies, and analytics.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="canonical" href="https://tejaltechwire.pages.dev/privacy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <div class="logo-mark">TW</div>
+    <div class="logo-text">Tejal<span>Tech</span>Wire</div>
+  </a>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">☾</button>
+</header>
+
+<div class="container">
+  <a class="back-link" href="/">← Back to TejalTechWire</a>
+  <h1 class="article-title">Privacy Policy</h1>
+
+  <div class="article-text">
+    <p><em>Last updated: 2026</em></p>
+
+    <p>TejalTechWire ("we", "our", "us") respects your privacy. This page explains what information we collect and how it's used when you visit this website.</p>
+
+    <h3 style="font-family:'Space Grotesk'; margin-top:1.6rem;">Analytics</h3>
+    <p>We use Google Analytics to understand how visitors use our site — for example, which articles are read most and how people find us. Google Analytics collects information such as your approximate location, device type, and browsing behavior on our site through cookies. This data is anonymized and aggregated; we do not use it to personally identify individual visitors.</p>
+
+    <h3 style="font-family:'Space Grotesk'; margin-top:1.6rem;">Cookies</h3>
+    <p>Cookies are small files stored on your device. We use them for analytics purposes as described above, and to remember your display preference (light or dark mode). You can disable cookies through your browser settings, though this may affect some site features.</p>
+
+    <h3 style="font-family:'Space Grotesk'; margin-top:1.6rem;">Advertising</h3>
+    <p>If we display advertising on this site (for example, through Google AdSense), our advertising partners may use cookies to serve ads based on your prior visits to this and other websites. You can learn more about how Google uses data in this context, and manage your ad preferences, at Google's Ads Settings.</p>
+
+    <h3 style="font-family:'Space Grotesk'; margin-top:1.6rem;">Third-Party Links</h3>
+    <p>Our articles may reference external sources. We are not responsible for the privacy practices of external websites linked from our content.</p>
+
+    <h3 style="font-family:'Space Grotesk'; margin-top:1.6rem;">Content Disclosure</h3>
+    <p>Articles on TejalTechWire are produced using an AI-assisted editorial process, drawing on multiple public sources to create original, plain-language summaries. See our <a href="/about.html" style="color:var(--accent);">About page</a> for details.</p>
+
+    <h3 style="font-family:'Space Grotesk'; margin-top:1.6rem;">Contact</h3>
+    <p>Questions about this policy? Reach out via our <a href="/contact.html" style="color:var(--accent);">Contact page</a>.</p>
+
+    <h3 style="font-family:'Space Grotesk'; margin-top:1.6rem;">Changes to This Policy</h3>
+    <p>We may update this privacy policy from time to time. Changes will be posted on this page.</p>
+  </div>
+</div>
+
+<footer>
+  <p><span class="foot-brand">TejalTechWire</span> — Independent AI, Tech &amp; Gadget news desk. &copy; 2026.</p>
+  <p><a href="/about.html">About</a>|<a href="/contact.html">Contact</a>|<a href="/privacy.html">Privacy Policy</a></p>
+</footer>
+
+<script>
+  const themeBtn = document.getElementById('themeBtn');
+  let currentTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
+  function toggleTheme(){
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+    themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
+  }
+</script>
+</body>
+</html>
