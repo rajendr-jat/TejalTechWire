@@ -764,12 +764,13 @@ def fetch_and_process(conn):
     os.makedirs("data", exist_ok=True)
     newly_published_ids = []   # <-- NAYA: is run mein jo naye articles bane unke IDs track karta hai
 
-    # --- FIX: pehle hi DB se saare "already used" source links uthake ek set bana lete hain.
-    # Ab har feed-entry ke liye check hota hai (feed ke andar aage badhte hue), poori category
-    # ek jhatke mein skip nahi hoti — sirf wahi links skip hote hain jo pehle chhap chuke hain. ---
+    # --- FIX: pehle "used_source_links" table se (ye dono A aur B links record karti hai),
+    # aur purane data ke liye "articles.source_url" se bhi — dono jagah se "already used" list banate hain.
+    cursor.execute("SELECT link FROM used_source_links")
+    seen_urls = {row[0] for row in cursor.fetchall()}
     cursor.execute("SELECT source_url FROM articles WHERE source_url IS NOT NULL")
-    seen_urls = {row[0] for row in cursor.fetchall() if row[0] and row[0] != "#"}
-    print(f"Already-published source links in DB: {len(seen_urls)}")
+    seen_urls |= {row[0] for row in cursor.fetchall() if row[0] and row[0] != "#"}
+    print(f"Already-used source links tracked: {len(seen_urls)}")
 
     for category, feed_urls in SOURCES.items():
         print(f"\n=== Processing category: {category} ===")
@@ -780,7 +781,20 @@ def fetch_and_process(conn):
             continue
 
         article_a, article_b = articles[0], articles[1]
-        source_link = article_a.get("link", "")
+        link_a = article_a.get("link", "")
+        link_b = article_b.get("link", "")
+
+        # --- FIX: dono links turant lock kar dete hain — chahe Gemini success ho ya fail,
+        # ye 2 source articles is run mein "consume" ho chuke hain, dobara kisi aur category
+        # mein use nahi honge. Isی se "same story 3-4 baar chapна" wala bug fix hota hai. ---
+        for link in (link_a, link_b):
+            if link:
+                cursor.execute(
+                    "INSERT OR IGNORE INTO used_source_links (link, used_at) VALUES (?, ?)",
+                    (link, datetime.now().isoformat())
+                )
+                seen_urls.add(link)
+        conn.commit()
 
         print(f"Merging {category} articles with Gemini...")
         summary, title, image_keywords = generate_merged_article(article_a, article_b, category)
@@ -801,15 +815,12 @@ def fetch_and_process(conn):
         cursor.execute("""
             INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (title, summary, category, image_url, "TejalTechWire Original", source_link, datetime.now().isoformat()))
+        """, (title, summary, category, image_url, "TejalTechWire Original", link_a, datetime.now().isoformat()))
         print(f"Published Original: {title}")
-        newly_published_ids.append(cursor.lastrowid)   # <-- NAYA
-
-        # Isی run ke andar bhi dobara wahi link use na ho, isliye turant seen_urls mein daal do
-        seen_urls.add(source_link)
+        newly_published_ids.append(cursor.lastrowid)
 
     conn.commit()
-    return newly_published_ids   # <-- NAYA
+    return newly_published_ids
 
 
 def export_to_json(conn):
@@ -880,4 +891,4 @@ if __name__ == "__main__":
         print("No new articles this run — skipping IndexNow submission")
 
     db_conn.close()
-    print("Generation Complete!") 
+    print("Generation Complete!")
