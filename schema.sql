@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS articles (
     source_name TEXT,
     source_url TEXT,
     published_at DATETIME,
-    is_featured BOOLEAN DEFAULT 0
+    is_featured BOOLEAN DEFAULT 0,
+    trending_score REAL DEFAULT 0
 );
 
 -- NAYA: har article do source links (A aur B) se banta hai, lekin 'articles' table mein
@@ -18,4 +19,3 @@ CREATE TABLE IF NOT EXISTS used_source_links (
     link TEXT PRIMARY KEY,
     used_at DATETIME
 );
-
