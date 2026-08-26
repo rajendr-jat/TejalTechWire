@@ -5,12 +5,95 @@ import feedparser
 import trafilatura
 import requests
 import random  # <-- Sirf ye add kiya hai random image system ke liye
+import time
 from datetime import datetime
 from google import genai
 
 # Setup Gemini API
 api_key = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=api_key) if api_key else None
+
+# --- NAYA: TRENDING/VIRAL DETECTION SYSTEM ---
+# Sirf genuinely trending/viral stories hi publish hongi. Kam-score wali "boring" news
+# skip ho jaayegi -- koi bhi random/filler article site par nahi jaayega.
+MIN_TRENDING_SCORE = 30   # ise 0-100 ke beech tune kar sakte ho -- jitna zyada, utna strict
+
+STOPWORDS = {
+    "the", "and", "for", "with", "from", "this", "that", "have", "will",
+    "your", "what", "into", "over", "after", "about", "than", "then",
+    "just", "more", "some", "when", "how", "why", "who", "its", "his",
+    "her", "our", "their", "you", "are", "was", "were", "has", "had",
+}
+
+
+def _keywords(title):
+    words = "".join(c if c.isalnum() else " " for c in (title or "").lower()).split()
+    return {w for w in words if len(w) > 3 and w not in STOPWORDS}
+
+
+def check_hackernews_score(title):
+    """Hacker News (free, no API key) par check karta hai ki isi topic pe koi
+    high-point/high-comment discussion hai ya nahi -- genuine tech-world trending signal."""
+    try:
+        cutoff = int(time.time()) - (3 * 86400)  # pichle 3 din
+        query = " ".join(list(_keywords(title))[:8])
+        if not query:
+            return 0
+        resp = requests.get(
+            "https://hn.algolia.com/api/v1/search",
+            params={"query": query, "tags": "story", "numericFilters": f"created_at_i>{cutoff}"},
+            timeout=10,
+        )
+        hits = resp.json().get("hits", [])
+        if not hits:
+            return 0
+        max_points = max((h.get("points") or 0) for h in hits)
+        max_comments = max((h.get("num_comments") or 0) for h in hits)
+        score = min(40, max_points / 5) + min(10, max_comments / 5)
+        return round(score, 1)
+    except Exception as e:
+        print(f"Hacker News check failed: {e}")
+        return 0
+
+
+def get_all_recent_titles():
+    """Saari categories ki saari feeds se latest titles nikalta hai (ek hi baar poore
+    run mein) -- isse pata chalta hai kitni ALAG websites isi topic ko cover kar rahi hain."""
+    all_feeds = sorted({url for feeds in SOURCES.values() for url in feeds})
+    titles_by_feed = []
+    for feed_url in all_feeds:
+        try:
+            feed = feedparser.parse(feed_url)
+            for entry in feed.entries[:5]:
+                t = entry.get("title", "")
+                if t:
+                    titles_by_feed.append((feed_url, t))
+        except Exception:
+            continue
+    return titles_by_feed
+
+
+def count_overlap_sources(title, titles_by_feed):
+    """Kitni ALAG feeds mein isi topic (2+ common significant keywords) ka mention hai."""
+    my_kw = _keywords(title)
+    if not my_kw:
+        return 0
+    matching_feeds = set()
+    for feed_url, other_title in titles_by_feed:
+        if len(my_kw & _keywords(other_title)) >= 2:
+            matching_feeds.add(feed_url)
+    return len(matching_feeds)
+
+
+def compute_trending_score(title, titles_by_feed):
+    """0-100 ka trending score -- Hacker News signal + kitni jagah cover ho raha hai, dono milakar."""
+    hn_component = check_hackernews_score(title)
+    overlap_count = count_overlap_sources(title, titles_by_feed)
+    overlap_component = min(50, overlap_count * 15)
+    total = min(100, hn_component + overlap_component)
+    print(f"  Trending check: HN={hn_component}, sources-overlap={overlap_count} (+{overlap_component}) => total={total}")
+    return total
+# ------------------------------------------------
 
 # Bahut si news sites bina "real browser" jaisा User-Agent bheje request block kar deti hain.
 # Isse fetch fail hota tha aur AI/Gadgets category skip ho jaati thi.
@@ -263,6 +346,7 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
 <div class="container">
   <a class="back-link" href="/">← Back to TejalTechWire</a>
   <span class="cat-badge {cat_class}">{category}</span>
+  {trending_badge}
   <h1 class="article-title">{title}</h1>
   <div class="article-byline">
     <div class="avatar">{avatar}</div>
@@ -336,8 +420,7 @@ def _time_ago(published_at):
 # --- NAYA: Homepage ab fetcher.py hi generate karta hai, articles ka HTML pehle se
 # built-in hota hai (JS ke bharose nahi rehta). Isse Google/Bing turant homepage khulte
 # hi saara content dekh lete hain, bina JavaScript render kiye — crawlability guaranteed. ---
-HOME_TEMPLATE = """<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+HOME_TEMPLATE = """<!DOCTYPE htmlfo<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -491,6 +574,16 @@ HOME_TEMPLATE = """<!DOCTYPE html>
 """
 
 
+def _trending_badge(a):
+    """Score ke hisaab se badge dikhata hai — sirf visual hai, koi extra data nahi chahiye."""
+    score = a.get("trending_score") or 0
+    if score >= 70:
+        return '<span class="trend-badge trend-high">🔥 Viral</span>'
+    if score >= 30:
+        return '<span class="trend-badge trend-mid">📈 Trending</span>'
+    return ""
+
+
 def _render_hero_html(a):
     cls = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
     image = a.get("image_url") or "https://via.placeholder.com/700x400?text=TejalTechWire"
@@ -499,6 +592,7 @@ def _render_hero_html(a):
         <img src="{image}" alt="{_escape_html(a.get('title',''))}">
         <div class="hero-body">
           <span class="cat-badge {cls}">{_escape_html(a.get('category',''))}</span>
+          {_trending_badge(a)}
           <h1>{_escape_html(a.get('title',''))}</h1>
           <div class="byline">
             <div class="avatar">{_initials(source_name)}</div>
@@ -514,6 +608,7 @@ def _render_row_html(a):
     return f"""<a class="row" href="/articles/{a['id']}.html">
           <div class="row-body">
             <span class="row-cat {cls}">{_escape_html(a.get('category',''))}</span>
+            {_trending_badge(a)}
             <h3>{_escape_html(a.get('title',''))}</h3>
             <span class="row-time">{_time_ago(a.get('published_at',''))}</span>
           </div>
@@ -590,6 +685,7 @@ def generate_article_pages(conn):
             url=f"{SITE_URL}/articles/{a['id']}.html",
             cat_class=cat_class,
             category=_escape_html(a.get("category", "")),
+            trending_badge=_trending_badge(a),
             avatar=_initials(source_name),
             source_name=_escape_html(source_name),
             time_str=_time_ago(a.get("published_at", "")),
@@ -614,6 +710,13 @@ def setup_db():
     if os.path.exists('schema.sql'):
         with open('schema.sql', 'r') as f:
             conn.executescript(f.read())
+    # Safe migration: agar purani DB mein trending_score column nahi hai to add kar do
+    try:
+        conn.execute("ALTER TABLE articles ADD COLUMN trending_score REAL DEFAULT 0")
+        conn.commit()
+        print("Migrated: added trending_score column to existing database")
+    except sqlite3.OperationalError:
+        pass  # column already exists
     return conn
 
 
@@ -628,6 +731,8 @@ def fetch_full_article(url):
     except Exception as e:
         print(f"Full article fetch failed for {url}: {e}")
         return None
+
+
 
 
 # --- FIX: ab "seen_urls" leta hai — jo links pehle publish ho chuke hain unhe SKIP karke
@@ -762,15 +867,20 @@ def generate_merged_article(article_a, article_b, category):
 def fetch_and_process(conn):
     cursor = conn.cursor()
     os.makedirs("data", exist_ok=True)
-    newly_published_ids = []   # <-- NAYA: is run mein jo naye articles bane unke IDs track karta hai
+    newly_published_ids = []   # is run mein jo naye articles bane unke IDs track karta hai
 
-    # --- FIX: pehle "used_source_links" table se (ye dono A aur B links record karti hai),
-    # aur purane data ke liye "articles.source_url" se bhi — dono jagah se "already used" list banate hain.
+    # pehle "used_source_links" table se (ye dono A aur B links record karti hai),
+    # aur purane data ke liye "articles.source_url" se bhi -- dono jagah se "already used" list banate hain.
     cursor.execute("SELECT link FROM used_source_links")
     seen_urls = {row[0] for row in cursor.fetchall()}
     cursor.execute("SELECT source_url FROM articles WHERE source_url IS NOT NULL")
     seen_urls |= {row[0] for row in cursor.fetchall() if row[0] and row[0] != "#"}
     print(f"Already-used source links tracked: {len(seen_urls)}")
+
+    # NAYA: trending detection ke liye saari feeds ka snapshot ek hi baar le lete hain
+    print("\nFetching all feed titles for trending/overlap analysis...")
+    titles_by_feed = get_all_recent_titles()
+    print(f"Collected {len(titles_by_feed)} recent titles across all sources for comparison")
 
     for category, feed_urls in SOURCES.items():
         print(f"\n=== Processing category: {category} ===")
@@ -784,9 +894,15 @@ def fetch_and_process(conn):
         link_a = article_a.get("link", "")
         link_b = article_b.get("link", "")
 
-        # --- FIX: dono links turant lock kar dete hain — chahe Gemini success ho ya fail,
+        # NAYA: TRENDING CHECK -- Gemini ko call karne se PEHLE hi decide kar lete hain
+        # ki kya ye story genuinely trending/viral hai. Agar nahi, publish hi nahi karte
+        # (na hi Gemini API waste hoti hai) -- sirf "kachra" filter ho jaata hai.
+        print(f"Checking trending score for: {article_a['title'][:70]}")
+        trending_score = compute_trending_score(article_a["title"], titles_by_feed)
+
+        # Dono links turant lock kar dete hain -- chahe story trending nikle ya na nikle,
         # ye 2 source articles is run mein "consume" ho chuke hain, dobara kisi aur category
-        # mein use nahi honge. Isی se "same story 3-4 baar chapна" wala bug fix hota hai. ---
+        # mein use nahi honge. Isi se "same story 3-4 baar chapna" wala bug bhi fix hota hai.
         for link in (link_a, link_b):
             if link:
                 cursor.execute(
@@ -796,11 +912,16 @@ def fetch_and_process(conn):
                 seen_urls.add(link)
         conn.commit()
 
+        if trending_score < MIN_TRENDING_SCORE:
+            print(f"Skipping {category}: trending score {trending_score} is below threshold {MIN_TRENDING_SCORE} -- not viral/important enough")
+            continue
+
+        print(f"Trending score {trending_score} >= {MIN_TRENDING_SCORE} -- proceeding to generate article")
         print(f"Merging {category} articles with Gemini...")
         summary, title, image_keywords = generate_merged_article(article_a, article_b, category)
 
-        # --- FIX: Gemini fail ho gaya (dono retries) — is category ko is run mein publish
-        # hi mat karo. Placeholder/khali article site par nahi jaana chahiye. ---
+        # Gemini fail ho gaya (dono retries) -- is category ko is run mein publish
+        # hi mat karo. Placeholder/khali article site par nahi jaana chahiye.
         if not summary or not title:
             print(f"Skipping {category}: article generation failed, nothing published this run")
             continue
@@ -813,14 +934,15 @@ def fetch_and_process(conn):
             continue
 
         cursor.execute("""
-            INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (title, summary, category, image_url, "TejalTechWire Original", link_a, datetime.now().isoformat()))
-        print(f"Published Original: {title}")
+            INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at, trending_score)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (title, summary, category, image_url, "TejalTechWire Original", link_a, datetime.now().isoformat(), trending_score))
+        print(f"Published Original (score={trending_score}): {title}")
         newly_published_ids.append(cursor.lastrowid)
 
     conn.commit()
     return newly_published_ids
+
 
 
 def export_to_json(conn):
