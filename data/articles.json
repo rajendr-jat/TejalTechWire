@@ -1,5 +1,17 @@
 [
     {
+        "id": 62,
+        "title": "New phone updates make video editing and screen styling easier than ever",
+        "summary": "Instagram and the phone maker Nothing are both launching new software updates to make video editing and phone customization much easier.\n\nFirst, Instagram is rolling out a new tool called First Draft to help people create short videos, known as Reels. This feature automatically trims out quiet pauses and silent moments from your video clips. It does the boring work of cleaning up your videos so you can focus on the creative parts. To use it, you just select your clips, tap a button, and the app places them neatly on a timeline. This tool uses machine learning, which is a type of computer system that learns how to perform tasks on its own. It will arrive on Apple iPhones first before coming to other devices.\n\nMeanwhile, the phone company Nothing is launching its new phone software, called Nothing OS 5.0. An operating system, or OS, is the main software that makes your phone run. This update is based on Android 17 and begins its open beta, which is a public test version, on August 26 for the Nothing Phone 3. The update lets you color-match your apps and widgets to your wallpaper. It also has a new app to control the glowing LED lights on the back of the phone, which are called Glyph lights. There are also new widgets, including an \"Away Time\" widget that tracks how long you spend away from your screen. Sadly, older devices like the Phone 1 will not get this update.\n\nThese updates matter to you because they take the chore out of everyday phone tasks. Instead of spending 10 minutes cutting silent gaps from a clip, or struggling to make your home screen look neat, your phone does the hard work. It gives you a much faster, cleaner, and more personal way to use your device every day.\n\nYou can expect to see these changes rolling out to compatible devices over the next few months.",
+        "category": "Gadgets",
+        "image_url": "https://images.unsplash.com/photo-1734070447512-2917a9e7393a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM2Njc3fDB8MXxzZWFyY2h8N3x8c21hcnRwaG9uZSUyMGhvbWUlMjBzY3JlZW58ZW58MHwwfHx8MTc4NzcyNTQ2Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+        "source_name": "TejalTechWire Original",
+        "source_url": "https://www.engadget.com/2244219/instagram-adds-feature-that-automatically-trims-clips-for-reels/",
+        "published_at": "2026-08-26T06:24:22.120943",
+        "is_featured": 0,
+        "trending_score": 30.0
+    },
+    {
         "id": 61,
         "title": "A Popular Social Media Trick Ends as a Top Indie Game Goes on Sale",
         "summary": "A popular way to read social media posts has been shut down, while a highly rated video game has just received a major price cut. \n\nThe social media platform X, formerly known as Twitter, has forced a tool called Nitter to close by sending its creator a legal warning letter in August 2026. Nitter was a free, open-source project, which means its software code was built by volunteers and shared openly for anyone to use. The service was loved by many because it let people read public posts on X without logging in, downloading the app, or seeing ads. X accused the tool of scraping, which is a process where a computer program automatically pulls data off a website. \n\nThis matters to you because major tech companies are increasingly blocking these helpful third-party tools. They want to force everyone to log into their official apps so they can track your online activity and show you targeted ads. If you want to keep up with public news on X, you will now likely have to create a real account and log in. \n\nFortunately, if you need a new way to spend your screen time, there is a fantastic deal on a hit video game. A strange and highly praised game called Inscryption is currently on sale on the Humble store for only $7.99, down from its usual price of $20. This massive discount arrived right after the game's developer shared a new trailer for his next project at a major European gaming showcase.\n\nInscryption starts out as a spooky card game where you build a deck of moves to defeat an opponent. However, the game soon evolves into a mind-bending mystery that breaks all the rules of typical gaming. It is compatible with Windows, Mac, and Linux computers. If you want to escape the social media drama for a few hours, this budget-friendly game is a great place to start.",
@@ -344,18 +356,6 @@
         "source_name": "TejalTechWire Original",
         "source_url": "https://www.engadget.com/2240255/vesa-tv-mount-how-to-know-type-guide/",
         "published_at": "2026-08-24T00:58:20.296491",
-        "is_featured": 0,
-        "trending_score": 0.0
-    },
-    {
-        "id": 32,
-        "title": "AI Wins a Court Battle While Bad Weather Delays a Mission to the Moon",
-        "summary": "This week, big tech legal battles and wild weather are changing the future of artificial intelligence and space travel. First, a US judge made a huge decision about how AI models are built. Tech company Anthropic was ordered to pay a $1.5 billion fine because they trained their AI using pirated books. However, the judge actually ruled that training AI on copyrighted books is legal, comparing it to a human reading books to learn how to write. \n\nThis matters to you because it shapes how future AI tools will behave and what they can read. The decision comes down to \"fair use,\" which is a legal rule that lets people use copyrighted material without permission if they create something brand new. Since our main copyright laws were written back in 1976, judges are working hard to apply old rules to new tech. Basically, if an AI is built to compete directly with the original author, courts will stop it. But if the AI is just learning to build something different, judges say it is okay.\n\nMeanwhile, far away from the courtroom, China had to pause its massive mission to the moon. They delayed their Chang'e 7 spacecraft launch, which was supposed to happen this week, and pushed it back. This mission includes a lunar orbiter, a lander, a rover, and a small jumping probe. Bad weather from Typhoon Narra is the main reason for the delay. The storm shut down the launch window, which is the short timeframe when weather and orbits are perfect for a safe liftoff.\n\nBecause of the bad weather, the next safe launch window might not open for a long time, potentially pushing the mission as far back as 2027. Whether it is writing code or flying to the stars, tech progress takes patience and careful planning. We will keep you updated as these stories unfold.",
-        "category": "Tech",
-        "image_url": "https://images.unsplash.com/photo-1614642237208-a17ea4a90221?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM2Njc3fDB8MXxzZWFyY2h8MjN8fHNwYWNlJTIwcm9ja2V0JTIwbGF1bmNofGVufDB8MHx8fDE3ODc1MzMwNzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-        "source_name": "TejalTechWire Original",
-        "source_url": "https://techcrunch.com/2026/08/23/is-it-legal-to-train-ai-models-on-copyrighted-books-its-complicated/",
-        "published_at": "2026-08-24T00:57:59.451562",
         "is_featured": 0,
         "trending_score": 0.0
     }
