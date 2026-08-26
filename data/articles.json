@@ -1,5 +1,17 @@
 [
     {
+        "id": 65,
+        "title": "Cool Collectibles and Smart Cars: Today's Biggest Tech Updates",
+        "summary": "This week brings 2 big tech updates, with Xbox launching a special gaming console and Volvo making its cars smart enough to warn each other about road hazards. If you love gaming or want safer roads, these new features are worth watching. \n\nTo start, Xbox is celebrating its 25th birthday with a new limited-edition console bundle that costs $900. This bundle includes a translucent Xbox Series X, which means the plastic shell of the console is see-through green. It also comes with a matching green controller and a digital copy of the classic game Halo: Campaign Evolved. Each console has its own special number engraved on it. If you want one, you can preorder it on August 27 at 10 AM ET. The bundle will ship on November 15. If $900 is too expensive, you can buy just the special green controller for $80. \n\nOn the road, Volvo is updating its electric vehicles so they can talk to each other to prevent accidents. Only 3 models, the EX90, ES90, and EX60, will use cameras and sensors to spot dangers. This includes things like wild animals, people walking, bike riders, and car crashes. When a Volvo car sees a hazard, it sends the location to Volvo's internet servers. The system then alerts other Volvo drivers heading toward that same spot. Volvo also announced that its EX90 car will support spatial audio for Apple CarPlay. Spatial audio is a technology that makes music sound like it is wrapping all around you inside the car. \n\nThese updates show how our daily devices are becoming more connected and personal. You might be playing a game on a see-through console. Or you might be driving a car that looks out for your safety. Either way, technology is finding new ways to fit into our everyday lives. It will be exciting to see how these new tools perform in the real world.",
+        "category": "Gadgets",
+        "image_url": "https://images.unsplash.com/photo-1615383690110-62acb993993e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM2Njc3fDB8MXxzZWFyY2h8MzB8fGNvbm5lY3RlZCUyMGVsZWN0cmljJTIwY2FyfGVufDB8MHx8fDE3ODc3NjI2OTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        "source_name": "TejalTechWire Original",
+        "source_url": "https://www.engadget.com/2244719/preorders-for-xbox-anniversary-collection-are-open-and-the-bundle-costs-900-bucks/",
+        "published_at": "2026-08-26T16:44:50.444825",
+        "is_featured": 0,
+        "trending_score": 30.0
+    },
+    {
         "id": 64,
         "title": "New AI Business Helpers and Big Video Game Updates",
         "summary": "This week, a smart AI startup raised millions of dollars to help small businesses grow, while a major gaming studio finally spoke out about massive leaks of its next big video game. Whether you run a side hustle or just love playing games, these updates show how fast technology is changing our daily lives.\n\nTo start with, a startup called Runable just secured $21 million in new funding. Runable makes an AI agent, which is a smart software helper that can perform online tasks for you. While many AI tools just write text or build simple websites, Runable wants to help companies actually find customers. It can set up online ads, post on social media, and improve search rankings on Google. The company was started in 2025 and already has 1.7 million users, with many living in the US and the UK. \n\nMeanwhile, the creators of Grand Theft Auto 6 are dealing with a different kind of tech challenge. Rockstar Games released a statement about recent, unauthorized videos of their upcoming game being shared online. They called the leaks deeply upsetting for their staff, especially since they wanted to show off the finished product themselves. The leaks were shared by a group trying to promote a cryptocurrency, which is a form of digital money. Fortunately, the game is still on track. Fans can watch a special preview on Netflix at 3 PM Eastern Time, and the game will officially launch on November 19.\n\nIt is clear that tech is bringing both great new tools and big security headaches. We will keep an eye on how these stories unfold.",
@@ -344,18 +356,6 @@
         "source_name": "TejalTechWire Original",
         "source_url": "https://www.artificialintelligence-news.com/news/alvys-ai-agents-freight-tms/",
         "published_at": "2026-08-24T08:41:21.447304",
-        "is_featured": 0,
-        "trending_score": 0.0
-    },
-    {
-        "id": 35,
-        "title": "Smart Cars and Super Bright Lights: Upgrades for Your Daily Routine",
-        "summary": "From the screens in our cars to the lights in our pockets, everyday gadgets are getting some incredibly powerful upgrades. \n\nFirst, let us look at the confusing world of car screens. Many people do not know the difference between Android Auto and Android Automotive. Android Auto is a system that projects your phone screen onto your car dashboard. It acts like a second screen for your phone. On the other side, Android Automotive is an operating system, which is the main software built directly into the car. This means the car does its own thinking without needing a phone. It can even control your car's air conditioning and battery settings. Polestar became the first brand to use this built-in system in 2020. \n\nNext, let us look at everyday carry tools, often called EDC gear. These are useful items you carry with you every day. Pocket flashlights are now reaching unbelievable levels of brightness. Brightness is measured in lumens. While a normal flashlight uses a few hundred lumens, new models can pump out up to 10,000 lumens. For example, the Olight Marauder Mini costs about $200 and blasts 7,000 lumens of light. The Nitecore EDC37 costs around $140 and packs 8,000 lumens into a tiny body. If you want even more power, the Fenix LR35R shines at a massive 10,000 lumens. These devices recharge easily using a normal USB-C cable.\n\nWhy does this matter to you? Knowing these tech differences helps you buy the right gear. Built-in car software keeps your eyes on the road because you do not have to plug in your phone. Meanwhile, having a tiny flashlight that can light up an entire field makes power outages or dark walks much safer. Whether you are driving at night or walking the dog, these smart upgrades make daily life just a bit easier.",
-        "category": "Gadgets",
-        "image_url": "https://images.unsplash.com/photo-1692445630561-c6858433f833?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDM2Njc3fDB8MXxzZWFyY2h8NXx8YnJpZ2h0JTIwcG9ja2V0JTIwZmxhc2hsaWdodHxlbnwwfDB8fHwxNzg3NTQ2Mzc3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-        "source_name": "TejalTechWire Original",
-        "source_url": "https://www.engadget.com/2240251/android-auto-vs-automotive-how-different/",
-        "published_at": "2026-08-24T04:39:37.912727",
         "is_featured": 0,
         "trending_score": 0.0
     }
