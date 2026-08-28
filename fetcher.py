@@ -95,6 +95,13 @@ def compute_trending_score(title, titles_by_feed):
     return total
 # ------------------------------------------------
 
+
+def are_related(title_a, title_b):
+    """Check karta hai ki dono sources GENUINELY isi event ke baare mein hain ya nahi
+    (kam se kam 1 common significant keyword). Agar unrelated hain (jaise "Apple headset"
+    aur "drone ban" -- 2 alag stories), to inhe jabardasti mix NAHI karte."""
+    return len(_keywords(title_a) & _keywords(title_b)) >= 1
+
 # Bahut si news sites bina "real browser" jaisा User-Agent bheje request block kar deti hain.
 # Isse fetch fail hota tha aur AI/Gadgets category skip ho jaati thi.
 REQUEST_HEADERS = {
@@ -122,12 +129,25 @@ SOURCES = {
         "https://www.theverge.com/rss/index.xml",
         "https://www.slashgear.com/feed/",
     ],
+    "Mobile": [
+        "https://www.gsmarena.com/rss-news-reviews.php3",
+        "https://www.androidauthority.com/feed/",
+        "https://9to5mac.com/feed/",
+        "https://www.androidpolice.com/feed/",
+    ],
+    "Business": [
+        "https://www.cnbc.com/id/19854910/device/rss/rss.html",
+        "https://www.businessinsider.com/tech/rss",
+        "https://fortune.com/section/tech/feed/",
+    ],
 }
 
 FALLBACK_IMAGES = {
     "AI": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80",
     "Tech": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
     "Gadgets": "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=900&q=80",
+    "Mobile": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=900&q=80",
+    "Business": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&q=80",
 }
 
 # --- NAYA IMAGE SYSTEM: Unsplash (official API) primary, Pexels backup, fixed image final fallback ---
@@ -141,6 +161,8 @@ CATEGORY_IMAGE_KEYWORDS = {
     "AI": ["artificial intelligence", "machine learning technology", "robot automation", "data center servers"],
     "Tech": ["technology computer", "software startup", "computer chip", "modern office technology"],
     "Gadgets": ["smartphone gadget", "wearable technology", "laptop desk", "smart home device"],
+    "Mobile": ["smartphone screen", "mobile phone hand", "app interface phone", "smartphone camera"],
+    "Business": ["business meeting office", "stock market chart", "corporate skyscraper", "handshake business"],
 }
 
 # Isی run ke andar jo images use ho chuki, unhe dobara na chunne ke liye
@@ -234,6 +256,12 @@ DB_FILE = "tejaltechwire.db"
 JSON_FILE = "data/articles.json"
 SITE_URL = "https://tejaltechwire.pages.dev"
 
+# --- NAYA: Draft Review System ke GitHub links banane ke liye ---
+# YE APNI REPO KE HISAAB SE THEEK KARNA: "username/repo-name" (jaisa github.com URL mein dikhta hai)
+GITHUB_REPO = "rajendr-jat/TejalTechWire"
+GITHUB_BRANCH = "main"
+
+
 # --- NAYA: IndexNow protocol — Bing/Yandex ko turant "naya article aaya hai" batata hai,
 # turant crawl ho jaata hai (Google ke liye ye kaam nahi karta, sirf sitemap se hi discover hota hai) ---
 INDEXNOW_KEY = "tejaltechwire4f8a2c19"  # koi bhi unique random text ho sakta hai, ye fixed rehna chahiye
@@ -265,7 +293,7 @@ def submit_indexnow(urls):
     except Exception as e:
         print(f"IndexNow submission failed: {e}")
 
-CAT_CLASS_MAP = {"AI": "ai", "Tech": "tech", "Gadgets": "gadgets"}
+CAT_CLASS_MAP = {"AI": "ai", "Tech": "tech", "Gadgets": "gadgets", "Mobile": "mobile", "Business": "business"}
 
 ARTICLE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -389,10 +417,45 @@ def _escape_html(text):
 
 
 def _paragraphs_html(text):
-    parts = [p.strip() for p in (text or "").split("\n\n") if p.strip()]
-    if len(parts) <= 1:
-        parts = [p.strip() for p in (text or "").split("\n") if p.strip()]
-    return "".join(f"<p>{_escape_html(p)}</p>" for p in parts)
+    """Gemini ka structured output (HEADING:/Q:/A: markers ke saath) HTML mein convert karta hai
+    -- headings <h2> ban jaate hain, Q:/A: pairs ek FAQ box ban jaate hain, baaki normal <p>."""
+    blocks = [b.strip() for b in (text or "").split("\n\n") if b.strip()]
+    if len(blocks) <= 1:
+        blocks = [b.strip() for b in (text or "").split("\n") if b.strip()]
+
+    html_parts = []
+    for block in blocks:
+        block_lines = block.splitlines()
+        first_line = block_lines[0].strip()
+
+        if first_line.upper().startswith("HEADING:"):
+            heading_text = first_line.split(":", 1)[1].strip()
+            rest = " ".join(l.strip() for l in block_lines[1:]).strip()
+            html_parts.append(f"<h2>{_escape_html(heading_text)}</h2>")
+            if rest:
+                html_parts.append(f"<p>{_escape_html(rest)}</p>")
+
+        elif first_line.upper().startswith("Q:"):
+            q_text = first_line.split(":", 1)[1].strip()
+            a_text = ""
+            for l in block_lines[1:]:
+                if l.strip().upper().startswith("A:"):
+                    a_text = l.strip().split(":", 1)[1].strip()
+            html_parts.append(
+                f'<div class="faq-item"><p class="faq-q">{_escape_html(q_text)}</p>'
+                f'<p class="faq-a">{_escape_html(a_text)}</p></div>'
+            )
+        else:
+            html_parts.append(f"<p>{_escape_html(block)}</p>")
+
+    return "".join(html_parts)
+
+
+def _plain_summary(text, limit=160):
+    """Meta description/JSON-LD ke liye HEADING:/Q:/A: markers hataakar plain text banata hai."""
+    cleaned = (text or "").replace("HEADING:", " ").replace("Q:", " ").replace("A:", " ")
+    cleaned = " ".join(cleaned.split())
+    return cleaned[:limit]
 
 
 def _initials(name):
@@ -401,6 +464,19 @@ def _initials(name):
     clean = name.replace("TejalTechWire", "TW")
     words = clean.split(" ")
     return "".join(w[0] for w in words[:2] if w).upper()[:2] or "TW"
+
+
+def slugify(title):
+    """Title ko URL-friendly slug mein badalta hai: 'Garmin Fenix 9 Launch!' -> 'garmin-fenix-9-launch'"""
+    text = "".join(c if c.isalnum() else " " for c in (title or "").lower())
+    words = [w for w in text.split() if w]
+    return "-".join(words[:10])[:80] or "article"
+
+
+def article_url_path(article_id, title):
+    """Ab URL format: /articles/<id>-<slug>.html — ID hamesha unique/stable rehta hai,
+    slug sirf readability/SEO ke liye extra hai."""
+    return f"{article_id}-{slugify(title)}"
 
 
 def _time_ago(published_at):
@@ -420,7 +496,8 @@ def _time_ago(published_at):
 # --- NAYA: Homepage ab fetcher.py hi generate karta hai, articles ka HTML pehle se
 # built-in hota hai (JS ke bharose nahi rehta). Isse Google/Bing turant homepage khulte
 # hi saara content dekh lete hain, bina JavaScript render kiye — crawlability guaranteed. ---
-HOME_TEMPLATE = """<!DOCTYPE htmlfo<html lang="en" data-theme="dark">
+HOME_TEMPLATE = """<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -465,6 +542,8 @@ HOME_TEMPLATE = """<!DOCTYPE htmlfo<html lang="en" data-theme="dark">
     <button class="pill" onclick="filterNews('AI', this)">AI</button>
     <button class="pill" onclick="filterNews('Tech', this)">Tech</button>
     <button class="pill" onclick="filterNews('Gadgets', this)">Gadgets</button>
+    <button class="pill" onclick="filterNews('Mobile', this)">Mobile</button>
+    <button class="pill" onclick="filterNews('Business', this)">Business</button>
   </nav>
   <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">☾</button>
 </header>
@@ -494,7 +573,7 @@ HOME_TEMPLATE = """<!DOCTYPE htmlfo<html lang="en" data-theme="dark">
     themeBtn.innerText = currentTheme === 'dark' ? '☀' : '☾';
   }}
 
-  const CAT_CLASS = {{'AI':'ai', 'Tech':'tech', 'Gadgets':'gadgets'}};
+  const CAT_CLASS = {{'AI':'ai', 'Tech':'tech', 'Gadgets':'gadgets', 'Mobile':'mobile', 'Business':'business'}};
   // Page load hote hi content pehle se HTML mein maujood hai (SEO ke liye).
   // Ye embedded data sirf CATEGORY FILTER buttons ke liye use hota hai — koi extra network call nahi.
   const allArticles = JSON.parse(document.getElementById('articles-data').textContent);
@@ -533,7 +612,7 @@ HOME_TEMPLATE = """<!DOCTYPE htmlfo<html lang="en" data-theme="dark">
     const [top, ...rest] = articles;
     const topCls = CAT_CLASS[top.category] || 'gadgets';
     heroSlot.innerHTML = `
-      <a class="hero" href="/articles/${{top.id}}.html">
+      <a class="hero" href="/articles/${{top.url_path}}.html">
         <img src="${{top.image_url || 'https://via.placeholder.com/700x400?text=TejalTechWire'}}" alt="">
         <div class="hero-body">
           <span class="cat-badge ${{topCls}}">${{escapeHtml(top.category)}}</span>
@@ -548,7 +627,7 @@ HOME_TEMPLATE = """<!DOCTYPE htmlfo<html lang="en" data-theme="dark">
     list.innerHTML = rest.map(a => {{
       const cls = CAT_CLASS[a.category] || 'gadgets';
       return `
-        <a class="row" href="/articles/${{a.id}}.html">
+        <a class="row" href="/articles/${{a.url_path}}.html">
           <div class="row-body">
             <span class="row-cat ${{cls}}">${{escapeHtml(a.category)}}</span>
             <h3>${{escapeHtml(a.title)}}</h3>
@@ -575,20 +654,18 @@ HOME_TEMPLATE = """<!DOCTYPE htmlfo<html lang="en" data-theme="dark">
 
 
 def _trending_badge(a):
-    """Score ke hisaab se badge dikhata hai — sirf visual hai, koi extra data nahi chahiye."""
-    score = a.get("trending_score") or 0
-    if score >= 70:
-        return '<span class="trend-badge trend-high">🔥 Viral</span>'
-    if score >= 30:
-        return '<span class="trend-badge trend-mid">📈 Trending</span>'
+    """Badge hata diya gaya — sabhi published news pehle se hi trending-filtered hain
+    (threshold pass kiye bina publish hoti hi nahi), isliye alag se badge dikhana zaroori nahi.
+    trending_score internally filtering ke liye abhi bhi use hota hai."""
     return ""
+
 
 
 def _render_hero_html(a):
     cls = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
     image = a.get("image_url") or "https://via.placeholder.com/700x400?text=TejalTechWire"
     source_name = a.get("source_name") or "TejalTechWire Original"
-    return f"""<a class="hero" href="/articles/{a['id']}.html">
+    return f"""<a class="hero" href="/articles/{article_url_path(a['id'], a.get('title',''))}.html">
         <img src="{image}" alt="{_escape_html(a.get('title',''))}">
         <div class="hero-body">
           <span class="cat-badge {cls}">{_escape_html(a.get('category',''))}</span>
@@ -605,7 +682,7 @@ def _render_hero_html(a):
 def _render_row_html(a):
     cls = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
     image = a.get("image_url") or "https://via.placeholder.com/160x160?text=TW"
-    return f"""<a class="row" href="/articles/{a['id']}.html">
+    return f"""<a class="row" href="/articles/{article_url_path(a['id'], a.get('title',''))}.html">
           <div class="row-body">
             <span class="row-cat {cls}">{_escape_html(a.get('category',''))}</span>
             {_trending_badge(a)}
@@ -623,6 +700,8 @@ def generate_homepage(conn):
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM articles ORDER BY published_at DESC LIMIT 30")
     rows = [dict(r) for r in cursor.fetchall()]
+    for r in rows:
+        r["url_path"] = article_url_path(r["id"], r.get("title", ""))   # JS filter ke liye
 
     if not rows:
         hero_html = ""
@@ -643,6 +722,104 @@ def generate_homepage(conn):
     print("Homepage (index.html) regenerated with pre-rendered content")
 
 
+def _github_new_file_link(path, content):
+    """GitHub ka special URL jo ek 'naya file banao' page kholta hai, content pehle se
+    bhara hua — user ko sirf 'Commit new file' dabana hota hai, kuch type nahi karna padta."""
+    from urllib.parse import quote
+    return f"https://github.com/{GITHUB_REPO}/new/{GITHUB_BRANCH}?filename={quote(path)}&value={quote(content)}"
+
+
+def _github_edit_link(path):
+    """Kisi existing file ko seedha GitHub par edit karne ka link."""
+    return f"https://github.com/{GITHUB_REPO}/edit/{GITHUB_BRANCH}/{path}"
+
+
+def generate_review_page(conn):
+    """Draft Review System: sabhi pending drafts ko ek page par dikhata hai jahan tum
+    poora article padh sakte ho, aur Approve / Reject / Edit kar sakte ho — bina kisi
+    login/backend ke, seedha GitHub ke through."""
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM drafts ORDER BY created_at DESC")
+    drafts = [dict(r) for r in cursor.fetchall()]
+
+    os.makedirs("review", exist_ok=True)
+
+    if not drafts:
+        cards_html = '<div class="empty-state">// Koi pending draft nahi hai abhi. Agla workflow run naye drafts la sakta hai.</div>'
+    else:
+        cards = []
+        for d in drafts:
+            approve_link = _github_new_file_link(f"approvals/approve_{d['id']}.txt", "approve")
+            reject_link = _github_new_file_link(f"approvals/reject_{d['id']}.txt", "reject")
+            edit_link = _github_edit_link(f"drafts_text/{d['id']}.txt")
+            cls = CAT_CLASS_MAP.get(d.get("category"), "gadgets")
+            cards.append(f"""
+            <div class="draft-card">
+              <img src="{d.get('image_url','')}" alt="">
+              <div class="draft-body">
+                <span class="cat-badge {cls}">{_escape_html(d.get('category',''))}</span>
+                {_trending_badge(d)}
+                <h2>{_escape_html(d.get('title',''))}</h2>
+                <div class="draft-text">{_paragraphs_html(d.get('summary',''))}</div>
+                <div class="draft-actions">
+                  <a class="btn-approve" href="{approve_link}" target="_blank">✅ Approve &amp; Publish</a>
+                  <a class="btn-edit" href="{edit_link}" target="_blank">✏️ Edit Text</a>
+                  <a class="btn-reject" href="{reject_link}" target="_blank">🗑️ Reject</a>
+                </div>
+                <p class="draft-hint">Approve/Reject click karne ke baad GitHub khulega — wahan "Commit new file" dabao. Agle workflow run (30 min tak) mein ye process ho jaayega.</p>
+              </div>
+            </div>""")
+        cards_html = "".join(cards)
+
+    html = f"""<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Review — TejalTechWire (Private)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  .draft-card{{background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-bottom:1.5rem; box-shadow:var(--shadow);}}
+  .draft-card img{{width:100%; height:220px; object-fit:cover;}}
+  .draft-body{{padding:1.3rem;}}
+  .draft-body h2{{font-family:'Space Grotesk'; font-size:1.3rem; margin:.8rem 0;}}
+  .draft-text p{{font-size:.95rem; line-height:1.6; color:var(--text-dim); margin:0 0 .8rem;}}
+  .draft-actions{{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1rem;}}
+  .draft-actions a{{
+    font-family:'Space Grotesk'; font-weight:700; font-size:.85rem; padding:.6rem 1.1rem;
+    border-radius:6px; text-decoration:none; display:inline-block;
+  }}
+  .btn-approve{{background:#33D6A6; color:#0A0A0C;}}
+  .btn-edit{{background:var(--accent); color:#0A0A0C;}}
+  .btn-reject{{background:transparent; color:#FF5D6C; border:1px solid #FF5D6C;}}
+  .draft-hint{{font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--text-dim); margin-top:.8rem;}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">
+    <div class="logo-mark">TW</div>
+    <div class="logo-text">Tejal<span>Tech</span>Wire</div>
+  </a>
+</header>
+<div class="container">
+  <h1 style="font-family:'Space Grotesk'; margin-bottom:.3rem;">📝 Draft Review</h1>
+  <p style="color:var(--text-dim); font-family:'IBM Plex Mono'; font-size:.8rem; margin-bottom:2rem;">Private page — {len(drafts)} pending draft(s)</p>
+  {cards_html}
+</div>
+</body>
+</html>
+"""
+    with open("review/index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Review page generated with {len(drafts)} pending draft(s)")
+
+
 def generate_article_pages(conn):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -653,15 +830,16 @@ def generate_article_pages(conn):
 
     for a in rows:
         image = a.get("image_url") or FALLBACK_IMAGES.get(a.get("category"), "")
-        description = _escape_html((a.get("summary") or "")[:160])
+        description = _escape_html(_plain_summary(a.get("summary"), 160))
         cat_class = CAT_CLASS_MAP.get(a.get("category"), "gadgets")
         source_name = a.get("source_name") or "TejalTechWire Original"
+        url_path = article_url_path(a["id"], a.get("title", ""))
 
-        # --- NAYA: isی category ke 3 aur articles dhoondh ke "Related" links banate hain ---
+        # --- isی category ke 3 aur articles dhoondh ke "Related" links banate hain ---
         related = [r for r in rows if r.get("category") == a.get("category") and r["id"] != a["id"]][:3]
         if related:
             related_html = "".join(
-                f'<a class="related-item" href="/articles/{r["id"]}.html">'
+                f'<a class="related-item" href="/articles/{article_url_path(r["id"], r.get("title",""))}.html">'
                 f'<img src="{r.get("image_url") or FALLBACK_IMAGES.get(r.get("category"), "")}" alt="">'
                 f'<h4>{_escape_html(r.get("title", ""))}</h4></a>'
                 for r in related
@@ -671,7 +849,7 @@ def generate_article_pages(conn):
 
         # Structured data (JSON-LD) ke andar safely daalne ke liye JSON-escaped strings
         title_json = json.dumps(a.get("title", ""))
-        description_json = json.dumps((a.get("summary") or "")[:200])
+        description_json = json.dumps(_plain_summary(a.get("summary"), 200))
         image_json = json.dumps(image)
         try:
             date_iso = datetime.fromisoformat(a.get("published_at", "")).strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -682,7 +860,7 @@ def generate_article_pages(conn):
             title=_escape_html(a.get("title", "")),
             description=description,
             image=image,
-            url=f"{SITE_URL}/articles/{a['id']}.html",
+            url=f"{SITE_URL}/articles/{url_path}.html",
             cat_class=cat_class,
             category=_escape_html(a.get("category", "")),
             trending_badge=_trending_badge(a),
@@ -698,8 +876,19 @@ def generate_article_pages(conn):
             site_url=SITE_URL,
         )
 
-        with open(f"articles/{a['id']}.html", "w", encoding="utf-8") as f:
+        with open(f"articles/{url_path}.html", "w", encoding="utf-8") as f:
             f.write(html)
+
+        # Purana format (/articles/<id>.html) agar kahin already share/index ho chuka ho,
+        # to wahan ek simple redirect chhod dete hain taaki koi link na toote.
+        redirect_html = (
+            f'<!DOCTYPE html><html><head><meta charset="UTF-8">'
+            f'<meta http-equiv="refresh" content="0; url=/articles/{url_path}.html">'
+            f'<link rel="canonical" href="{SITE_URL}/articles/{url_path}.html">'
+            f'</head><body>Redirecting... <a href="/articles/{url_path}.html">Click here</a></body></html>'
+        )
+        with open(f"articles/{a['id']}.html", "w", encoding="utf-8") as f:
+            f.write(redirect_html)
 
     print(f"Generated {len(rows)} article pages in /articles/")
     return rows
@@ -731,8 +920,6 @@ def fetch_full_article(url):
     except Exception as e:
         print(f"Full article fetch failed for {url}: {e}")
         return None
-
-
 
 
 # --- FIX: ab "seen_urls" leta hai — jo links pehle publish ho chuke hain unhe SKIP karke
@@ -774,55 +961,85 @@ def get_two_articles(feed_urls, seen_urls):
     return collected
 
 
-def _call_gemini_once(article_a, article_b, category):
-    """Gemini ko ek baar call karta hai. Fail hone par exception raise karta hai (caller retry karega)."""
-    prompt = f"""
-        You are a friendly tech writer for 'TejalTechWire', explaining recent developments in
+def _build_source_blocks(sources):
+    blocks = []
+    for i, s in enumerate(sources):
+        label = "SOURCE A" if i == 0 else "SOURCE B"
+        blocks.append(f'''--- {label}: "{s["title"]}" ---
+{s["text"]}''')
+    return "\n\n".join(blocks)
+
+
+def _call_gemini_once(sources, category, target_keywords):
+    """Gemini ko ek baar call karta hai. sources ek list hai -- 2 ho sakti hain (dono
+    genuinely related ho tab) ya sirf 1 (jab dusra source topic se match nahi karta,
+    isliye jabardasti mix nahi karte). Fail hone par exception raise karta hai."""
+    source_blocks = _build_source_blocks(sources)
+    combine_instruction = (
+        "Read both carefully, then write a brand-new, completely original article in your own words "
+        "-- combining the key facts, context, and angles from both. Do NOT copy any sentence or "
+        "phrasing from the sources."
+        if len(sources) > 1 else
+        "Read it carefully, then write a brand-new, completely original article in your own words "
+        "based on it. Do NOT copy any sentence or phrasing from the source."
+    )
+    source_word = "sources" if len(sources) > 1 else "source"
+
+    prompt = f'''
+        You are a friendly tech writer for \'TejalTechWire\', explaining recent developments in
         AI, Technology, and Gadgets to EVERYDAY READERS in the US and UK who are not tech experts.
 
-        Below are two full source articles on related recent developments in the '{category}' space.
-        Read both carefully, then write a brand-new, completely original article in your own words —
-        combining the key facts, context, and angles from both. Do NOT copy any sentence or phrasing
-        from the sources.
+        Below {"are" if len(sources) > 1 else "is"} {len(sources)} full source article{"s" if len(sources) > 1 else ""}
+        on recent development{"s" if len(sources) > 1 else ""} in the \'{category}\' space.
+        {combine_instruction}
 
-        AUDIENCE: Write for a general American and British audience. Use US/UK spelling and phrasing
-        (e.g. "color" or "colour" both fine, avoid region-specific slang from other countries). Prices
-        should stay in the currency mentioned in the source (usually USD "$"); if converting, prefer USD.
-        Do not add India-specific or any other region-specific framing or comparisons unless the source
-        material itself is about that region.
+        AUDIENCE: Write for a general American and British audience. Use US/UK spelling and phrasing.
+        Prices should stay in the currency mentioned in the {source_word} (usually USD "$"); if converting,
+        prefer USD. Do not add India-specific or any other region-specific framing or comparisons unless
+        the source material itself is about that region.
 
-        WRITING STYLE — this is critical:
-        - Use SIMPLE, PLAIN language. Write like you're explaining it to a smart friend who doesn't
-          follow tech news closely — not like a formal press release or analyst report.
+        SEO KEYWORDS -- this is important: These are the real, specific keywords tied to this story
+        that people are likely to actually search for (extracted from the source headlines): {target_keywords}.
+        Naturally include the 1-2 MOST relevant/specific of these (e.g. product name + the key action --
+        "launch", "price", "release date", "review") in your TITLE and again once early in the article.
+        Do this naturally, like a real headline would -- NEVER force in all of them, NEVER keyword-stuff.
+
+        SEARCH INTENT -- this is important: Think about what someone searching Google for this topic
+        actually wants to know (e.g. price, release date, availability, what it does, how it compares).
+        If the {source_word} contain that specific information, make sure your article directly and
+        clearly states it -- do not just vaguely gesture at "details" when a concrete fact is available.
+
+        WRITING STYLE:
+        - Use SIMPLE, PLAIN language, like explaining to a smart friend who doesn't follow tech news.
         - Short sentences. One idea per sentence where possible.
-        - Explain any technical term or jargon in plain words the moment you use it (e.g. instead of
-          just saying "modular nuclear reactor", briefly explain what that means in everyday terms).
-        - ALWAYS write numbers and years as normal digits (e.g. "2028", "7.5 billion", "$500") —
-          NEVER spell them out as words (never write "twenty-twenty-eight" or "seven point five billion").
-        - Avoid heavy, dense, literary sentences. Avoid words like "amid", "underscores", "harbinger".
-        - Start with a simple, clear opening line that says what happened, in one sentence.
-        - Include a short "why this matters to you" idea in plain terms.
-        - End with a simple, natural closing thought — not a grand dramatic statement.
-        Length: 300-400 words, 3-5 short paragraphs, no bullet points.
+        - Explain any technical term/jargon in plain words the moment you use it.
+        - ALWAYS write numbers and years as normal digits (e.g. "2028", "7.5 billion", "$500") --
+          NEVER spell them out as words.
+        - Avoid heavy, literary words like "amid", "underscores", "harbinger".
 
-        --- SOURCE A: "{article_a['title']}" ---
-        {article_a['text']}
+        ARTICLE STRUCTURE -- follow this EXACT plain-text format (no markdown symbols like ** or #):
+        1. Start with 1-2 opening paragraphs (no heading) that clearly state what happened and why
+           it matters -- in plain, simple language.
+        2. Then add 2-3 short sections, each starting on its own line with exactly:
+           HEADING: <short section title, e.g. "What This Means" or "Price and Availability">
+           followed by 1 short paragraph for that section.
+        3. End with a section starting with exactly:
+           HEADING: Quick Questions Answered
+           followed by 2-3 question/answer pairs, each formatted as TWO separate lines:
+           Q: <a short, natural question someone might search for>
+           A: <a short, direct, factual answer based on the source material>
+        Leave one blank line between every paragraph/heading/Q-A block.
 
-        --- SOURCE B: "{article_b['title']}" ---
-        {article_b['text']}
+        {source_blocks}
 
         Also suggest a short stock-photo search phrase (2-4 words) that visually captures the SPECIFIC
-        subject of THIS article — for example if it's about self-driving cars, say "self-driving car";
-        if it's about a new AI chip, say "computer processor chip"; if it's about wearables, say
-        "smartwatch wrist". Base it on the actual content above, not just the general category.
-        Do NOT use people's names or company/product brand names, since this is for a royalty-free
-        stock photo search and must return real matching generic photos.
+        subject of THIS article (not people's names or brand names) for a royalty-free stock photo search.
 
-        Format your response strictly as:
+        Format your FULL response strictly as:
         TITLE: [Your new original catchy headline, in simple plain language]
-        CONTENT: [Your full original article, in simple plain language]
+        CONTENT: [Your full article following the ARTICLE STRUCTURE above]
         IMAGE_KEYWORDS: [2-4 word generic visual search phrase]
-        """
+        '''
 
     response = client.models.generate_content(model='gemini-3.5-flash', contents=prompt)
     text = response.text.strip()
@@ -845,29 +1062,28 @@ def _call_gemini_once(article_a, article_b, category):
     return new_content, new_title, image_keywords
 
 
-def generate_merged_article(article_a, article_b, category):
-    """Gemini se article generate karta hai. Fail hone par 1 baar retry karta hai.
-    Dono attempts fail hon to (None, None, None) return karta hai — is case mein
-    fetch_and_process is category ko SKIP kar deta hai, koi placeholder/khali article
-    publish nahi hota (low-quality content site par jaane se bachata hai)."""
+def generate_merged_article(sources, category, target_keywords=""):
+    """Gemini se article generate karta hai. sources = list of 1 ya 2 source dicts.
+    Fail hone par 1 baar retry karta hai. Dono attempts fail hon to (None, None, None)
+    return karta hai -- fetch_and_process is category ko SKIP kar deta hai."""
     if not client:
-        print("Gemini client not configured (missing GEMINI_API_KEY) — skipping this category")
+        print("Gemini client not configured (missing GEMINI_API_KEY) -- skipping this category")
         return None, None, None
 
     for attempt in (1, 2):
         try:
-            return _call_gemini_once(article_a, article_b, category)
+            return _call_gemini_once(sources, category, target_keywords)
         except Exception as e:
             print(f"Gemini generation attempt {attempt} failed: {e}")
             if attempt == 2:
-                print("Both attempts failed — skipping this category this run (no placeholder published)")
+                print("Both attempts failed -- skipping this category this run (no placeholder published)")
                 return None, None, None
 
 
 def fetch_and_process(conn):
     cursor = conn.cursor()
     os.makedirs("data", exist_ok=True)
-    newly_published_ids = []   # is run mein jo naye articles bane unke IDs track karta hai
+    # (publishing ab yahan se nahi hoti, drafts mein jaata hai — process_approvals() publish karta hai)
 
     # pehle "used_source_links" table se (ye dono A aur B links record karti hai),
     # aur purane data ke liye "articles.source_url" se bhi -- dono jagah se "already used" list banate hain.
@@ -900,6 +1116,21 @@ def fetch_and_process(conn):
         print(f"Checking trending score for: {article_a['title'][:70]}")
         trending_score = compute_trending_score(article_a["title"], titles_by_feed)
 
+        # NAYA: yehi keywords ab Gemini ko bhi diye jaate hain, taaki title/article mein
+        # genuinely search hone waale terms naturally shamil hon (sirf trending-check ke
+        # liye internal use na ho kar reh jaayein).
+        story_keywords = ", ".join(sorted(_keywords(article_a["title"]) | _keywords(article_b["title"])))
+
+        # NAYA: "do alag news mix na ho" fix -- agar A aur B genuinely unrelated stories
+        # hain (jaise "Apple headset" + "drone ban"), to inhe jabardasti ek article mein
+        # nahi milaate. Sirf jo zyaada trending/relevant hai (article_a) usi se article banta hai.
+        if are_related(article_a["title"], article_b["title"]):
+            sources_for_article = [article_a, article_b]
+            print("Sources are related -- merging both into one article")
+        else:
+            sources_for_article = [article_a]
+            print("Sources are UNRELATED -- using only the primary source, not mixing two different stories")
+
         # Dono links turant lock kar dete hain -- chahe story trending nikle ya na nikle,
         # ye 2 source articles is run mein "consume" ho chuke hain, dobara kisi aur category
         # mein use nahi honge. Isi se "same story 3-4 baar chapna" wala bug bhi fix hota hai.
@@ -917,8 +1148,8 @@ def fetch_and_process(conn):
             continue
 
         print(f"Trending score {trending_score} >= {MIN_TRENDING_SCORE} -- proceeding to generate article")
-        print(f"Merging {category} articles with Gemini...")
-        summary, title, image_keywords = generate_merged_article(article_a, article_b, category)
+        print(f"Generating {category} article with Gemini (target keywords: {story_keywords})...")
+        summary, title, image_keywords = generate_merged_article(sources_for_article, category, story_keywords)
 
         # Gemini fail ho gaya (dono retries) -- is category ko is run mein publish
         # hi mat karo. Placeholder/khali article site par nahi jaana chahiye.
@@ -932,17 +1163,93 @@ def fetch_and_process(conn):
         if cursor.fetchone():
             print(f"Duplicate title skipped: {title}")
             continue
+        cursor.execute("SELECT id FROM drafts WHERE title = ?", (title,))
+        if cursor.fetchone():
+            print(f"Duplicate title (already in drafts) skipped: {title}")
+            continue
 
+        # --- NAYA: seedhe 'articles' (live site) mein NAHI jaata — pehle 'drafts' mein
+        # jaata hai, review page par dikhega, tumhare Approve karne ke baad hi publish hoga. ---
         cursor.execute("""
-            INSERT OR IGNORE INTO articles (title, summary, category, image_url, source_name, source_url, published_at, trending_score)
+            INSERT INTO drafts (title, summary, category, image_url, source_name, source_url, trending_score, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        """, (title, summary, category, image_url, "TejalTechWire Original", link_a, datetime.now().isoformat(), trending_score))
-        print(f"Published Original (score={trending_score}): {title}")
-        newly_published_ids.append(cursor.lastrowid)
+        """, (title, summary, category, image_url, "TejalTechWire Original", link_a, trending_score, datetime.now().isoformat()))
+        draft_id = cursor.lastrowid
+
+        # Draft ka text ek alag file mein bhi save karte hain, taaki tum chaho to
+        # GitHub par seedha edit kar sako publish hone se pehle.
+        os.makedirs("drafts_text", exist_ok=True)
+        with open(f"drafts_text/{draft_id}.txt", "w", encoding="utf-8") as f:
+            f.write(f"TITLE: {title}\n\nCONTENT:\n{summary}")
+
+        print(f"Added to DRAFTS for review (score={trending_score}): {title}")
+
+    conn.commit()
+    return []   # publish yahan se nahi hota — process_approvals() publish karta hai
+
+
+# --- NAYA: Approve/Reject system. GitHub mein banayi gayi "approvals/" files ko check karta
+# hai. Tum review page se ek link click karte ho, GitHub khulta hai, tum "Commit" dabate ho
+# -- agli baar workflow chalne par ye function wahi dekh kar publish/reject karta hai. ---
+def process_approvals(conn):
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    newly_published_ids = []
+
+    if not os.path.isdir("approvals"):
+        return newly_published_ids
+
+    for fname in os.listdir("approvals"):
+        fpath = os.path.join("approvals", fname)
+        if not fname.endswith(".txt"):
+            continue
+
+        if fname.startswith("approve_"):
+            draft_id = fname.replace("approve_", "").replace(".txt", "")
+            cursor.execute("SELECT * FROM drafts WHERE id = ?", (draft_id,))
+            row = cursor.fetchone()
+            if row:
+                d = dict(row)
+
+                # Agar tumne drafts_text/<id>.txt file edit ki thi, wahi final content use hota hai
+                title, summary = d["title"], d["summary"]
+                text_path = f"drafts_text/{draft_id}.txt"
+                if os.path.exists(text_path):
+                    with open(text_path, "r", encoding="utf-8") as f:
+                        edited = f.read()
+                    if "TITLE:" in edited and "CONTENT:" in edited:
+                        parts = edited.split("CONTENT:")
+                        edited_title = parts[0].replace("TITLE:", "").strip()
+                        edited_content = parts[1].strip()
+                        if edited_title:
+                            title = edited_title
+                        if edited_content:
+                            summary = edited_content
+
+                cursor.execute("""
+                    INSERT INTO articles (title, summary, category, image_url, source_name, source_url, published_at, trending_score)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, (title, summary, d["category"], d["image_url"], d["source_name"], d["source_url"],
+                      datetime.now().isoformat(), d["trending_score"]))
+                newly_published_ids.append(cursor.lastrowid)
+                print(f"APPROVED and published draft {draft_id}: {title}")
+
+                cursor.execute("DELETE FROM drafts WHERE id = ?", (draft_id,))
+                if os.path.exists(text_path):
+                    os.remove(text_path)
+            os.remove(fpath)
+
+        elif fname.startswith("reject_"):
+            draft_id = fname.replace("reject_", "").replace(".txt", "")
+            cursor.execute("DELETE FROM drafts WHERE id = ?", (draft_id,))
+            text_path = f"drafts_text/{draft_id}.txt"
+            if os.path.exists(text_path):
+                os.remove(text_path)
+            print(f"REJECTED draft {draft_id}, deleted")
+            os.remove(fpath)
 
     conn.commit()
     return newly_published_ids
-
 
 
 def export_to_json(conn):
@@ -967,7 +1274,7 @@ def generate_sitemap(article_rows=None):
     for a in (article_rows or []):
         lastmod = (a.get("published_at") or "")[:10] or now[:10]
         url_entries.append(f"""  <url>
-    <loc>{SITE_URL}/articles/{a['id']}.html</loc>
+    <loc>{SITE_URL}/articles/{article_url_path(a['id'], a.get('title',''))}.html</loc>
     <lastmod>{lastmod}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -986,6 +1293,9 @@ def generate_sitemap(article_rows=None):
 def generate_robots_txt():
     content = f"""User-agent: *
 Allow: /
+Disallow: /review/
+Disallow: /drafts_text/
+Disallow: /approvals/
 
 Sitemap: {SITE_URL}/sitemap.xml
 """
@@ -997,20 +1307,37 @@ Sitemap: {SITE_URL}/sitemap.xml
 if __name__ == "__main__":
     print("Starting TejalTechWire Autonomous Content Engine...")
     db_conn = setup_db()
-    new_ids = fetch_and_process(db_conn)
+
+    # 1) Pehle dekh lete hain — kya pichle cycle mein tumne kisi draft ko GitHub par
+    # Approve/Reject kiya tha? Agar haan, to yahan wo process hota hai (publish/delete).
+    approved_ids = process_approvals(db_conn)
+
+    # 2) Naye stories dhoondo, trending-filter lagao, "drafts" mein daalo (LIVE nahi hota)
+    fetch_and_process(db_conn)
+
     export_to_json(db_conn)
     all_rows = generate_article_pages(db_conn)
-    generate_homepage(db_conn)   # <-- NAYA: homepage ab pre-rendered HTML ke saath banti hai
+    generate_homepage(db_conn)
+    generate_review_page(db_conn)   # <-- NAYA: draft review page banti hai
     generate_sitemap(all_rows)
     generate_robots_txt()
     generate_indexnow_key_file()
 
-    # --- naye publish hue articles ke baare mein Bing/Yandex ko turant bata dete hain ---
-    new_urls = [f"{SITE_URL}/articles/{i}.html" for i in new_ids]
+    # --- naye APPROVED-and-published articles ke baare mein Bing/Yandex ko turant bata dete hain ---
+    new_urls = []
+    if approved_ids:
+        conn2 = db_conn
+        conn2.row_factory = sqlite3.Row
+        c2 = conn2.cursor()
+        for aid in approved_ids:
+            c2.execute("SELECT id, title FROM articles WHERE id = ?", (aid,))
+            r = c2.fetchone()
+            if r:
+                new_urls.append(f"{SITE_URL}/articles/{article_url_path(r['id'], r['title'])}.html")
     if new_urls:
         submit_indexnow([f"{SITE_URL}/"] + new_urls)
     else:
-        print("No new articles this run — skipping IndexNow submission")
+        print("No newly-approved articles this run — skipping IndexNow submission")
 
     db_conn.close()
     print("Generation Complete!")
