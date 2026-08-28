@@ -9,6 +9,8 @@
   --ai:#B3A6FF;
   --tech:#5FB4E8;
   --gadgets:#D4AF37;
+  --mobile:#FF8FB3;
+  --business:#7FDBA0;
   --shadow:none;
 }
 [data-theme="light"]{
@@ -22,6 +24,8 @@
   --ai:#6C5CE0;
   --tech:#1279B8;
   --gadgets:#B8862F;
+  --mobile:#D6336C;
+  --business:#1F9254;
   --shadow:0 2px 8px rgba(20,20,20,.04), 0 8px 24px rgba(20,20,20,.06);
 }
 *{box-sizing:border-box;}
@@ -79,6 +83,8 @@ nav{display:flex; gap:.4rem; align-items:center;}
 .cat-badge.ai{color:#0A0A0C; background:var(--ai);}
 .cat-badge.tech{color:#0A0A0C; background:var(--tech);}
 .cat-badge.gadgets{color:#0A0A0C; background:var(--gadgets);}
+.cat-badge.mobile{color:#0A0A0C; background:var(--mobile);}
+.cat-badge.business{color:#0A0A0C; background:var(--business);}
 
 /* Trending/Viral badges */
 .trend-badge{
@@ -124,6 +130,8 @@ nav{display:flex; gap:.4rem; align-items:center;}
 .row-cat.ai{color:var(--ai);}
 .row-cat.tech{color:var(--tech);}
 .row-cat.gadgets{color:var(--gadgets);}
+.row-cat.mobile{color:var(--mobile);}
+.row-cat.business{color:var(--business);}
 .row h3{
   font-family:'Space Grotesk'; font-size:1rem; line-height:1.35; margin:0 0 .5rem; font-weight:600;
 }
@@ -154,6 +162,10 @@ footer a:hover{color:var(--text);}
 .article-title{font-family:'Space Grotesk'; font-size:1.65rem; line-height:1.3; margin:0 0 1.2rem; font-weight:700;}
 .article-hero-img{width:100%; border-radius:10px; margin-bottom:1.4rem; display:block;}
 .article-text p{font-size:1.02rem; line-height:1.75; color:var(--text); margin:0 0 1.1rem;}
+.article-text h2{font-family:'Space Grotesk'; font-size:1.25rem; margin:1.6rem 0 .8rem; color:var(--text);}
+.faq-item{background:var(--panel-2); border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:0 0 .8rem;}
+.faq-item .faq-q{font-family:'Space Grotesk'; font-weight:700; font-size:.98rem; margin:0 0 .4rem; color:var(--text);}
+.faq-item .faq-a{font-size:.92rem; color:var(--text-dim); margin:0; line-height:1.6;}
 .article-source{
   margin-top:2rem; padding-top:1.2rem; border-top:1px solid var(--line);
   font-family:'IBM Plex Mono'; font-size:.78rem; color:var(--text-dim);
@@ -174,4 +186,3 @@ footer a:hover{color:var(--text);}
 .related-item:last-child{border-bottom:none;}
 .related-item img{width:60px; height:60px; object-fit:cover; border-radius:6px; flex-shrink:0; background:var(--panel-2);}
 .related-item h4{font-family:'Space Grotesk'; font-size:.92rem; line-height:1.3; margin:0; font-weight:600;}
-                  
