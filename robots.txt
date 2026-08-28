@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /review/
+Disallow: /drafts_text/
+Disallow: /approvals/
 
 Sitemap: https://tejaltechwire.pages.dev/sitemap.xml
