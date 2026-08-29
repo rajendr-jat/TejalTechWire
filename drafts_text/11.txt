@@ -1,0 +1,28 @@
+TITLE: Sony and Warner Sue Anthropic Alleging Brazen Music Theft
+
+CONTENT:
+Some of the world's biggest music companies, including Sony Music and Warner Music, are taking the artificial intelligence giant Anthropic to court. The music publishers are alleging a brazen campaign of intellectual property theft. Intellectual property is the legal term for creative work that belongs to someone, such as songs, art, or books. The companies claim the tech firm illegally downloaded copyrighted songs to train its popular AI assistant, Claude.
+
+This massive lawsuit was filed in a California federal court. The music companies claim Anthropic used piracy and illegal torrent sites to download millions of pages of copyrighted books, sheet music, and song lyrics. Torrent sites are online networks where people share files, often illegally, without paying for them.
+
+HEADING: What the Music Labels Claim
+
+The music publishers are very angry because they say Anthropic did not ask for permission or pay to use their music. Instead, the publishers claim Anthropic took a massive shortcut by downloading huge amounts of copyrighted material from the internet. This includes lyrics and sheet music from famous artists. The music companies call this flagrant piracy and want the court to make the AI company stop using their work.
+
+HEADING: Anthropic's History of Legal Trouble
+
+This is not the first time Anthropic has faced trouble over copyright issues. In fact, a judge recently ordered the AI company to pay $1.5 billion in a similar case brought by a group of authors. In that landmark case, the court ruled that while using copyrighted material to train AI is sometimes allowed, getting that material through illegal piracy is completely against the law. Anthropic is also facing active lawsuits from other major music groups.
+
+HEADING: Quick Questions Answered
+
+Q: Who is suing Anthropic in this new case?
+
+A: Sony Music Publishing, Warner Chappell, and several other music publishers have filed the lawsuit together.
+
+Q: What exactly is Anthropic accused of doing?
+
+A: The music publishers claim Anthropic used illegal torrenting and piracy websites to download millions of copyrighted works, including song lyrics and sheet music, to train its AI model named Claude.
+
+Q: Has Anthropic lost any similar lawsuits before?
+
+A: Yes, Anthropic was recently ordered to pay $1.5 billion in a lawsuit after a judge ruled the company illegally used pirated books to train its AI.
