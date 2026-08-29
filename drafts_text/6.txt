@@ -1,0 +1,25 @@
+TITLE: Chinese automakers build humanoid robots to find their next big profit
+
+CONTENT:
+Many Chinese automakers are now building humanoid robots because they think these machines will be their next big profit generator. They are following the lead of US electric car pioneer Tesla, which has been working on its own robot called Optimus. These car brands see a future where robots do hard physical labor in factories and homes.
+
+To make this happen, companies are pouring massive amounts of cash into the technology. For example, the robotics branch of Chinese car company Xpeng recently raised over $900 million. This cash injection values the robot business at more than $6.3 billion. Other major car brands like BYD and Chery are also building their own mechanical helpers.
+
+HEADING: Why Car Companies Want Robots
+
+Making cars is getting less profitable because of intense price competition. Humanoid robots, which look and move like people, offer a fresh way to make money. Car factories already have the heavy equipment and hardware experience needed to build physical robots. These companies believe that artificial intelligence, or AI, can now help these machines learn complex physical tasks very quickly.
+
+HEADING: When We Will See Them in Factories
+
+We might see these robots at work sooner than you think. Hyundai plans to test humanoid robots made by Boston Dynamics in its Georgia factory this year. By 2028, the company expects these robots to handle tasks like sorting car parts. Meanwhile, Xpeng is preparing its own robot, named Iron, for real-world commercial work.
+
+HEADING: Quick Questions Answered
+
+Q: Which Chinese car brands are making robots?
+A: Xpeng, BYD, and Chery are leading the way, while other brands like Changan and SAIC are also developing them.
+
+Q: How much money is being invested in these robots?
+A: Xpeng alone recently raised over $900 million, while Mobileye bought a robot startup called Mentee Robotics for $900 million.
+
+Q: Can these robots think for themselves?
+A: They use advanced AI systems, sometimes called embodied AI, which means the computer brain is built directly into the physical machine to help it learn how to move and work.

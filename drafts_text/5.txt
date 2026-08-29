@@ -1,0 +1,32 @@
+TITLE: AI Company Lambda Secures $1 Billion in Debt to Buy Nvidia Chips
+
+CONTENT:
+The artificial intelligence company Lambda secures $1 billion in new debt to buy highly sought-after computer chips. The firm will lease these specialized processors to Microsoft to help power its massive AI systems.
+
+Lambda is what people call a cloud provider. Instead of companies buying their own expensive hardware, they rent computing power from Lambda over the internet. This setup helps tech giants get the massive power they need for AI without waiting.
+
+HEADING: How the Deal Works
+
+Lambda is borrowing this money through a private, short-term loan arranged by the investment bank JP Morgan Chase. Because the loan must be paid back quickly, Lambda is betting it can set up the chips and start renting them to Microsoft almost immediately. The rent money from Microsoft will then be used to pay off the debt. This strategy helps Lambda grow fast without selling off parts of its business.
+
+HEADING: A Growing Trend in Tech
+
+This is not the first time Lambda has borrowed huge sums of money to buy hardware. In May, the company raised $1 billion, and they recently got another $926 million loan to buy Nvidia's newest GB300 chips. Other tech firms are doing the same thing. Globally, banks and technology companies have raised over $400 billion in AI-related debt so far in 2026.
+
+HEADING: What Lies Next
+
+In addition to borrowing money, Lambda is looking for long-term investors. Reports suggest the company is in talks to raise another $3 billion before it eventually goes public on the stock market. In November last year, investors valued the entire company at $5.43 billion, showing how valuable these AI hardware rental services have become.
+
+HEADING: Quick Questions Answered
+
+Q: What does Lambda do?
+
+A: Lambda buys expensive AI computer chips and rents out their processing power to other companies over the internet.
+
+Q: Who is renting the new chips from Lambda?
+
+A: Microsoft is leasing the new chips from Lambda to help run its artificial intelligence projects.
+
+Q: Why is Lambda borrowing money instead of selling stock?
+
+A: Borrowing money allows Lambda to buy chips immediately and pay off the debt using rental income, without giving away ownership of the company.
