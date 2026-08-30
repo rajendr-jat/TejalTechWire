@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tejaltechwire.pages.dev/</loc>
-    <lastmod>2026-08-30T05:39:33Z</lastmod>
+    <lastmod>2026-08-30T10:00:37Z</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://tejaltechwire.pages.dev/articles/81-why-the-honor-robot-phone-and-its-camera-capabilities-are.html</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tejaltechwire.pages.dev/articles/80-sony-and-warner-sue-anthropic-alleging-brazen-music-theft.html</loc>
