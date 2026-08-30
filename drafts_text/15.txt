@@ -1,0 +1,28 @@
+TITLE: New WhatsApp scam alert feature arrives on Android as Google Pixel 11 Pro Fold gets major rivals
+
+CONTENT:
+Big changes are coming to your mobile phone. WhatsApp is testing a clever new safety tool to stop scammers in their tracks. At the same time, phone shoppers are looking at exciting new alternatives to Google's latest expensive folding phone.
+
+The new WhatsApp scam alert feature is now available to some Android beta users. A beta is a test version of an app before it is released to the general public. This tool uses smart technology on your phone to spot dangerous messages from unknown numbers. Meanwhile, if you do not want to spend $1,899 on the new Google Pixel 11 Pro Fold, other companies are launching impressive folding phones that might be better choices.
+
+HEADING: How the New WhatsApp Scam Tool Works
+
+This safety feature uses on-device machine learning. This means a smart program on your phone analyzes messages without sending your private chats to WhatsApp or Meta. When you get a message from someone you do not know, your phone will warn you if it looks like a trick. You can then easily block the sender or mark them as safe. Because it is optional, you have to turn it on yourself in your account settings.
+
+HEADING: Great Alternatives to Google's Pricey Foldable
+
+Google's new Pixel 11 Pro Fold is very thin, but it faces tough competition from other brands. For the same $1,899 price, the Motorola Razr Fold offers a massive 6,000mAh battery that charges much faster. It also has a better camera system and more storage. Another option is the Samsung Galaxy Z Fold 8. This phone features a wider screen shape that is much better for watching widescreen movies without annoying black bars on the top and bottom.
+
+HEADING: Quick Questions Answered
+
+Q: How do I get the new WhatsApp scam feature?
+
+A: It is currently only available to people using the WhatsApp beta test version 2.26.34.1 on Android phones, but it should roll out to everyone soon.
+
+Q: Does WhatsApp read my messages to find scams?
+
+A: No, the computer model runs entirely on your physical device, so your private messages remain safely locked and encrypted.
+
+Q: What is a major drawback of the Google Pixel 11 Pro Fold compared to its rivals?
+
+A: It has a smaller 4,750mAh battery than last year's model, slower charging speeds, and basic 10.5MP and 10.8MP secondary cameras.
