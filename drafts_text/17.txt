@@ -1,0 +1,26 @@
+TITLE: Elon Musk Finds a Faster Path to Build Gas Turbines for AI Power
+
+CONTENT:
+Artificial intelligence uses a massive amount of electricity. Right now, there is a major shortage of power to run the giant data centers that train new AI models. To solve this problem, billionaire Elon Musk has started a secret project to build key parts for natural gas power turbines himself so his AI projects do not have to rely on the overloaded electrical grid.
+
+The plan involves a secret metal-casting factory, called a foundry, built by SpaceX on 830 acres in Bastrop, Texas. Musk confirmed that making these turbine parts in-house will help get new natural gas plants online up to 18 months faster. This would give his AI company a huge advantage, but the move is already raising major concerns about air pollution.
+
+HEADING: The Power Grid Problem
+Artificial intelligence requires specialized computer chips that need vast amounts of energy. The International Energy Agency expects global data center power use to double by 2030. Because the normal power grid cannot keep up, major tech companies are building their own private gas-fired power plants. However, the companies that make these massive gas turbines are completely sold out of production capacity until 2030.
+
+HEADING: Why Making Turbine Blades is Hard
+The biggest bottleneck in making gas turbines is casting the spinning blades inside them. These blades must survive extreme heat up to 3,600 degrees Fahrenheit, which is actually hotter than the melting point of the metal itself. To handle this stress, each blade must be slowly grown as a single, perfect metal crystal inside a special vacuum furnace. Only 4 companies in the world can currently do this, and SpaceX is now trying to become the fifth.
+
+HEADING: The Pollution Problem
+While this plan could speed up AI development, it comes with a dirty cost. Running more natural gas turbines means releasing more smog and harmful chemicals like formaldehyde into the air. In Memphis, Tennessee, where Musk operates his giant Colossus data center, local civil rights groups have already accused his company of running gas turbines without the proper environmental permits.
+
+HEADING: Quick Questions Answered
+
+Q: Why does Elon Musk want to build gas turbines?
+A: He wants to generate private electricity for his AI data centers because the public power grid cannot supply enough energy fast enough.
+
+Q: Where is SpaceX building this new turbine factory?
+A: The factory is located on an 830-acre site in Bastrop, Texas, near an existing Starlink facility.
+
+Q: What is the main environmental concern with this project?
+A: Natural gas turbines release harmful air pollutants like formaldehyde and smog-forming chemicals, which can cause respiratory diseases.
