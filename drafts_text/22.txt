@@ -1,0 +1,32 @@
+TITLE: Why the US is building barriers around foreign robots and drones
+
+CONTENT:
+The US government is putting up strict new rules and taxes on automated machines made abroad. Washington recently restricted advanced robotic systems and placed high taxes on imported drones. Officials say these steps are necessary to protect national security. However, these actions are raising big questions about the future of the technology market.
+
+By building barriers around robots and drones from other countries, the US hopes to protect its own businesses. But China already makes these machines at a massive scale and at very low costs. Because of this, Chinese companies might easily find ways around these restrictions by selling to the rest of the world instead.
+
+HEADING: The Scale of the Giant
+
+The gap in manufacturing between the US and China is very large. In the first half of 2026, global shipments of humanoid robots—which are robots designed to look and move like humans—reached 22,000 units. Chinese companies made a massive 86% of those machines. Five Chinese firms currently lead the global market. Because they make so many robots, they can lower their prices much faster than American rivals can. This also lets them collect more real-world data to make their machines smarter.
+
+HEADING: Where the Tech Goes Next
+
+If these affordable machines cannot enter the US, they will simply go elsewhere. Experts say Chinese brands are already targeting other parts of the world. They are focusing on regions with labor shortages that need cheap automation, such as Europe, Southeast Asia, Latin America, and the Middle East. This could create a split global market. The US and its allies might use more expensive, highly secure robots, while the rest of the world adopts cheaper Chinese technology.
+
+HEADING: Software Versus Hardware
+
+The US still holds a major advantage in creating advanced artificial intelligence, which is the software or "brains" behind these machines. American companies also lead in making the powerful computer chips needed to run them. However, building physical machines requires deep supply chains and factories. China excels at this physical manufacturing. Experts warn that the US cannot just block its way to success and must invest heavily in its own factories to keep up.
+
+HEADING: Quick Questions Answered
+
+Q: Why is the US blocking foreign drones and robots?
+
+A: The US government has raised national security concerns about foreign-made technology spying on citizens or disrupting critical systems.
+
+Q: Will these new rules stop China from making robots?
+
+A: No, because Chinese companies can easily sell their low-cost machines to other growing markets in Europe, Asia, and Latin America.
+
+Q: How much of the humanoid robot market does China control?
+
+A: Chinese manufacturers made 86% of all humanoid robots shipped globally in the first half of 2026.
