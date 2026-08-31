@@ -1,0 +1,29 @@
+TITLE: How to easily improve your Apple CarPlay audio quality
+
+CONTENT:
+Many of us love using Apple CarPlay to play our favorite songs while driving. But you might not be getting the best sound your car speakers can actually offer. Sometimes, your phone sends a lower-quality signal that sounds fine through your headphones but flat in your vehicle.
+
+Fortunately, you can improve Apple CarPlay audio quality with a few quick adjustments. You do not need to buy an expensive new sound system to get better results.
+
+HEADING: Use a Cable Instead of Wireless
+
+While wireless connections are very convenient, they actually compress your music to send it through the air. This compression removes tiny details from the sound. If you plug your iPhone into your car with a USB cable, it can transmit lossless audio. Lossless audio means the music file retains all of its original detail, making your favorite songs sound much richer.
+
+HEADING: Download Your Songs Before You Drive
+
+Streaming music on the go can be patchy because your phone constantly hops between different cell towers. When your signal drops, your music quality drops too. To prevent this, download your playlists to your phone before you leave the house. Both Apple Music and Spotify Premium let you download high-quality files directly to your device, which also saves your mobile data plan. Just keep in mind that these high-quality files will use up more storage space on your phone.
+
+HEADING: Adjust Your Phone Settings
+
+Your iPhone has built-in equalizer settings that might be holding your car speakers back. Often, these settings are customized for headphones and can make car audio sound muddy. Take a quick look at your music app settings to make sure the equalizer is set to a profile that matches your car, or turn it off entirely to see if the sound improves.
+
+HEADING: Quick Questions Answered
+
+Q: Why does wired CarPlay sound better than wireless?
+A: Wired connections use a system that transmits uncompressed audio. Wireless connections must compress the audio to send it over the air, which removes some of the music's original detail.
+
+Q: Does downloading music help with audio quality?
+A: Yes, because downloading music beforehand stops your phone from lowering the audio quality when you drive through areas with poor cellular reception.
+
+Q: Will lossless audio files take up a lot of space on my iPhone?
+A: Yes, lossless audio files contain much more data than standard files, so they will use up significantly more of your phone's storage.
