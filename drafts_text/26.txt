@@ -1,0 +1,32 @@
+TITLE: FTC accuses Amazon in new lawsuit over a secret ad surcharge scheme
+
+CONTENT:
+The US government and 22 states have filed a major lawsuit against Amazon. The Federal Trade Commission, or FTC, accuses Amazon of running a secret ad surcharge scheme. Regulators claim this trick helped the company quietly pocket billions of dollars by overcharging businesses that advertise on its website.
+
+The lawsuit alleges this practice went on for more than 7 years. It reportedly affected over 1 million brands and sellers who use Amazon to reach shoppers.
+
+HEADING: How the Ad Auctions Worked
+
+The lawsuit focuses on how Amazon sells its search result ads, like Sponsored Products. Normally, Amazon told sellers it used a second-price auction. In this system, the winner of the ad spot only pays 1 cent more than the next highest bid. This gave businesses the confidence to bid high, believing they would not actually have to pay their maximum bid. However, the FTC claims that starting in 2019, Amazon secretly changed the rules. They allegedly used fake bidders and hidden price floors to force advertisers to pay their full maximum bids nearly 80% of the time.
+
+HEADING: Why Amazon Did It
+
+According to the lawsuit, Amazon made this change simply to increase its own advertising revenue. The company feared that if they told advertisers about the price hikes, those businesses would lower their bids. This secret change reportedly helped boost Amazon's massive advertising business, which brought in more than $68 billion in 2023.
+
+HEADING: Amazon's Response
+
+Amazon strongly denies these claims. The company released a blog post calling the lawsuit misguided. It stated that the FTC does not understand how advertising works. Amazon says that ad prices naturally change because their system looks at billions of bids at once, and they keep advertisers properly informed.
+
+HEADING: Quick Questions Answered
+
+Q: Who is suing Amazon over these ad fees?
+
+A: The Federal Trade Commission and 22 US states are suing the company.
+
+Q: How long did this alleged scheme last?
+
+A: Regulators say Amazon ran this hidden ad pricing system for more than 7 years.
+
+Q: What does Amazon say about the lawsuit?
+
+A: Amazon claims the lawsuit is misguided and misinterprets how its auction system works.
