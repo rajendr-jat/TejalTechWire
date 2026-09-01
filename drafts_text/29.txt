@@ -1,0 +1,29 @@
+TITLE: Dyson Launches $500 CameraJet Toothbrush That Scans Your Mouth
+
+CONTENT:
+The famous vacuum cleaner company Dyson is trying something completely new. They just announced the Dyson CameraJet, a smart toothbrush that scans your mouth to brush, floss, and rinse your teeth all at the same time.
+
+This new device costs $500 and uses a built-in camera and artificial intelligence to find the gaps between your teeth. When the brush spots a gap, it shoots a tiny jet of water or mouthwash to clean it out instantly. This means you can brush and floss your teeth in one easy step.
+
+HEADING: How the Smart Tech Works
+
+The toothbrush has a small camera mounted right under the brush head. This camera takes 28 pictures every second. A smart computer system, which was trained on 470,000 dental images, reads these pictures in real time. Within 100 milliseconds of seeing a gap between your teeth, the brush fires a quick, targeted burst of water. The brush holds about 2.5 teaspoons of water in a special tank that works even if you hold the toothbrush upside down.
+
+HEADING: Using the Companion App
+
+You can connect the toothbrush to the MyDyson app on your phone. This app shows you a live video of the inside of your mouth so you can see hard-to-reach areas behind your teeth. Dyson says that none of your video data is recorded or saved in the cloud. The app also tracks how well you brush and gives you tips on how to improve.
+
+HEADING: Price and Release Details
+
+The Dyson CameraJet will cost $500. While Dyson has officially revealed the device, they have not yet announced the exact date when it will go on sale. It represents a major upgrade compared to standard electric toothbrushes because it combines a camera, a water flosser, and a brush into one handheld tool.
+
+HEADING: Quick Questions Answered
+
+Q: How much does the Dyson CameraJet cost?
+A: The Dyson CameraJet costs $500.
+
+Q: Does the toothbrush save video recordings of your mouth?
+A: No, the MyDyson app only shows a live view and does not store any images or video on your device or in the cloud.
+
+Q: How does the flossing feature work?
+A: A camera scans your teeth 28 times per second and uses AI to find gaps, then shoots tiny jets of water to clean them.
