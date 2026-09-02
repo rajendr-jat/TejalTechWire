@@ -1,0 +1,28 @@
+TITLE: Pangram AI Detection Secures New $9 Million Funding To Spot Fake Content
+
+CONTENT:
+It is getting harder to tell what is real online. AI-generated text and photos are popping up everywhere, from job applications to online reviews. To help solve this problem, a startup called Pangram just secured $9 million in new funding for its advanced AI detection tools.
+
+This fresh cash will help the company build better ways to spot computer-made content. The goal is not just to label things as real or fake, but to help people understand how much AI was actually used to create them.
+
+HEADING: Spotting AI on Popular Platforms
+
+Pangram is already putting its technology to work. The company recently teamed up with Substack, which is a popular online writing platform. Through this partnership, readers can see if their favorite newsletter writers are using AI to write their articles. Pangram has also released a brand-new tool specifically designed to catch AI-generated images.
+
+HEADING: Why Checking for AI is Hard
+
+The head of the company, Max Spero, explained that detecting AI is not a simple yes-or-no question. Sometimes people use AI just to fix their grammar, while other times a computer writes the entire piece. Pangram wants to show the difference between minor computer assistance and fully automated writing so users can make up their own minds.
+
+HEADING: Quick Questions Answered
+
+Q: How much funding did Pangram receive?
+
+A: Pangram raised $9 million to develop and expand its AI detection systems.
+
+Q: How does Substack use Pangram's technology?
+
+A: Substack uses the tool to show readers whether their favorite newsletter authors are using AI to write their content.
+
+Q: Does Pangram only check text?
+
+A: No, Pangram also has a new tool designed to detect fake, AI-generated images.
