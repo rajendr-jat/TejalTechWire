@@ -1,0 +1,28 @@
+TITLE: Apple changes Lake Ontario name to Lake America on its maps app
+
+CONTENT:
+If you open your iPhone today in the US, you might notice a big change on your map. Apple has officially changed the name of Lake Ontario to Lake America on its Apple Maps service. This decision follows a recent order from the US government to rename the famous body of water.
+
+Apple is not the first tech giant to make this update. Google also changed the name on Google Maps last week. Only users inside the US will see the new name. People using the app in Canada will still see Lake Ontario, while users in other countries will see both names on their screens.
+
+HEADING: Why the Name Changed
+
+The change is a direct result of an executive order signed by President Trump on August 27. This order gave US government departments 30 days to update their digital databases, which are the official electronic filing systems for geographic names. Since Google and Apple get their map information from these official government sources, they updated their apps to match. The two companies made a similar change last year when they renamed the Gulf of Mexico to the Gulf of America.
+
+HEADING: MapQuest Sees a Huge Boost
+
+Not every mapping service is following the new government rule. MapQuest announced that it will keep using the traditional name of Lake Ontario. Because of this stand, MapQuest has seen a massive surge in popularity. The classic map app quickly became the number 1 free download on the Apple App Store, which is the marketplace where phone users get their apps. It even beat ChatGPT in download numbers on September 1.
+
+HEADING: Quick Questions Answered
+
+Q: Why did Apple change the name of the lake?
+
+A: Apple changed the name to match official US government databases after an executive order was signed on August 27.
+
+Q: Does this name change affect maps in Canada?
+
+A: No, people using map apps in Canada will still see the traditional name of Lake Ontario.
+
+Q: Which mapping apps are keeping the old name?
+
+A: MapQuest has refused to change the name and will continue to show Lake Ontario on its maps.
