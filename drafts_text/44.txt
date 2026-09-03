@@ -1,0 +1,26 @@
+TITLE: Uber launches first robotaxis in London with human safety drivers
+
+CONTENT:
+Uber is bringing its self-driving car service to the UK. The company officially launches its first robotaxis in London through a new partnership with a British self-driving company called Wayve. This means passengers in the UK capital can now hitch a ride in a high-tech car that drives itself.
+
+The new service uses electric Ford Mustang Mach-E cars. Uber will send a message to your phone before the vehicle arrives, so you can easily decline and ask for a regular car with a human driver if you feel nervous.
+
+HEADING: Safety and Human Drivers
+Because of strict local transport rules, these cars will not be totally empty. A human supervisor will sit in the front seat at all times to take over the wheel if something goes wrong. Uber received its official license to run these vehicles in London last month, and the rules state a safety driver must be present.
+
+HEADING: Pricing and Tipping Details
+Getting a ride in a robotaxi will not cost you any extra money. The prices are exactly the same as standard Uber fares in the city. The app will not prompt you to tip the human supervisor, but you can still leave a tip later by going into your trip history.
+
+HEADING: Future Travel Plans
+London is the latest spot for these vehicles, but Uber already runs robotaxis in US cities like Dallas, Las Vegas, Atlanta, and Austin. The company plans to bring them to Los Angeles and the San Francisco Bay Area soon. After that, Uber and Wayve plan to launch self-driving Nissan cars in Tokyo.
+
+HEADING: Quick Questions Answered
+
+Q: Can I opt out of a robotaxi ride?
+A: Yes, Uber will send a notification before the vehicle arrives so you can choose a traditional car instead.
+
+Q: Do I have to tip the safety driver?
+A: No, you will not be prompted to tip the human supervisor, but you can still do so through the trip history page in the app.
+
+Q: What model of car is being used in London?
+A: Uber is using all-electric Ford Mustang Mach-E vehicles equipped with special self-driving software.
