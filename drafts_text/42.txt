@@ -1,0 +1,32 @@
+TITLE: Cybersecurity giant Palo Alto Networks paid $500m for AI startup Console
+
+CONTENT:
+The major cybersecurity firm Palo Alto Networks paid $500m for an artificial intelligence startup called Console. This massive deal is part of a growing trend where big tech companies buy young AI businesses to make their own software much smarter. Console is only 2 years old and helps offices automate their everyday tech support tasks.
+
+While the two companies announced the merger recently, they did not share the official price tag. However, people familiar with the deal revealed the $500 million figure. This is a huge win for the startup, which was previously valued at $157 million and backed by major investment firms like Thrive Capital.
+
+HEADING: What Console Does
+
+Console uses virtual AI helpers, also known as agents, to handle everyday office IT problems. Instead of waiting for a human IT worker, employees can use Console to reset passwords, get access to work apps, or fix basic computer glitches. The startup already has several well-known business customers using its smart software to keep offices running smoothly.
+
+HEADING: How Palo Alto Networks Will Use It
+
+Palo Alto Networks plans to merge Console's technology with its own security platform called Cortex. Cortex is designed to find and stop cyber threats automatically. By adding Console's clever AI, security teams will be able to investigate and fix security issues simply by typing questions in normal, everyday language. The company's boss explained that this gives their security system the hands and feet it needs to take action on its own.
+
+HEADING: A Busy Year for Tech Buyouts
+
+This purchase is the 7th company that Palo Alto Networks has bought in 2026. The company has been spending heavily to stay ahead in the cybersecurity race. Earlier this year, they spent $3.35 billion on a data monitoring company called Chronosphere and another $400 million on a security startup called Koi.
+
+HEADING: Quick Questions Answered
+
+Q: What is Console?
+
+A: Console is a 2-year-old software startup that uses artificial intelligence to automatically handle routine office tech support questions and tasks.
+
+Q: How much did Palo Alto Networks pay for Console?
+
+A: Sources close to the deal say Palo Alto Networks paid $500 million in cash and stock to acquire the startup.
+
+Q: Why did Palo Alto Networks buy Console?
+
+A: They want to use Console's smart AI agents to help businesses find, investigate, and fix cyber threats using simple conversational language.
