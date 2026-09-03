@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tejaltechwire.pages.dev/</loc>
-    <lastmod>2026-09-03T10:44:15Z</lastmod>
+    <lastmod>2026-09-03T14:46:37Z</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://tejaltechwire.pages.dev/articles/99-why-you-should-never-rely-on-ai-to-plan-a.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tejaltechwire.pages.dev/articles/98-techcrunch-disrupt-2026-features-brand-new-stage-for-real-world.html</loc>
