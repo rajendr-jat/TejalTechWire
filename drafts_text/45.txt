@@ -1,0 +1,32 @@
+TITLE: Why you should never rely on AI to plan a mountain climb
+
+CONTENT:
+Artificial intelligence can do amazing things, but it is not ready to guide you through the wilderness. A group of hikers in California recently learned this the hard way when they had to be rescued after following bad advice from Google's Gemini chatbot. They used the AI tool to plan a major mountain climb, but experts warn you should never rely on chatbots for outdoor safety.
+
+The chatbot told the group that climbing Mount Shasta would only take 8 hours. Based on this advice, the climbers packed light with only daypacks, a little food, and some water. They brought no shelter or warm clothing, expecting a quick and easy hike. Unfortunately, the trek actually took twice as long, leaving them stranded in the dark.
+
+HEADING: What Went Wrong on the Mountain
+
+The climbers began their ascent at 3 AM on August 30. Instead of the 8 hours promised by the AI, it took them 16 hours just to reach the summit. By the time they started walking back down, it was 7 PM and completely dark. To make matters worse, the smartphone they were using for navigation died, and they quickly lost their way in the dark.
+
+HEADING: The Rescue Mission
+
+Stranded on the cold mountain, the hikers called 911 for help. Forest rangers finally reached them at 9:30 AM the next morning. Because of bad weather, a rescue helicopter could not land, forcing everyone to walk down the mountain on foot. The long hike down took another 9 hours, but thankfully everyone made it back safely.
+
+HEADING: AI is Not a Human Expert
+
+After their rescue, the hikers admitted they relied too much on technology instead of their own common sense. The local sheriff's office is now urging outdoor adventurers to double-check their plans with human experts. If you are planning a dangerous trip, it is always best to call local park rangers instead of asking an AI chatbot for advice.
+
+HEADING: Quick Questions Answered
+
+Q: What AI tool did the climbers use?
+
+A: The hikers used Google's Gemini chatbot to research their route and plan what supplies to pack.
+
+Q: What bad advice did the AI chatbot give?
+
+A: The chatbot said the climb would only take 8 hours and advised them to pack light food instead of fats, leaving them without enough supplies or warm clothes.
+
+Q: What is the best way to plan a mountain climb?
+
+A: You should contact local ranger stations and talk to real experts who know the current weather and trail conditions.
