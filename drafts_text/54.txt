@@ -1,0 +1,32 @@
+TITLE: OpenAI Launches GPT-6 Astra, Its Most Intelligent AI Model Yet
+
+CONTENT:
+The famous artificial intelligence company OpenAI just launched its newest and most advanced AI tool, called GPT-6 Astra. The company says this new GPT-6 Astra model is the most intelligent and safest system in the world right now, designed to handle complex tasks on your computer just like a human assistant would.
+
+This release comes only 2 months after OpenAI put out its last major update. The new software is incredibly good at browsing the web, writing code, and even multitasking. In a demo video, it was shown making a 3D model and building a slideshow, while also ordering food in the background.
+
+HEADING: What It Can Do
+
+Astra is what experts call an "agentic" AI, which means it can perform multi-step tasks on its own. It can work both inside and outside your web browser without losing track of your original instructions. In test runs, it scored 98.6% on a major test that measures how well an AI can solve brand-new problems. It also proved highly skilled at coding and digital security tasks, easily beating older versions like GPT-5.6 Sol.
+
+HEADING: Safety Concerns and Protections
+
+Because Astra is so powerful, it is also highly skilled at finding weaknesses in software. In fact, it scored 100% on a test that measures how well AI can exploit computer security bugs. To prevent bad actors from using it for hacking, OpenAI built safety walls into the model. The company says Astra is designed to refuse requests to do dangerous cybersecurity tasks and is better at resisting tricks designed to bypass its rules.
+
+HEADING: Price and How to Get It
+
+OpenAI is rolling out Astra starting today for a small group of organizations. Over the next few days, it will become available to anyone paying for ChatGPT Plus, Pro, Business, or Enterprise. Software developers can also access it through OpenAI's digital tools or Amazon Web Services. However, using it won't be cheap. For developers, it costs $10 for every 1 million input "tokens" (chunks of words fed into the AI) and $50 for every 1 million output tokens that the AI writes back.
+
+HEADING: Quick Questions Answered
+
+Q: Who can use GPT-6 Astra right now?
+
+A: It is rolling out today to select organizations, and it will reach paying ChatGPT Plus, Pro, Business, and Enterprise subscribers over the coming days.
+
+Q: How much does GPT-6 Astra cost for developers?
+
+A: Developers will pay $10 per million input tokens and $50 per million output tokens to use the model.
+
+Q: What makes Astra different from older AI models?
+
+A: Astra can complete multi-step tasks on its own across different programs and websites, showing much stronger computer-use skills and better safety features than previous versions.
