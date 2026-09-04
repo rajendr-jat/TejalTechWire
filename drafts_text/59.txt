@@ -1,0 +1,28 @@
+TITLE: AI Compute Provider Nscale Is Looking For Giant 3.5 Billion Dollar Financing
+
+CONTENT:
+A young British technology company called Nscale is making massive waves in the artificial intelligence world. The AI compute provider is looking for an extra $3.5 billion in financing before it lists its shares on the public stock market. Compute refers to the immense computer processing power needed to run and train modern AI systems.
+
+This massive fundraising effort comes just before Nscale plans to launch its initial public offering, which is also called an IPO. Going public on the stock market could happen as early as later this month. Nscale is only 2 years old, but it has quickly become a major player in the tech industry.
+
+HEADING: Big Backers and Huge Deals
+
+Nscale is currently in talks to secure this new money from some very famous names. It wants to raise $1.5 billion through special loans that can later turn into company stock. It is also looking for another $2 billion directly from Nvidia, the world leader in AI microchips. Nvidia already invested in Nscale earlier in March 2025 during a record-breaking $1.1 billion funding round.
+
+HEADING: What Nscale Does and Why It Matters
+
+Nscale provides the physical computer hardware and cloud systems that other companies need to build AI tools. Recently, Nscale signed a massive partnership with Anthropic, the creator of the popular Claude AI chatbot. This single deal is worth around $45 billion. Because of major contracts like this, Nscale has told future investors that it expects to bring in $103 billion in future revenue based on these long-term customer agreements.
+
+HEADING: Quick Questions Answered
+
+Q: What is Nscale?
+
+A: Nscale is a 2-year-old British company that provides the heavy-duty computer power and infrastructure needed to run artificial intelligence programs.
+
+Q: When is Nscale going public?
+
+A: The company could launch its initial public offering on the stock market as early as later this month.
+
+Q: Who is investing in Nscale?
+
+A: Chipmaker giant Nvidia is in talks to provide $2 billion in financing, after previously participating in a $1.1 billion funding round in March 2025.
