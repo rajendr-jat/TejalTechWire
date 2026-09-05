@@ -1,0 +1,28 @@
+TITLE: Robot Startup XDOF In Talks For Massive $1.2 Billion Valuation After Leaving Stealth
+
+CONTENT:
+An exciting new robotics startup called XDOF is making waves in the tech world. The company has only been out of stealth mode for 3 months. Stealth mode is when a new company works in secret before revealing its plans to the public. Now, XDOF is already in late-stage talks to raise fresh funding at a giant $1.2 billion valuation. This is a massive achievement for a business that only started in 2024.
+
+XDOF does not actually build physical robots. Instead, it solves a major problem in the artificial intelligence industry. It collects high-quality movement data to help robots learn how to perform everyday tasks. Just like humans need practice, smart machines need lots of real-world examples to learn how to move safely and accurately.
+
+HEADING: How XDOF Trains Robots
+
+To get this helpful data, the startup uses a process called teleoperation. This is a term for controlling a robot from a distance. XDOF hires human workers to wear advanced body sensors. As these humans fold laundry or flatten cardboard boxes, the sensors record their movements. Remote operators then use those movements to guide robot arms. All of this physical action is turned into digital training lessons for robots.
+
+HEADING: Why Investors Are Rushing In
+
+The company is growing at a rapid pace. It is already bringing in nearly $50 million in yearly revenue. XDOF has 20 customers on its list, including several top AI research labs. Because it is growing so fast, major investors approached the company with new funding offers. This upcoming investment round, known as a Series B, is expected to be led by a venture capital firm called 8VC. This comes shortly after XDOF raised $70 million back in June 2024.
+
+HEADING: Quick Questions Answered
+
+Q: What does the startup XDOF do?
+
+A: XDOF collects and organizes real-world movement data so other companies can use it to teach and train robots.
+
+Q: Who started XDOF and when?
+
+A: Researchers Philipp Wu and Fred Shentu founded the company in 2024 at UC Berkeley.
+
+Q: How much is XDOF worth?
+
+A: The startup is currently in talks for a new funding round that would value the company at around $1.2 billion.
