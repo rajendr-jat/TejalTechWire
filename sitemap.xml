@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tejaltechwire.pages.dev/</loc>
-    <lastmod>2026-09-06T12:59:39Z</lastmod>
+    <lastmod>2026-09-06T15:58:02Z</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://tejaltechwire.pages.dev/articles/111-how-to-turn-your-old-phone-into-a-home-security.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tejaltechwire.pages.dev/articles/110-seattle-times-and-newsday-sue-openai-and-microsoft-over-ai.html</loc>
