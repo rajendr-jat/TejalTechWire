@@ -1,0 +1,32 @@
+TITLE: Seattle Times and Newsday sue OpenAI and Microsoft over AI training
+
+CONTENT:
+Two major local newspapers are taking a stand against big tech. The Seattle Times and Newsday are the latest publications to file a lawsuit against OpenAI and Microsoft. They argue that these tech giants are using their news articles to train artificial intelligence (AI) programs without permission.
+
+These newspapers worry that generative AI—the technology that creates text and images on its own—could completely ruin the journalism industry. They believe that AI systems like ChatGPT and Copilot are taking human-written work and copying it to make money.
+
+HEADING: The Core of the Argument
+
+The publishers describe AI programs as massive consumers of content. Instead of creating truly original work, the newspapers say these tools just digest human writing and output imitations of it. They worry that if AI destroys the very companies that write the news, there will be no high-quality information left for anyone to read.
+
+HEADING: A Growing Legal Battle
+
+This is not the first time a news outlet has gone to court over this issue. The New York Times sued the same tech companies back in 2023. Since then, more news organizations have joined the fight. What makes this new case interesting is that Microsoft and OpenAI have actually funded journalism projects and fellowships for The Seattle Times in the past.
+
+HEADING: What Happens Next
+
+Microsoft has expressed surprise over the legal action. The company stated that it is ready to talk and find a friendly solution to this ongoing dispute. The outcome of these lawsuits could change how AI companies collect data in the future.
+
+HEADING: Quick Questions Answered
+
+Q: Why are these newspapers suing the tech companies?
+
+A: They claim that OpenAI and Microsoft used their copyrighted news articles to train AI systems without permission or payment.
+
+Q: Which specific AI tools are mentioned in the lawsuit?
+
+A: The lawsuit points to ChatGPT from OpenAI and Copilot from Microsoft as programs using their content.
+
+Q: When did these legal disputes first start?
+
+A: The wave of lawsuits began in 2023 when The New York Times first sued the tech firms.
