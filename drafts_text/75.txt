@@ -1,0 +1,29 @@
+TITLE: What is opaque recurrence? The new AI terms you should probably know
+
+CONTENT:
+Artificial intelligence is changing our world at a rapid pace. Along with this tech boom comes a wave of confusing new jargon that can make anyone feel left behind. Last week, safety researchers started worrying about a concept called opaque recurrence, which is a new reasoning technique used in OpenAI's latest Astra model.
+
+To help you stay on top of these conversations, we have broken down some of the most common AI terms you should probably know. You do not need a computer science degree to understand how these new tools are shaping our future.
+
+HEADING: What is opaque recurrence and reasoning?
+Standard AI chatbots usually give you an answer instantly without showing how they got there. Newer models use what is called chain-of-thought reasoning, where the computer breaks a big problem down into smaller, logical steps before answering. However, with opaque recurrence, the AI does this extra thinking hidden deep inside its own network. Because humans cannot easily see or monitor this internal thinking process, safety experts are worried about what the AI might be deciding behind closed doors.
+
+HEADING: Understanding AGI and AI agents
+You might also hear people talk about AGI, which stands for artificial general intelligence. This refers to a future AI that can perform most intellectual tasks better than a human can. While AGI does not exist yet, we are starting to see the rise of AI agents. Unlike simple chatbots that only talk to you, an AI agent is a tool designed to actually perform multi-step chores on your behalf, such as booking a flight or filing your monthly expenses.
+
+HEADING: How software talks to itself
+For these smart agents to work, they need to connect with other programs. They do this using API endpoints, which you can think of as digital buttons built into software. While human users usually do not see these buttons, AI tools can press them to share data or complete tasks automatically. This allows different apps to work together seamlessly without you having to click a single thing.
+
+HEADING: Quick Questions Answered
+
+Q: What does AGI stand for?
+
+A: AGI stands for artificial general intelligence, which is a theoretical AI that can perform most cognitive tasks as well as or better than a human.
+
+Q: Why are researchers worried about opaque recurrence?
+
+A: Researchers are concerned because the AI processes its steps and reasoning internally, making it very difficult for humans to monitor or understand how it reached its final conclusion.
+
+Q: What is the difference between a chatbot and an AI agent?
+
+A: A chatbot is designed to hold conversations and answer questions, while an AI agent can actively perform tasks for you across different apps, like booking reservations.
