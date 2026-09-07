@@ -1,0 +1,32 @@
+TITLE: Seattle Times and Newsday Sue OpenAI and Microsoft for Infringement
+
+CONTENT:
+2 famous American newspapers, The Seattle Times and Newsday, are taking legal action against some of the biggest names in tech. They are suing OpenAI and Microsoft, claiming these companies used their news articles without asking. The newspapers accuse the tech companies of copyright infringement, which means they believe their original work was copied and used illegally.
+
+These computer programs, known as artificial intelligence or AI, can write essays and answer questions for users. The newspapers say the AI copies their writing and shows it directly to readers. This means people do not need to visit the newspaper websites anymore, which hurts the businesses.
+
+HEADING: Why the Newspapers are Angry
+
+The newspapers say the AI companies used their articles as training data. Training data is a massive collection of text that teaches an AI how to think and write. Because the AI already knows the news, readers do not visit the original websites to read the stories. This costs the newspapers a lot of money in lost digital subscriptions.
+
+HEADING: What the Publishers Want
+
+The Seattle Times and Newsday are not just asking for money to cover their losses. They want OpenAI and Microsoft to destroy any AI models built using their articles. They also want them to delete any saved copies of their news stories. This is a very big demand that could hurt how these popular AI tools work.
+
+HEADING: Part of a Bigger Battle
+
+These 2 publishers are not alone in this fight. Nearly 400 other local newspapers have also sued these tech companies. Other famous names like The New York Times and Encyclopedia Britannica have filed similar lawsuits too.
+
+HEADING: Quick Questions Answered
+
+Q: Why are OpenAI and Microsoft being sued?
+
+A: The Seattle Times and Newsday claim the tech companies used their news articles without permission to train their AI models.
+
+Q: What do the newspapers want the court to do?
+
+A: They want the companies to destroy the AI models and datasets that used their news articles.
+
+Q: Has this happened to these tech companies before?
+
+A: Yes, nearly 400 other local newspapers and major publications like The New York Times have also sued them for the same reason.
