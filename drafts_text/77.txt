@@ -1,0 +1,29 @@
+TITLE: Xiaomi launches a wide foldable phone while Samsung prepares new chip upgrades
+
+CONTENT:
+The world of gadgets is moving fast this week with big news from both phone makers and microchip builders. Chinese tech giant Xiaomi has just revealed its new 18 Fold, a short and wide foldable smartphone designed to compete directly with Samsung. Meanwhile, Samsung and rival manufacturer TSMC are teaming up with a company called ASML to use advanced new machines that will help make better computer chips for future devices.
+
+These developments could reshape what our future devices look like and how fast they run. Xiaomi is pushing the limits of screen design and battery power in its new phone, while the chip industry is investing billions to build more efficient processors and stop future supply shortages.
+
+HEADING: Xiaomi takes on the competition
+
+Xiaomi's new 18 Fold phone is shorter and wider than Samsung's popular Galaxy Z Fold 8. This wide shape makes it perfect for watching movies without annoying black bars on the screen. Inside, it packs a massive 6,000-milliamp-hour battery and a powerful new processor called the Xring O3, which uses special graphics technology to run games smoothly. It also features a high-quality triple camera system made in partnership with Leica, including a massive 200-megapixel main lens. For now, the phone is launching in China for about $1,600, but there is no word yet on when it might arrive in the US or UK.
+
+HEADING: Supercharging future microchips
+
+Behind the scenes, Samsung and TSMC are preparing for the future by buying cutting-edge machines from a Dutch firm called ASML. These machines use a process called High NA extreme ultraviolet lithography, which uses special light to print microscopic pathways onto silicon wafers. By adopting this technology by 2028 and 2030, these giants hope to make smaller, faster, and cheaper chips. They are also working together on a plan to use larger 12-inch stencils, called photomasks, starting in 2033. This upgrade will allow them to print complex designs on larger chips in one single step, boosting production speeds by up to 40 percent.
+
+HEADING: The battle for your pocket
+
+While Xiaomi is offering impressive cameras and a bigger battery, Samsung still holds an advantage in overall build quality. The new Xiaomi 18 Fold is slightly thicker and heavier than Samsung's flagship, and it lacks an official water-resistance rating. It also has a more noticeable crease down the middle of the screen where it folds. With rumors of Apple entering the folding phone market soon, the competition to make the perfect flexible device is heating up faster than ever.
+
+HEADING: Quick Questions Answered
+
+Q: How much does the new Xiaomi foldable phone cost?
+A: The Xiaomi 18 Fold starts at 10,999 yuan in China, which is about $1,600.
+
+Q: When will the new chip manufacturing technology be ready?
+A: Samsung plans to use the new lithography machines by 2028, TSMC will adopt them by 2030, and the larger 12-inch stencils are expected by 2033.
+
+Q: What makes Xiaomi's new phone different from Samsung's?
+A: Xiaomi's phone has a wider screen ratio, a larger 6,000-milliamp-hour battery, and a 200-megapixel camera, but it lacks a water-resistance rating and is slightly heavier.
