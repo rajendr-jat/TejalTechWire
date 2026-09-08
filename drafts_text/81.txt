@@ -1,0 +1,29 @@
+TITLE: Hackers Are Stealing Claude Tokens From Paid Subscribers
+
+CONTENT:
+Imagine paying for a premium service, only to find someone else is secretly using it all up. That is exactly what is happening to some people who pay for Claude, a popular artificial intelligence tool. Cybercriminals are finding ways to hijack user accounts and drain their monthly allowances.
+
+These hackers are stealing Claude tokens from paid subscribers by using sneaky software to grab login details. Tokens are basically the digital credits you use every time you ask the AI to write, code, or search the web. When these tokens get stolen, paying users are left locked out of the tool they need for their daily work.
+
+HEADING: How the Theft Happens
+
+Security teams at Anthropic, the company that makes Claude, found that hackers are using infostealer malware. This is a type of malicious software that slips onto your computer when you download sketchy files or click on bad ads. Once inside, it quietly copies your saved passwords and active login sessions. The hackers then use these stolen sessions to log into Claude as if they were you, burning through your paid limits to run their own tasks.
+
+HEADING: The Impact on Users
+
+One independent consultant in the UK noticed his account usage kept rising even when his computer was turned off. He pays $200 every month for a high-end Claude plan to help run his business. After he complained, Anthropic suspended his account to stop the theft and gave him a partial refund of £44.49. However, losing access to the AI tool temporarily disrupted his entire business. Other users on Reddit and GitHub have reported similar issues, with their usage limits jumping from 0 to 100 percent in minutes.
+
+HEADING: How to Protect Yourself
+
+Anthropic has been warning affected users and signing them out of all active sessions to stop the theft. To keep your account safe, you should run a virus scan on your computer to check for malware. Avoid downloading software from untrustworthy websites and do not click on suspicious links or online ads. Since Anthropic does not currently provide an itemized list of your daily usage, keeping a close eye on your account's usage meter is the best way to spot anything unusual.
+
+HEADING: Quick Questions Answered
+
+Q: What is a Claude token?
+A: A token is a unit of data that Claude uses to process your requests. Every time you ask the AI a question or have it write code, you use up a certain number of tokens from your monthly allowance.
+
+Q: Is the Claude website itself unsafe?
+A: No, the malware does not come from the Claude website itself. Hackers infect your computer through other sources, like malicious downloads or bad ads, and then steal your saved login data.
+
+Q: What should I do if my Claude usage suddenly spikes?
+A: You should contact Anthropic support immediately to suspend active sessions. You should also run an antivirus scan on your computer to find and remove any hidden malware.
