@@ -1,0 +1,32 @@
+TITLE: Massachusetts hits data centers with strict new clean power rules
+
+CONTENT:
+Massachusetts hits data centers with tough clean power rules under a new state order. Governor Maura Healey has decided that new, large computer facilities must source their own green electricity or pay a penalty. 
+
+Data centers are essentially giant warehouses packed with computer servers that keep the internet, apps, and artificial intelligence running. These buildings consume massive amounts of electricity, which can strain local power grids and raise electricity bills for everyday residents.
+
+HEADING: The New Requirements
+
+Under the new policy, any new data center that needs more than 25 megawatts of peak power must run on 100% clean energy. The state prefers that these facilities generate their own wind or solar power right on-site. If they cannot do that, they must pay to build new green energy projects nearby or put money into a special fund that protects local utility customers. To give regulators time to set up these guidelines, the state is also pausing a recently approved tax break for data center developers.
+
+HEADING: A Growing Trend Across the US
+
+Massachusetts is the third state in recent months to crack down on the rapid growth of these massive computer warehouses. In July 2024, New York stopped construction on new facilities that require 50 megawatts of power or more. In August 2024, Texas announced it would audit all new data centers to check their impact on the electricity grid. Tech leaders are starting to fight back against these state-level restrictions by funding advertising campaigns to win over voters.
+
+HEADING: Protecting Local Power Grids
+
+Local governments used to offer big financial incentives to attract these massive tech projects. Now, officials worry that the sheer volume of electricity these facilities use will cause power outages or drive up monthly utility bills for regular families. By forcing tech companies to supply their own green power, states hope to protect the public while still allowing technology to grow.
+
+HEADING: Quick Questions Answered
+
+Q: What is a data center?
+
+A: It is a large warehouse filled with computer servers that store data and run the systems behind websites, apps, and artificial intelligence.
+
+Q: Which data centers must follow the new rules in Massachusetts?
+
+A: The rules apply to any new data center project that requires more than 25 megawatts of peak power.
+
+Q: What happens if a developer cannot generate clean energy on-site?
+
+A: They must fund new green energy projects nearby or pay money into a state fund that protects everyday utility ratepayers.
