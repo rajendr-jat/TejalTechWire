@@ -1,0 +1,32 @@
+TITLE: Apple promises new foldable phone and iPhone camera mode to prove real photos
+
+CONTENT:
+Apple is making some major moves to change how we use our mobile devices. The tech giant is finally entering the flexible screen market with a new foldable phone called the Duo. To make sure this bending phone lasts, Apple built its critical hinge using artificial intelligence (AI) and 3D printing.
+
+At the same time, the company is tackling the rise of fake digital images. A new iPhone camera mode promises to prove your photo is real and has not been altered by AI. This upcoming tool will debut later this month on the new iPhone 18 Pro and Pro Max models.
+
+HEADING: How Apple Built a Stronger Foldable Hinge
+
+Many flexible phones suffer from wear and tear because bending them puts a lot of stress on the screen. To solve this, Apple is using AI algorithms to perfectly match every single hinge with its metal frame during assembly. The company also uses a special laser scanner and a 3D printer to apply 25 tiny layers of a protective material. This process smooths out the surface of the hinge so the screen folds without any bumps. To make it even tougher, the Duo has a special glare-reducing screen coating and multiple layers of protective plastic.
+
+HEADING: Proving Your Photos Are Real
+
+With AI-generated pictures looking more realistic than ever, it is hard to tell what is real. Apple is solving this with a new setting called Reference mode on the iPhone 18 Pro lineup. When you take a picture in this mode, a brand-new camera sensor digitally signs every single pixel the moment it captures the light. Apple's secure online servers then lock this data into an unalterable master photo. You can compare this master image with any edited versions to easily show if someone changed the photo later.
+
+HEADING: When Can You Get These Features
+
+The new camera technology will arrive later this month with the launch of the iPhone 18 Pro and Pro Max. However, if you live in the European Union, you will have to wait. Apple says the anti-AI photo feature will not be available in Europe right away, though European users will be able to view these secure photos later through system updates. As for the Duo foldable phone, Apple has shown off its high-tech hinge design but has not yet announced a final release date or price.
+
+HEADING: Quick Questions Answered
+
+Q: What is the name of Apple's new foldable phone?
+
+A: Apple's new foldable phone is called the Duo, and it features a durable hinge built with the help of AI and 3D printing.
+
+Q: How does the new iPhone camera mode prove a photo is real?
+
+A: The Reference mode on the iPhone 18 Pro uses a new hardware sensor to digitally sign every pixel, creating a secure master image that cannot be altered.
+
+Q: Will the new camera feature be available everywhere at launch?
+
+A: No, the photo verification feature will not be available in the European Union when the iPhone 18 Pro first launches.
