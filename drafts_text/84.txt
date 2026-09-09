@@ -1,0 +1,26 @@
+TITLE: How DeepMind Alumni Are Building Tools To Accelerate Fusion Power
+
+CONTENT:
+A group of 2 former scientists from Google's artificial intelligence division, DeepMind, have started a new company to help make clean energy a reality. These DeepMind alumni are building tools to accelerate fusion power so we can eventually use it to light up our homes. Their new startup, called Fusionality, wants to solve one of the biggest engineering headaches in the clean energy world.
+
+Fusion power is a clean way of making electricity by joining atoms together, which is exactly how the sun creates energy. To do this on Earth, scientists have to control a super-hot gas called plasma. This gas is incredibly hot and difficult to manage, requiring split-second decisions to keep it stable. Fusionality is creating the computerized control systems, or the brains, to manage these wild reactions automatically.
+
+HEADING: The Problem They Are Solving
+Right now, many different companies are trying to build their own fusion reactors. However, almost all of these companies are building their control systems completely from scratch. The founders of Fusionality realized that about 80% of the control technology is exactly the same for every reactor design. Instead of every company reinventing the wheel, Fusionality will sell ready-to-use control tools and computer simulations that any fusion company can customize.
+
+HEADING: Cash to Build the Future
+The startup is based in Switzerland and has already raised $3.7 million in early funding. The company currently has 7 employees. They plan to use this money to build their first set of control technologies, which they compare to building blocks. Initially, they are focusing on reactors that use powerful magnets to hold the hot gas in place, but they plan to expand to other types of reactors later.
+
+HEADING: The Role of Artificial Intelligence
+Because the founders have a background in artificial intelligence, many people wonder if AI will run these reactors. The founders say that AI will certainly help optimize and improve the control systems. However, they do not think AI should completely run a fusion reactor on its own yet. Instead, AI will work alongside traditional computer programs to keep things running safely.
+
+HEADING: Quick Questions Answered
+
+Q: What is Fusionality?
+A: It is a new startup founded by former Google DeepMind researchers that builds control systems and software tools for fusion power reactors.
+
+Q: How much money did the startup raise?
+A: Fusionality raised $3.7 million in its pre-seed funding round to help build its technology.
+
+Q: What is fusion power?
+A: It is a clean energy source created by merging atoms together under extreme heat, mimicking the way the sun makes energy.
