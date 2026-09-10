@@ -1,0 +1,32 @@
+TITLE: Google signs its biggest carbon credit deal yet with rice farming startup Mitti Labs
+
+CONTENT:
+Tech giant Google has agreed to a massive new environmental partnership. The search giant just announced that Google signs its biggest carbon credit deal yet for rice-farming emissions with an innovative startup called Mitti Labs. Under this four-year agreement, Google will purchase 1 million carbon credits through the year 2030 to help offset its environmental impact. 
+
+This agreement matters because rice farming is a major source of methane, which is a potent greenhouse gas that traps heat in our atmosphere. By paying farmers to change how they grow crops, this partnership aims to cut harmful emissions while saving billions of gallons of water.
+
+HEADING: How the Technology Works
+
+Traditionally, rice fields are kept flooded with water during the growing season. However, this wet environment creates the perfect conditions for bacteria to produce large amounts of methane. Mitti Labs uses satellite radar and smart artificial intelligence models to help farmers monitor their fields remotely. The startup teaches and pays farmers to reduce the amount of time their fields stay flooded. This simple change cuts methane emissions by about 50% and reduces water use by 40%, all without lowering the amount of rice harvested.
+
+HEADING: Why Google Needs This Now
+
+Google has set a strict goal to reach net-zero carbon emissions by 2030. However, the company is currently building massive data centers to power its new artificial intelligence tools, which require huge amounts of electricity. Because of this AI boom, Google's greenhouse gas emissions actually grew by 18% in 2025 to about 14.5 million metric tons. Buying carbon credits, which are certificates showing that a company paid to prevent greenhouse gases from entering the atmosphere, helps Google balance out its rising pollution levels.
+
+HEADING: What Comes Next
+
+Most of the money from this deal will go directly to the local farming communities in India. Right now, Mitti Labs works with over 100,000 farmers, but they hope to reach millions of growers by 2030. While this specific project is based in India, the startup plans to launch its water-saving program in the Philippines later this year, followed by Indonesia in 2027.
+
+HEADING: Quick Questions Answered
+
+Q: What is a carbon credit?
+
+A: A carbon credit is a certified token showing that a company paid to prevent one metric ton of greenhouse gases from entering the air, helping them offset their own pollution.
+
+Q: How much is Google paying for this deal?
+
+A: The exact financial details of the agreement between Google and Mitti Labs have not been publicly disclosed.
+
+Q: How does Mitti Labs track the farms?
+
+A: The startup uses high-resolution satellite imagery and field data to remotely monitor soil moisture and flooding on small farms.
