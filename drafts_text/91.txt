@@ -1,0 +1,28 @@
+TITLE: Apple Wallet vs Apple Pay: Here Is How They Differ
+
+CONTENT:
+Many of us use the terms Apple Wallet and Apple Pay to mean the exact same thing. However, these 2 features are actually distinct tools that work together on your iPhone to make shopping much easier. Here is how they differ.
+
+Simply put, 1 is a digital storage space, while the other is the technology that processes your transactions. Let us break down exactly what each one does so you can use them like a pro.
+
+HEADING: What Apple Wallet Does
+
+Think of Apple Wallet as a digital version of the physical wallet in your pocket. It is an app on your iPhone and Apple Watch where you store digital versions of your credit cards, debit cards, flight boarding passes, concert tickets, and even government IDs. This app does not actually process any payments on its own. Instead, it serves as a highly secure, convenient storage box to keep your important items organized.
+
+HEADING: How Apple Pay Works
+
+Apple Pay is the actual service that lets you make purchases using the cards stored in your Wallet. When you tap your phone at a store checkout or buy something online, you are using Apple Pay. For safety, this system does not share your real card number with the merchant. Instead, it creates a unique Device Account Number for each card. You just confirm it is you using Face ID, Touch ID, or your passcode to complete the secure payment.
+
+HEADING: Where Apple Cash Fits In
+
+If you want to send money directly to a friend, you will use a feature called Apple Cash. This service is built right into Apple Pay and lives as a virtual card inside your Apple Wallet. You can use it to send or receive money through the Messages app on your iPhone. Once you receive funds, they sit on your digital Apple Cash card, and you can easily transfer that money to your regular bank account.
+
+HEADING: Quick Questions Answered
+
+Q: Does Apple Pay share my actual credit card number with merchants?
+
+A: No. Apple Pay uses a unique Device Account Number and a 1-time security code for each purchase, keeping your real card details completely private.
+
+Q: Can I use Apple Cash to send money to someone with an Android phone?
+
+A: No. Apple Cash only works between people who have Apple devices. If your friend has an Android, you must use another app.
