@@ -1,0 +1,32 @@
+TITLE: Nvidia boss explains why the company will grow next year
+
+CONTENT:
+The boss of Nvidia, Jensen Huang, says his company is on track to grow even more next year. At a recent technology conference, he shared his massive confidence in the company's future. While some people worry that other tech giants will build competing chips, Nvidia expects its sales to increase by 70% next year.
+
+If Nvidia hits this target, its yearly revenue could jump to around $680 billion. Currently, experts expect the company to bring in $400 billion this year. Huang explains that Nvidia is no longer just a chip maker, but is now the foundational platform for the entire artificial intelligence (AI) industry.
+
+HEADING: What Nvidia Actually Builds
+
+Many people still think of Nvidia as a company that makes small graphics cards for home computer gaming. Huang pointed out that while those old gaming chips cost around $399, Nvidia's modern AI systems are massive. Today, a single top-tier system costs $8.5 million. These huge machines contain 2 million separate parts, use massive amounts of electricity, and require airplanes to ship. One of their newest systems, which combines 36 processors and 72 specialized AI chips, is seeing its sales grow by 27% every single month.
+
+HEADING: Why the Company Is So Confident
+
+Nvidia has its hands in almost every part of the technology world. The company works closely with everyone from the factories making memory chips to the startups building new software. Huang says his team tracks every single gigawatt of power and every data center building being planned around the world. Because every major AI lab uses Nvidia technology, the company has a unique view of where the entire industry is heading.
+
+HEADING: Answering the Doubters
+
+Some critics have questioned Nvidia's habit of investing money into young AI startups that then turn around and buy Nvidia chips. Some worry this is a risky cycle. Huang laughed off these concerns, saying that for every $1 Nvidia invests, it sees $100 come back in sales. He also made it clear that Nvidia only invests in startups that already have real, proven contracts with paying customers.
+
+HEADING: Quick Questions Answered
+
+Q: How much does Nvidia expect to grow next year?
+
+A: Nvidia expects its revenue to grow by 70% next year, which could bring its total sales to around $680 billion.
+
+Q: Why are Nvidia's new AI systems so expensive?
+
+A: Modern AI systems are no longer single chips. They are giant computing units made of 2 million parts that cost $8.5 million each and require airplanes to ship.
+
+Q: Is Nvidia worried about competition from other tech giants?
+
+A: No, because Nvidia is deeply connected to every part of the AI industry and its systems run the models for almost every major AI lab.
