@@ -1,0 +1,28 @@
+TITLE: Kimi Maker Moonshot AI Targets $2 Billion Annual Revenue
+
+CONTENT:
+A major artificial intelligence company is aiming for a massive financial milestone. Moonshot AI, the startup behind the popular Kimi chatbot, wants to bring in $2 billion in annual revenue by the end of 2024. This is a huge jump, doubling what the company was on track to make just a few months ago in August.
+
+This ambitious goal is driven by the success of its latest AI model called K3. AI models are the software engines that power smart chatbots. Even though some people are using it slightly less lately, the K3 system is still incredibly busy, generating billions of words and pieces of data every single day.
+
+HEADING: Free Software But Lower Profits
+
+Unlike major US competitors like OpenAI, Moonshot makes its technology "open-weight." This means the company shares the core blueprint of its AI for free, allowing other developers to copy and use it. While this makes the tool very popular, it also means Moonshot makes much less profit per user compared to companies that keep their technology secret. For comparison, top US AI firms are bringing in much larger sums, with some targeting between $40 billion and $65 billion.
+
+HEADING: Accusations of Copying Competitors
+
+Moonshot is also facing some serious drama behind the scenes. A rival US tech company called Anthropic recently accused Moonshot of cheating to train its AI. Anthropic claims that Moonshot secretly sent nearly 300,000 questions from its Kimi app directly to Anthropic's own smart assistant, Claude. By copying over 23 million answers, Moonshot allegedly used a shortcut to make its own system look smarter without doing the hard work itself.
+
+HEADING: Quick Questions Answered
+
+Q: What is Moonshot AI trying to achieve?
+
+A: The company wants to reach $2 billion in annual revenue by the end of 2024, doubling its previous earnings rate.
+
+Q: What is the Kimi chatbot?
+
+A: Kimi is a popular AI assistant created by Moonshot, powered by a free-to-use software engine called K3.
+
+Q: Why is another AI company accusing Moonshot of cheating?
+
+A: Anthropic claims Moonshot copied over 23 million answers from its own Claude AI helper to secretly train and improve the Kimi system.
