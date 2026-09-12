@@ -1,0 +1,32 @@
+TITLE: Why Anthropic outlines a new plan to pace the frontier of AI
+
+CONTENT:
+Artificial intelligence is growing incredibly fast, and some experts are worried it might become too dangerous. Dario Amodei, the leader of the AI safety company Anthropic outlines a new plan to pace the frontier of this technology before it gets out of hand. This proposal comes after several researchers raised concerns that tech firms are moving too quickly without knowing how to control their creations.
+
+To prevent a disaster, Anthropic is taking action by inviting outside safety inspectors into its offices. The goal is to slow down how fast these computer systems gain dangerous new abilities. This delay will give humans more time to understand and secure the technology.
+
+HEADING: Bringing In Outside Inspectors
+
+The 1st part of the plan involves giving independent safety experts their own company desks, laptops, and badges. These outsiders will work right alongside internal teams to monitor new AI models. They will make sure the firm keeps its safety promises and reports any dangerous glitches immediately to the public.
+
+HEADING: Working With Competitors and Governments
+
+The plan also calls for top tech rivals to coordinate safety standards with each other. Because current laws normally stop competing companies from working together, governments would need to grant special permission for these safety talks. Additionally, the US and its allies could restrict selling advanced computer chips to rival nations. This would slow down foreign competitors and buy Western developers 3 to 5 years of extra safety preparation time.
+
+HEADING: Creating Global Rules
+
+Finally, the strategy suggests setting basic safety rules with other countries, including China. While deep trust is difficult, nations could still agree to ban certain extreme uses of the technology. For example, everyone could agree to stop AI from being used to design biological weapons.
+
+HEADING: Quick Questions Answered
+
+Q: Why does Anthropic want to slow down AI development?
+
+A: The company believes AI is improving much faster than expected and could soon gain dangerous skills like building its own next-generation models.
+
+Q: Who will inspect the AI systems?
+
+A: Independent safety organizations will send their own evaluators to work inside tech offices to verify safety commitments.
+
+Q: How will the plan stop rival countries from building dangerous AI?
+
+A: It recommends restricting their access to powerful computer chips and advanced manufacturing gear to delay their progress.
