@@ -1,0 +1,29 @@
+TITLE: Y Combinator Boss Garry Tan Wants US Tech Firms to Distill AI Models
+
+CONTENT:
+A major debate is heating up in Silicon Valley over how artificial intelligence is built. Garry Tan, the head of the famous startup accelerator Y Combinator, recently shared his views on how smaller companies should compete. He wants smaller American AI companies to use a training method called distillation on the world's most powerful AI systems.
+
+This comes at a time when some big AI makers are trying to lock down their technology. Distillation is a process where a smaller AI model learns how to think by asking a larger, smarter model millions of questions. While some big tech firms want to ban this practice, Tan believes it is the key to keeping the AI industry fair and open.
+
+HEADING: What is Distillation
+In simple terms, distillation is like a student learning from a teacher. A smaller, cheaper AI model sends thousands of prompts to a giant, expensive frontier model to see how it answers. By studying these responses, the smaller model can quickly copy the reasoning skills of the larger one. While some big AI companies call this an attack, smaller developers use it as a standard and fast way to build helpful software.
+
+HEADING: The Battle Over AI Secrets
+The debate started after Anthropic, a major AI developer, released a report in 2024. The report accused Chinese labs of using fake accounts and stolen passwords to distill Anthropic's models without permission. The boss of Anthropic wants the US government to step in and stop people from copying models this way. However, Garry Tan argues that big AI companies already built their own systems by scraping massive amounts of copyrighted human data from the internet without asking. He believes those same companies should not be allowed to lock up their AI answers behind strict terms of service.
+
+HEADING: Why This Matters for the Future
+Tan warns that if the government bans distillation, it could lead to a scary future where only one giant corporation controls all advanced AI. By allowing smaller US companies to legally distill big models, we get more open-weight options. These are AI models where the inner workings are shared freely with the public. This gives regular people and smaller startups more freedom to build their own tools without relying on a single tech monopoly.
+
+HEADING: Quick Questions Answered
+
+Q: What is the difference between closed and open-weight AI?
+
+A: Closed AI is kept secret by the company that made it, while open-weight AI lets developers see and modify the inner settings of the model.
+
+Q: Why does Garry Tan support AI distillation?
+
+A: He believes it helps smaller US startups build better tools quickly, which prevents a single giant tech company from holding a monopoly over all AI.
+
+Q: Did big AI companies use copyrighted material?
+
+A: Yes, major AI developers trained their systems using vast amounts of public writing and art from the internet, often without the creators' permission.
