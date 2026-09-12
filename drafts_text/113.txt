@@ -1,0 +1,26 @@
+TITLE: Why the OpenAI feud with mathematicians is only escalating
+
+CONTENT:
+The OpenAI feud with mathematicians is only escalating as some of the world's smartest minds raise the alarm over how artificial intelligence is changing their field. A group of 25 top mathematicians, who have all won the prestigious Fields Medal, recently signed an open letter. They argue that major tech companies are rushing to solve famous math problems using AI without giving proper credit or explaining how the AI actually found the answers.
+
+This tension boiled over recently when a professor from New York University accused OpenAI of pressuring him to hide the help he got from a rival researcher at Anthropic. He also worried that OpenAI used his team's data to beat them to a breakthrough proof. Following backlash from researchers, OpenAI even pulled its funding from a math event at California Institute of Technology, also known as Caltech.
+
+HEADING: The Battle Over Proofs
+Mathematicians are worried that tech companies are using AI coding assistants like OpenAI's Codex to track what researchers are working on. If a company sees a human getting close to a breakthrough, they can spend millions of dollars on computer systems to beat the humans to the finish line. This is making researchers paranoid and could force them to keep their work secret. This secrecy goes against the traditional culture of sharing math research openly with the world.
+
+HEADING: Why Human Understanding Matters
+The experts argue that math is not just about getting the right answer. It is about understanding how the answer was reached so that humans can teach it to the next generation. If an AI model prints out a massive mathematical proof that no human can easily explain, the knowledge cannot be passed down. This could break the chain of learning that has helped human civilization advance for centuries.
+
+HEADING: A Warning for Other Industries
+This conflict is not just about math. The mathematicians warn that what is happening to them will soon happen to other creative and scientific fields. As AI tools are used to write code, create art, and write articles, workers everywhere face the same risks. People will have to fight to make sure AI does not take away the human connection and credit behind hard work.
+
+HEADING: Quick Questions Answered
+
+Q: Why are mathematicians angry at OpenAI?
+A: They are concerned that OpenAI is using their work without proper credit and rushing to solve math problems with AI in a way that humans cannot easily understand.
+
+Q: What is the Fields Medal?
+A: It is the most famous and respected award in mathematics, which is given to top researchers.
+
+Q: Did OpenAI cancel an event sponsorship?
+A: Yes, OpenAI withdrew its sponsorship of a math event at Caltech after researchers criticized the company.
