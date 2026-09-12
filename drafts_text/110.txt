@@ -1,0 +1,29 @@
+TITLE: Robot training data startup Mecka nears 500m valuation in major new funding deal
+
+CONTENT:
+A young startup called Mecka is quickly becoming a major player in the artificial intelligence race. The company, which collects robot training data to help teach humanoid machines how to behave, is reportedly close to signing a massive new funding deal. This investment, led by the well-known venture capital firm Sequoia Capital, is expected to push the Mecka valuation to around 500m.
+
+This sudden leap in value is happening incredibly fast. Mecka was only started in 2024, and they just raised $60 million a mere 3 months ago. The huge interest in the company shows how eager technology firms are to get their hands on high-quality information. Without this real-world learning material, smart humanoid robots cannot learn how to perform everyday human tasks.
+
+HEADING: How Mecka Teaches Robots
+
+Instead of using computer simulations, Mecka gathers real-world information by paying regular people to record themselves doing everyday chores. People wear special body sensors and use their smartphones to film themselves doing things like brewing a cup of coffee or repairing a vehicle. This raw human movement information is then used to train AI models, helping future humanoid robots move more naturally and perform physical tasks safely in our homes and workplaces.
+
+HEADING: Why This Data Is So Valuable
+
+Building smart robots requires a huge amount of physical-world information, which is currently very hard to find. While AI programs like chatbots can learn from billions of words on the internet, robots need to understand how the physical world works. Many tech experts believe this lack of real-world movement information is the main bottleneck stopping us from having useful robotic helpers in our daily lives. This high demand is why Mecka expects its annual revenue rate to reach $100 million by the end of 2026.
+
+HEADING: The Growing Robot AI Market
+
+Mecka is not the only company trying to solve this problem. Other startups are also raising massive amounts of cash to collect physical information for machines. For example, a rival company called XDOF was recently valued at $1.2 billion. As tech giants and research labs rush to build the earliest truly useful humanoid robots, the race to gather human movement information is quickly becoming among the hottest areas in the tech industry.
+
+HEADING: Quick Questions Answered
+
+Q: What is robot training data?
+A: It is information collected from real humans, like video and sensor recordings of people doing chores, used to teach robots how to move and perform physical tasks.
+
+Q: How much is Mecka worth?
+A: The startup is currently in talks for a new funding deal that would value the company at around 500m.
+
+Q: How does Mecka collect its data?
+A: The company pays everyday people to record themselves performing normal tasks, like fixing cars or making coffee, while wearing body sensors.
