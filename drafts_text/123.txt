@@ -1,0 +1,24 @@
+TITLE: Is your car selling your personal data behind your back?
+
+CONTENT:
+Many modern cars are secretly tracking how you drive and selling your data to other companies. This shocking practice came to light after the US Federal Trade Commission, or FTC, punished General Motors with a 5-year ban on selling consumer data. The carmaker was gathering private information on driver behavior and sharing it with data brokers, who are middleman companies that collect and sell personal details.
+
+This information included how often drivers sped or if they drove late at night. Because of this tracking, many people saw their car insurance rates spike without knowing why. Sadly, GM is not the only automaker doing this. Studies show that almost every major car company has poor privacy settings and tracks its drivers.
+
+HEADING: How They Collect Your Information
+
+Most drivers do not realize they are agreeing to let car companies track them. When you buy a vehicle, you sign multiple confusing agreements. These include contracts for the car itself, the mobile app, and the built-in maps or security services. These agreements are often buried in long pages of fine print. Unlike smartphones, cars make it very hard to find and turn off these tracking settings.
+
+HEADING: What Is Being Done About It
+
+The FTC is now forcing GM to make it much easier for drivers to opt out of tracking. Drivers must also be allowed to see and delete the info the company has already collected. Some US politicians also introduced a new bill in 2023 called the DRIVER Act. However, privacy experts say this bill still allows car companies to collect and sell your info, so it does not fully solve the problem.
+
+HEADING: Quick Questions Answered
+
+Q: How do I know if my car is sharing my driving info?
+
+A: You can check your car brand's mobile app settings or privacy policy, but it is often hard to find. The FTC is working to force automakers to make these settings easier to turn off.
+
+Q: Why do car companies want my driving data?
+
+A: Automakers sell this data to brokers, who then sell it to insurance companies so they can build risk profiles on drivers.
