@@ -1,0 +1,26 @@
+TITLE: What Is Behind the Scary AI Doom Warnings?
+
+CONTENT:
+Many people are asking what is behind the latest AI doom warnings after a top researcher suddenly quit his job. Jacob Coxon left Anthropic, a major technology company, because he believes these tech giants are gambling with human lives. Shortly after he resigned, another safety chief at the company agreed, stating there is a high chance that AI could destroy us all.
+
+These scary predictions have started a massive debate. People are trying to figure out if these tech experts are genuinely terrified, or if they are just hyping up how powerful their software is to impress investors.
+
+HEADING: The Big Resignation
+Jacob Coxon did something unusual. Many tech leaders talk about the dangers of AI but keep building it anyway. Coxon actually walked away from his job. After he left, another Anthropic leader posted on the social media site X. He wrote that he truly believes AI could wipe out humanity. He added that he thinks the risk is higher than 10% over the next 10 years. While some people think this 10% figure is just a made-up number, it has made a lot of people sit up and take notice.
+
+HEADING: Real Fear or Just Hype?
+Some industry experts are skeptical about these scary predictions. They wonder if companies are using these warnings as a strange way to show off. By claiming their AI is so powerful it could destroy the world, they might just be trying to prove how advanced their technology is. This is especially important right now because major AI companies are preparing to sell shares on the stock market. Scary warnings might actually make their technology look more impressive to investors who want to buy in.
+
+HEADING: Quick Questions Answered
+
+Q: Why did Jacob Coxon quit his job at Anthropic?
+
+A: He resigned because he is worried that leading AI companies are gambling with human lives by developing technology too quickly.
+
+Q: What is the estimated chance that AI could destroy humanity?
+
+A: An AI safety leader at Anthropic stated he believes there is higher than a 10% chance that AI could wipe out humanity within the next 10 years, though critics say this number is not based on real calculations.
+
+Q: Why do some people think these warnings are a marketing trick?
+
+A: Critics suspect that companies talk about how dangerous AI is to hype up how advanced and powerful their models are, especially as they prepare to go public on the stock market.
