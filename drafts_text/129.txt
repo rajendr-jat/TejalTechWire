@@ -1,0 +1,28 @@
+TITLE: Nvidia Boss Jensen Huang Tells Trump He Will Not Let An AI Slowdown Happen
+
+CONTENT:
+Imagine being in the middle of a live onstage interview and getting a phone call from a former US president. That is exactly what happened to Nvidia boss Jensen Huang. While speaking at a technology conference in Los Angeles, Huang received a phone call from Donald Trump and put him on speakerphone for the audience to hear.
+
+During the surprise call, Nvidia boss Jensen Huang told Trump that he will not let an AI slowdown happen. The two discussed the future of artificial intelligence, which is the technology that allows computers to think and learn like humans. Trump expressed his strong support for the tech industry and said the US must keep leading the world in this field.
+
+HEADING: The Debate Over AI Speed
+
+Some technology leaders believe we should slow down how fast we make AI more powerful. High-profile figures have suggested taking a step back to ensure the technology is safe. Trump and Huang disagree with this cautious approach. Trump called the push to slow down a trick that could help global rivals like China, and Huang agreed that his company will keep moving forward.
+
+HEADING: Why Regular Citizens Are Concerned
+
+While tech companies want to build more systems, many regular people are worried about the physical footprint of AI. A recent poll showed that 7 in 10 Americans oppose building new data centers in their local areas. Data centers are massive warehouses filled with thousands of loud, power-hungry computers that run AI programs. Over 50% of people are worried about the damage these buildings do to the environment, while 20% worry about their quality of life and rising bills.
+
+HEADING: Quick Questions Answered
+
+Q: Why did Donald Trump call the Nvidia boss?
+
+A: Trump called to voice his support for the US tech industry and to discuss how to keep the country ahead in AI development.
+
+Q: What are data centers and why do people oppose them?
+
+A: Data centers are large facilities packed with computers that run AI, and many citizens oppose them because they use a lot of power and can harm the local environment.
+
+Q: Do all tech leaders agree on the speed of AI development?
+
+A: No, some tech bosses want to slow down to focus on safety, while others like Huang want to keep developing the technology as fast as possible.
