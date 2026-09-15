@@ -1,0 +1,28 @@
+TITLE: Microsoft plans a big Windows and Surface event this October
+
+CONTENT:
+Microsoft is getting ready to show off the future of personal computers. The tech giant will hold a special Windows and Surface event on October 7 in San Francisco. This gathering will focus on how artificial intelligence, or AI, will run directly on your next laptop.
+
+The event is a big deal because top bosses from both Microsoft and Nvidia will be on stage. They want to show how their new technology will make everyday computers much smarter and faster at handling daily tasks.
+
+HEADING: The New Surface Laptop Ultra
+
+Back in June 2026, Microsoft gave us a sneak peek at a powerful new computer called the Surface Laptop Ultra. This machine uses a special new computer chip from Nvidia called the RTX Spark. Microsoft has kept quiet about how much this laptop will cost or when people can buy it. Many expect we will finally get those details at the upcoming show.
+
+HEADING: Why Local AI Matters
+
+Most AI tools we use today have to send your information over the internet to a faraway computer to work. Microsoft wants to change that by putting powerful AI chips directly inside your laptop. This means your computer can help you work and create much faster because the AI is running right on your own machine.
+
+HEADING: Quick Questions Answered
+
+Q: When is the Microsoft Surface event?
+
+A: The event is scheduled to take place on October 7 in San Francisco.
+
+Q: What is the Surface Laptop Ultra?
+
+A: It is a premium laptop from Microsoft that uses Nvidia RTX Spark technology to run advanced AI features directly on the device.
+
+Q: How much do the new RTX Spark laptops cost?
+
+A: Microsoft and other computer manufacturers have not announced the prices yet, but they are expected to share pricing at the October event.

@@ -1,0 +1,32 @@
+TITLE: Why the huge AI data center boom is colliding with local cities
+
+CONTENT:
+Artificial intelligence is growing incredibly fast, but this growth requires massive physical buildings called data centers. A data center is a giant warehouse filled with thousands of computers that store and process digital information. Now, tech companies want to build these facilities all over the US, but many local residents are fighting back.
+
+The conflict is especially tense in places that have already suffered from heavy pollution. In cities like Philadelphia, residents who lived near dirty oil refineries do not want another industrial neighbor. They worry that the new facilities will ruin their health, create loud noise, and damage the environment.
+
+HEADING: The Rise of the Data Center Boom
+
+Tech companies are rushing to build more of these computer warehouses to keep up with the global race for AI. This massive growth means these facilities will need an enormous amount of power to run. In fact, experts predict that by 2035, US data centers will use more natural gas than the entire countries of Germany and Japan combined. Burning this natural gas releases harmful greenhouse gases into the air, which contributes to climate change.
+
+HEADING: Local Environmental and Health Fears
+
+Residents are also worried about the immediate health impacts in their own backyards. A typical data center often relies on hundreds of massive diesel backup generators to keep running during power outages. These engines can release heavy air pollution directly into local neighborhoods when they run. Activists point out that air pollution from fossil fuels already causes many health problems and premature deaths worldwide.
+
+HEADING: Community Pushback in Philadelphia
+
+In Philadelphia, a local group called Philly Thrive is leading a movement to stop data center construction before it even starts. City officials have looked at two potential spots for these buildings, including a neighborhood that recently lost a massive oil refinery. Residents who lost family members to illnesses they blame on past refinery pollution say they will fight to keep their air clean.
+
+HEADING: Quick Questions Answered
+
+Q: Why do AI data centers need so much energy?
+
+A: They house thousands of powerful computers that must run and stay cool 24 hours a day to process complex artificial intelligence tasks.
+
+Q: What are the main complaints from local residents?
+
+A: Residents worry about air pollution from diesel backup generators, loud noise, massive energy use, and a lack of new local jobs.
+
+Q: How much greenhouse gas will these facilities produce?
+
+A: Experts estimate that extra demand from these facilities could create 1 million metric tons of greenhouse gas pollution every single day.
