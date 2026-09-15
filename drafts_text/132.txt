@@ -1,0 +1,32 @@
+TITLE: Can you finally use an Apple Pencil with your new iPhone?
+
+CONTENT:
+Apple is making a massive change to its mobile devices. For the first time ever, you can now use an Apple Pencil stylus with an iPhone. A stylus is a smart digital pen used for writing and drawing on screens. This exciting upgrade is only available on Apple's new double-screen device, the iPhone Duo.
+
+Previously, this handy digital pen only worked on iPads. Now, you can draw and write on both the inside and outside screens of the new Duo model. However, there are some important details and limitations you need to know before you run out to buy one.
+
+HEADING: How It Works and What You Need
+
+You cannot use just any stylus for this new feature. It only works with the cheaper Apple Pencil USB-C model, which costs $79. If you already own the more expensive Apple Pencil 2 or the Apple Pencil Pro, they will not work with the new phone. This is because the phone does not have the built-in magnets needed to hold and charge those pricier pens. Instead, you must plug the USB-C pencil directly into your phone with a cable to charge it and pair it.
+
+HEADING: Key Limitations and Release Date
+
+This special writing feature will not be ready the day the phone goes on sale. You will need to wait for a free software update, which is expected to arrive around November. Additionally, the cheaper USB-C stylus misses out on some advanced features. You will not get pressure sensitivity for drawing thick or thin lines, vibration feedback, or support for the Find My tracking app.
+
+HEADING: Drawing on Two Screens
+
+Despite these missing features, the digital pen is still very useful on the new hardware. You can use it to draw on the massive main screen when the phone is fully unfolded. You can also use it to quickly scribble a shopping list on the smaller front screen when the phone is closed. 
+
+HEADING: Quick Questions Answered
+
+Q: Does the Apple Pencil work on standard iPhones?
+
+A: No, the stylus only works on the new iPhone Duo and is not compatible with any other iPhone models.
+
+Q: Which Apple Pencil model do I need to buy?
+
+A: You must use the Apple Pencil USB-C, which costs $79.
+
+Q: When will my phone start supporting the stylus?
+
+A: The feature requires a software update that is expected to launch around November.
