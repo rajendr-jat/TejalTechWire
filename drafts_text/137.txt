@@ -1,0 +1,28 @@
+TITLE: Meta lets AI agents handle the boring parts of WhatsApp Business setup
+
+CONTENT:
+Setting up a business account on WhatsApp is about to get a lot easier. Meta has announced a new update that lets AI agents handle the boring parts of WhatsApp Business setup for you. Instead of clicking through lots of different menus and tools, business owners and developers can now just chat with an AI assistant to get things running.
+
+This new feature uses a technology called a Model Context Protocol, or MCP. Think of MCP as a secure bridge. It connects popular AI assistants like ChatGPT or Claude directly to WhatsApp so they can do the heavy tech work for you.
+
+HEADING: How the AI Helps
+
+In the past, setting up WhatsApp Business required switching between several different developer tools and web pages. Now, you can simply tell your chosen AI agent what you want to do in plain English. The AI can automatically create your business account, verify your phone number, and register your business. It can also write or edit your message templates and check for any background errors that might stop your account from working.
+
+HEADING: Who Can Use It
+
+This update is designed for developers and businesses that want to connect with their customers on WhatsApp. Meta is not the only company using this kind of bridge technology. Big tech names like Google, Microsoft, Slack, and Stripe also use these tools to let AI assistants securely interact with their services. Meta also offers another tool to help the AI search through tech support documents and fix setup errors on the fly.
+
+HEADING: Quick Questions Answered
+
+Q: What is an MCP server?
+
+A: It is a secure bridge technology that allows AI assistants to directly connect to and work with other apps and services.
+
+Q: Which AI assistants can I use to set up WhatsApp Business?
+
+A: You can use popular AI coding agents like ChatGPT, Claude, Cursor, or Codex.
+
+Q: What specific tasks can the AI agent handle for my business?
+
+A: The AI can create your account, verify your phone number, build messaging templates, and check for setup errors.
