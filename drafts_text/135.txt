@@ -1,0 +1,23 @@
+TITLE: Nvidia Boss Jensen Huang Says We Do Not Need New AI Regulation
+
+CONTENT:
+The boss of the giant computer chip company Nvidia, Jensen Huang, says we do not need new AI regulation. Speaking at a big tech conference, he explained that artificial intelligence is just a computer system built by humans. Because of this, he believes we can control it using the laws we already have, rather than making new ones.
+
+For Huang, making sure AI safety is maintained is a job for engineers, not lawyers. He thinks that if a company makes a product that is not safe, they simply should not release it. In his view, the pressure of the business market will naturally force companies to behave responsibly because nobody wants to sell a broken or dangerous product.
+
+HEADING: Why He Thinks the Market Works
+Huang believes that companies can move fast and still make safe products. He says that if a business feels its technology is getting out of control, it should just pause and fix it. Since Nvidia makes the powerful chips that run almost all modern AI, his opinion carries a lot of weight. However, some people worry that tech companies might put profits before safety if governments do not watch over them.
+
+HEADING: The Risks of No Rules
+History shows that even well-meaning tech companies can make huge mistakes. For example, in 2024, a faulty software update from a security firm called CrowdStrike caused computers to crash worldwide, stopping flights and disrupting businesses. Additionally, social media giant Meta recently paid $18 billion to settle a lawsuit over harms to children. Critics point out that AI has already caused some real-world harm, which is why many experts argue we cannot just trust these companies to police themselves.
+
+HEADING: Quick Questions Answered
+
+Q: Who is Jensen Huang?
+A: He is the co-founder and chief executive officer of Nvidia, the company that makes the computer chips powering most of the world's artificial intelligence.
+
+Q: What is his view on AI safety?
+A: He believes safety is an engineering problem rather than a legal one, meaning computer scientists should build safe systems instead of governments writing new laws.
+
+Q: Why do some people disagree with him?
+A: Critics argue that companies might rush dangerous products to market to make money, pointing to past tech failures and the $18 billion Meta lawsuit as proof that we need government oversight.
