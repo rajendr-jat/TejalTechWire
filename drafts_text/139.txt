@@ -1,0 +1,28 @@
+TITLE: Why US data centers could consume massive amounts of natural gas by 2035
+
+CONTENT:
+The artificial intelligence boom is creating a massive hunger for electricity. To feed this hunger, companies are building giant computer warehouses called data centers. A new report shows that US data centers could consume an incredible amount of natural gas by 2035. In fact, these facilities might soon use more natural gas than Germany and Japan combined.
+
+This surge in energy demand is happening much faster than anyone expected. Tech companies need constant, reliable power to keep their systems running. To avoid overloading the public electrical grid, which is the network of power lines that delivers electricity to homes, some companies are building their own private gas plants. 
+
+HEADING: Why the Power Demand is Soaring
+
+Data centers are the physical engines of the internet and modern AI. Every time you search the web or ask an AI chatbot a question, computers in these warehouses do the heavy work. These computers run day and night and get very hot, so they require constant cooling. To keep them running, experts predict that US data centers will require 18 billion cubic feet of natural gas every day by 2035. 
+
+HEADING: The Cost to the Planet and Your Wallet
+
+This energy boom comes with a heavy price. Burning natural gas releases greenhouse gases that trap heat in the atmosphere. By 2035, the extra pollution from these data centers could make up about 12% of all US greenhouse gas emissions. All this extra demand could also push energy prices up. While wealthy tech giants can easily afford these rising costs, everyday families might see their monthly electricity bills go up. 
+
+HEADING: Quick Questions Answered
+
+Q: Why do AI data centers use so much natural gas?
+
+A: AI software requires massive amounts of computer power to process information. Natural gas is a reliable energy source that can generate electricity constantly, unlike solar or wind power which depend on the weather.
+
+Q: Which companies are building their own natural gas power plants?
+
+A: Major tech companies including Meta, Microsoft, Google, and Amazon have all announced plans to build private natural gas plants to power their operations.
+
+Q: How much will natural gas use grow by 2035?
+
+A: Daily natural gas consumption by US data centers is expected to reach 18 billion cubic feet by 2035, which is nearly double the amount experts predicted just nine months ago.
