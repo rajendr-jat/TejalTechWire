@@ -1,0 +1,32 @@
+TITLE: Why robots are waiting for their big ChatGPT moment in 2026
+
+CONTENT:
+We all remember when ChatGPT arrived in late 2022 and changed how we use artificial intelligence. But while digital AI software is growing incredibly fast, physical robots are still waiting for their own big breakthrough. 
+
+A top expert from Nvidia is set to explain exactly what is holding these machines back. Les Karpas, who leads physical AI efforts at Nvidia, will discuss these challenges at the upcoming TechCrunch Disrupt event in San Francisco, which runs from October 13 to 15, 2026.
+
+HEADING: The Big Problem with Robot Training
+
+The main reason robots are lagging behind is a lack of information. To train a smart computer program like ChatGPT, creators used massive amounts of text from the public internet. However, there is no giant internet database of physical movements for robots. While self-driving cars can learn by driving millions of miles on real roads, everyday robots do not have an easy way to practice physical tasks in the real world.
+
+HEADING: How Tech Companies Are Solving It
+
+To fix this data gap, many new startup companies are getting creative. They are using computer simulations, which are realistic virtual environments, to train robots inside digital worlds before testing them in reality. Nvidia is working closely with these startups to help bridge the gap between virtual training and physical machines.
+
+HEADING: Event Details and Tickets
+
+This discussion will take place at the TechCrunch Disrupt conference at Moscone West in San Francisco. Visitors who buy tickets before September 25 can save up to $200 on the entry price. Groups can also get discounts of up to 30% to attend the three-day technology event.
+
+HEADING: Quick Questions Answered
+
+Q: Why haven't we seen a ChatGPT moment for robots yet?
+
+A: Robots do not have a massive, pre-existing database of physical movement data to learn from the way AI chatbots learned from internet text.
+
+Q: When and where is this Nvidia presentation happening?
+
+A: It will take place at the TechCrunch Disrupt event in San Francisco from October 13 to 15, 2026.
+
+Q: How can startups train robots without real-world data?
+
+A: They use virtual simulations and computer-generated data to teach robots how to move and interact before building them.
