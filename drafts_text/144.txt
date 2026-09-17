@@ -1,0 +1,29 @@
+TITLE: Snap Introduces Specs Intelligence: A Smart New AI Assistant for Your Daily Life
+
+CONTENT:
+Snap is launching a new way to help you stay organized throughout your busy day. The company behind Snapchat just revealed a brand-new tool called Specs Intelligence. This is a standalone AI assistant, which means it is a completely separate helper that does not live inside the main Snapchat social media app. 
+
+Instead of just being for fun, this new tool is designed to help you get things done. It connects to your outside accounts, like your Google Calendar, to learn about your daily routines. The assistant can then give you timely reminders, like prompting you with useful questions to ask before an important work meeting or organizing your travel details before a trip.
+
+HEADING: How It Works on Smart Glasses and Phones
+
+You do not need to own smart glasses to use this new software, as Snap is launching it as a regular app for mobile phones and computers. However, if you do own Snap's new augmented reality glasses, which are called Specs, the experience is hands-free. Augmented reality is technology that overlays digital pictures and words onto the real world in front of your eyes. With these glasses on, you can simply say "Hey Specs" to see your tasks and reminders pop up right in your field of view.
+
+HEADING: Keeping Your Personal Information Private
+
+Many people worry about how tech companies handle private data when using smart tools. Snap is trying to address these worries early by promising high levels of privacy for this service. The company states that it will not use any of your personal data from this assistant to train its AI models. Furthermore, Snap says it will not show you ads based on this information, and its own employees cannot look at your private content.
+
+HEADING: How to Try It Today
+
+The new assistant is rolling out slowly to users. Right now, people in the US can download a limited preview version of the service through the Specs app on Apple iPhones. This early version lets you connect your Google account to see how you spend your time, but it will not give you proactive suggestions yet. If you want the full, early-access version, you will need to sign up for a waitlist to get an invitation for the Mac computer app.
+
+HEADING: Quick Questions Answered
+
+Q: Do I need Snapchat to use Specs Intelligence?
+A: No, this is a separate service that runs on its own mobile and desktop apps.
+
+Q: How much does Specs Intelligence cost?
+A: The source does not mention a price, but you can join a waitlist to try the early-access version.
+
+Q: Can I use Specs Intelligence on my phone?
+A: Yes, US users can download a limited preview version right now through the iOS Specs app.

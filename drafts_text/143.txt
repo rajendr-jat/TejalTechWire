@@ -1,0 +1,32 @@
+TITLE: Apple Might Make Servers Again to Cash In on AI as Snap Tries to Save Its Smart Glasses
+
+CONTENT:
+There are big changes coming to the tech world as 2 major companies try to win over users. Apple might make servers again to cash in on the massive artificial intelligence (AI) boom. A server is a powerful computer that stores data and runs heavy programs for businesses. Apple stopped making them back in 2011, but the huge demand for AI power has changed its plans.
+
+At the same time, social media company Snap is trying to convince people to buy its new AR smart glasses. AR stands for augmented reality, which overlays digital images onto the real world. The glasses cost a massive $2,200, and Snap is adding new features to make them more useful.
+
+HEADING: Apple Plans a Return to Enterprise Hardware
+
+Apple wants to use its own powerful computer chips to run complex AI programs. Reports suggest the company is designing new servers that could launch in 2029. These machines will likely run on future M8 Ultra chips. They might also use special technology from Nvidia to connect multiple chips together to work as 1. This is a big shift for Apple, which has mostly avoided making business servers for over 10 years.
+
+HEADING: Snap Adds New Features to Its Expensive Glasses
+
+Meanwhile, Snap is trying to rescue its expensive smart glasses from bad reviews. The company just announced that the glasses can now connect to Spotify and HBO Max for entertainment. They also showed off a new AI system that helps you manage your daily routine. To help people use the glasses outside, Snap is selling a new charging case with cellular data through Verizon for $10 to $20 a month.
+
+HEADING: Tech Partnerships Shape the Future
+
+Both of these big projects rely on partnerships with other tech giants. Apple is reportedly working with its usual rival, Nvidia, to make its new servers work faster. Snap is partnering with companies like Amazon and Salesforce to make its glasses useful for office workers, such as IT technicians who fix computer hardware.
+
+HEADING: Quick Questions Answered
+
+Q: How much do the new Snap smart glasses cost?
+
+A: The glasses cost $2,200, and you can get a special cellular charging case for an extra monthly fee of $10 to $20.
+
+Q: When will Apple release its new AI servers?
+
+A: Rumors suggest Apple will not release these new servers until 2029 because they will use advanced chips that are still under development.
+
+Q: Can the Snap glasses be used without Wi-Fi?
+
+A: Yes, but you must buy a new charging case with built-in cellular connectivity, which works through a partnership with Verizon.
