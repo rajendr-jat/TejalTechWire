@@ -1,0 +1,28 @@
+TITLE: The first iPhone 18 Pro teardown video is here to show us what is inside
+
+CONTENT:
+Apple just released its brand-new iPhone 18 Pro and iPhone 18 Pro Max today. Almost immediately, a YouTube creator posted the very first iPhone 18 Pro teardown video online. A teardown is when someone carefully takes a new phone apart piece by piece to show us exactly what parts are hidden inside.
+
+This early look inside the phone reveals some really interesting changes that Apple made this year. We get a clear view of the new camera setup, the battery size, and how Apple managed to make the screen cutout even smaller.
+
+HEADING: Inside the Screen and Camera
+
+The video shows that the pill-shaped cutout at the top of the screen, which Apple calls the Dynamic Island, is smaller this year. Apple did this by hiding the infrared camera used for Face ID security underneath the glass of the display. We also see that the main camera on the back is physically larger than last year. This extra space is likely there to fit a variable aperture, which is a lens that physically opens and closes to control how much light gets into your photos.
+
+HEADING: Battery and Prices
+
+The teardown also confirms that the iPhone 18 Pro comes with a 4,056 mAh battery. A mAh, or milliampere-hour, measures how much electrical energy a battery can hold. In terms of cost, the standard iPhone 18 Pro with 256 GB of storage starts at $1,250 in the US. If you want the larger iPhone 18 Pro Max, the 256 GB version starts at $1,350 in the US and £1,299 in the UK.
+
+HEADING: Quick Questions Answered
+
+Q: Why is the screen cutout smaller on the iPhone 18 Pro?
+
+A: Apple moved the infrared camera underneath the screen glass so it takes up less space at the top of the display.
+
+Q: How big is the battery in the new iPhone 18 Pro?
+
+A: The internal teardown confirms the phone has a 4,056 mAh battery.
+
+Q: What is new with the iPhone 18 Pro main camera?
+
+A: The camera unit is physically larger, which suggests Apple added a variable aperture to help take better photos in different lighting.
