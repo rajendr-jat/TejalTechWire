@@ -1,0 +1,32 @@
+TITLE: Anthropic Says Claude Leads 26 Percent Of Its Own AI Work
+
+CONTENT:
+Artificial intelligence startup Anthropic has shared a surprising fact about how it builds its technology. The company says its chatbot, Claude, leads 26 percent of its own AI research and development work. This means the AI is actually helping to build the next generation of itself.
+
+When Anthropic says the AI leads this work, it means Claude can finish most of a task on its own. A human worker still watches over the process, but the AI does the heavy lifting. In total, Claude helps with more than 90 percent of the company's research tasks in some way, showing just how much the developers rely on their own creation.
+
+HEADING: How the AI Helps
+
+Anthropic is using a special scale to track how much work Claude does. While the AI is not working completely on its own yet, it is taking over larger tasks. For example, a human can give Claude a simple instruction, and the AI will complete the project from start to finish while the human just supervises. The company hopes that tracking this data will help everyone understand how fast AI is improving.
+
+HEADING: Keeping Track of AI Safety
+
+This news comes as tech leaders worry about AI getting out of control. Anthropic wants other AI companies to share similar data. They suggest tracking 3 things: how much research the AI does, how closely humans monitor AI agents, and how much computer power is being used. Sharing this information could make it easier for the public and governments to see if AI is developing too quickly.
+
+HEADING: The Push for Regulation
+
+Right now, AI companies mostly police themselves. Tech leaders like Elon Musk agree that safety is important, especially after recent security scares at other companies. However, political leaders in the US have largely downplayed the risks of AI, so we may not see official government rules anytime soon.
+
+HEADING: Quick Questions Answered
+
+Q: What does it mean when Claude leads a task?
+
+A: It means the AI can complete most of a job from start to finish based on a simple prompt, while a human worker supervises.
+
+Q: Is Claude making decisions completely on its own?
+
+A: No, Anthropic says the chatbot does not run fully on its own without any human oversight.
+
+Q: Why did Anthropic share this information?
+
+A: The company wants to create standard ways to measure how fast AI is developing so the industry can stay safe and transparent.
