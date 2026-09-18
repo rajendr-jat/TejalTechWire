@@ -1,0 +1,29 @@
+TITLE: Google Has Revamped Its AI Agent to Keep Busy Families Organized
+
+CONTENT:
+Google has launched a new experimental tool designed to help busy households manage their daily lives. The company revamped its AI agent, which is a type of smart assistant that can perform tasks on its own, to act as a virtual organizer for families. If you struggle to keep track of school forms, grocery lists, and soccer practices, this tool aims to do the heavy lifting for you.
+
+This assistant gets its own Google account. Up to 6 people can choose to connect and share information with it. By pulling details from your shared documents and emails, the assistant builds a central hub to keep everyone on the exact same page.
+
+HEADING: How the Assistant Works
+Family members can choose exactly what information they want to share. You can forward a single email about a doctor visit, or set the assistant to automatically read emails from specific senders like a school teacher. The assistant then uses that information to build a shared calendar and a daily task list. It even sends out a daily summary to everyone in the group so no one misses an update. It can also draft shopping lists and help fill out online registration forms, though it will always ask for your permission before taking action.
+
+HEADING: Privacy and Safety Limits
+You can talk to the assistant in a standard Google Chat window or give it access to folders in Google Drive. To keep your information safe, Google has put strict privacy rules in place. The assistant is not allowed to search through your private personal inbox, and it cannot add or remove members from your family group on its own.
+
+HEADING: Availability and Waitlist
+This tool is still in its early testing phase, so it is not widely open to the public just yet. If you previously used Google's older briefing tools, you should see an invitation to upgrade your account. For everyone else who wants to try it, Google has set up a waitlist where you can sign up for future access.
+
+HEADING: Quick Questions Answered
+
+Q: How many people can use this new Google tool together?
+
+A: Up to 6 family or group members can link their accounts to the assistant.
+
+Q: Can the assistant read all of my personal emails?
+
+A: No, it can only access the specific emails you choose to share or forward to its account.
+
+Q: Is there a fee to use the new family assistant?
+
+A: The source does not mention any price, but the tool is currently an experimental feature with a waitlist.
