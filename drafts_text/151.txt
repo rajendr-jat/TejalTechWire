@@ -1,0 +1,28 @@
+TITLE: Why Anthropic Conducts Biology Experiments In Its Own Lab
+
+CONTENT:
+The artificial intelligence company Anthropic is doing more than just writing code. The creators of the Claude chatbot have confirmed they now run a physical science lab. In this lab, Anthropic conducts biology experiments to test how their AI models work in the real world.
+
+Many tech leaders believe AI will help cure major diseases in the next 5 to 10 years. To make this happen, AI models need a way to test their ideas on physical cells and chemicals. This is why the tech company decided to build its own physical lab, often called a wet lab because it handles liquids and biological materials.
+
+HEADING: Why This Lab Matters
+
+Anthropic wants to make sure its AI models actually work when applied to real-world science. The company bought a biotechnology startup called Coefficient Bio in April to help jumpstart this project. While the lab conducts physical tests, Anthropic says it is not trying to find and sell its own new medicines. Instead, it wants to help other drug companies use AI safely. To help with this, Anthropic also started a new program to give approved science researchers access to its most powerful AI tools.
+
+HEADING: Safety Fears and Backlash
+
+Some people are worried about an AI company handling biological materials. Critics point out that Anthropic leaders have previously warned that AI could be used to create dangerous biological weapons. In fact, a safety researcher recently quit the company after warning that AI could pose a threat to human survival by 2030. Some tech investors have joked about the irony of a company that warns about the end of the world building a real-life biology lab.
+
+HEADING: Quick Questions Answered
+
+Q: What is a wet lab?
+
+A: A wet lab is a physical laboratory where scientists test liquid chemicals, drugs, and biological matter like cells.
+
+Q: Is Anthropic trying to cure diseases on its own?
+
+A: No, Anthropic is not trying to make its own drugs because it does not want to compete with large pharmaceutical companies that already use its AI tools.
+
+Q: Why are critics worried about this science lab?
+
+A: Critics are worried because Anthropic executives have previously warned that advanced AI could accidentally help people create biological weapons.
