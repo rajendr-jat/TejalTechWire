@@ -1,0 +1,32 @@
+TITLE: Why an Andreessen Horowitz backed startup called Vals wants to change how we test AI
+
+CONTENT:
+Tech companies love to brag about how smart their artificial intelligence is. To prove it, they use tests called "benchmarks." But many of these tests are outdated, and some AI models have learned how to cheat on them. That is why a young startup named Vals is looking to become the gold standard for AI benchmarking.
+
+Vals was started in 2024 by a 25-year-old developer. The company recently raised $40 million in a funding round led by the famous venture capital firm Andreessen Horowitz. Vals wants to make sure AI actually works in the real world before it is put to use in important areas like law, medicine, and cybersecurity.
+
+HEADING: The Problem With Current AI Tests
+
+Right now, most AI tests are public. This means AI creators can let their programs study the test questions beforehand. It is like a student getting the answers to an exam before they walk into the classroom. Because of this, AI models look much smarter on paper than they actually are in real life.
+
+HEADING: How Vals Is Different
+
+Vals does not make its test questions public. It grades AI models on how well they can do actual, complex jobs in fields like finance, coding, and law. They even test models on how well they understand the Geneva Convention and online security. Companies pay Vals to grade their AI, which helps them find and fix mistakes before the software is released to the public.
+
+HEADING: Fast Growth in San Francisco
+
+The startup is based in a historic former brewery building in San Francisco. It is growing incredibly fast, with its revenue surging to 8 times what it was last year. After starting the year with just 8 employees, the company is rapidly hiring to keep up with the massive demand for honest AI testing.
+
+HEADING: Quick Questions Answered
+
+Q: What is AI benchmarking?
+
+A: It is a set of standardized tests used to measure how smart, accurate, and capable an artificial intelligence model is.
+
+Q: Why are companies paying to have their AI tested?
+
+A: Companies want to find hidden bugs and errors in their AI models so they can fix them before customers use them.
+
+Q: How much money did Vals recently raise?
+
+A: Vals raised $40 million in a funding round led by Andreessen Horowitz.
