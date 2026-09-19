@@ -1,0 +1,32 @@
+TITLE: How Apple changed Focus mode on your iPhone with iOS 27
+
+CONTENT:
+Apple has introduced some handy updates to the iPhone with its iOS 27 software. While there are plenty of big updates to talk about, one of the most useful tweaks is how Apple changed Focus mode. Focus mode is a built-in tool that lets you silence distracting alerts and choose exactly who or what can interrupt your day.
+
+If you want to get more done without constant buzzing, the new update makes this tool much more flexible. You can now customize how it looks on your screen and use it to run smart, automatic tasks on your phone.
+
+HEADING: A New Look For Control Center
+
+You can now change the size of the Focus button in your Control Center, which is the menu you see when you swipe down from the top-right of your screen. In older software like iOS 26, the button was stuck as a medium-sized rectangle. Now, you can press and hold your screen to enter edit mode, then drag the corner of the icon. You can shrink it down to a tiny 1x1 circle to save space, or stretch it to a large 2x2 square so it is easier to tap.
+
+HEADING: Smarter Shortcuts and Automations
+
+The update also connects Focus mode to Shortcuts, which are automated tasks your phone performs on its own. For example, you can set your phone to open a fitness app the second you turn on your workout Focus. Thanks to smarter tracking, your phone can now check your current Focus status and make decisions based on it. You can create a rule that plays a podcast when you are in Driving mode, but does something completely different if you switch to Sleep mode.
+
+HEADING: Better Custom Silence Options
+
+Focus mode still allows you to build custom setups for your daily routine. You can create a personalized mode that blocks notifications from social media and casual phone calls, but still lets important work alerts or family messages come through. With the updated Siri AI, you can even use simple voice commands to set up these custom rules and automations in seconds.
+
+HEADING: Quick Questions Answered
+
+Q: How do I resize the Focus button on my iPhone?
+
+A: Swipe down to open the Control Center, press and hold on an empty space to edit, and then drag the corner of the Focus icon to make it a 1x1 circle or a 2x2 square.
+
+Q: Can I use Siri to set up Focus automations in iOS 27?
+
+A: Yes, the upgraded Siri allows you to use normal, everyday language to create Shortcuts that link directly to your active Focus mode.
+
+Q: What is the new logic feature for Focus mode?
+
+A: iOS 27 supports "Otherwise if" rules, which let your phone run different automated tasks depending on which specific Focus mode you switch to.
